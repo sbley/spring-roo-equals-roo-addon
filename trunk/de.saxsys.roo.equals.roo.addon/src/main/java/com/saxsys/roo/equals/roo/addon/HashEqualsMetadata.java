@@ -19,48 +19,61 @@ import org.springframework.roo.classpath.details.MemberFindingUtils;
 import org.springframework.roo.classpath.details.MethodMetadata;
 import org.springframework.roo.classpath.details.annotations.AnnotatedJavaType;
 import org.springframework.roo.classpath.details.annotations.AnnotationMetadata;
-import org.springframework.roo.classpath.details.annotations.populator.AutoPopulate;
 import org.springframework.roo.classpath.details.annotations.populator.AutoPopulationUtils;
 import org.springframework.roo.classpath.itd.AbstractItdTypeDetailsProvidingMetadataItem;
 import org.springframework.roo.classpath.itd.InvocableMemberBodyBuilder;
 import org.springframework.roo.metadata.MetadataIdentificationUtils;
 import org.springframework.roo.model.JavaSymbolName;
 import org.springframework.roo.model.JavaType;
+import org.springframework.roo.project.Dependency;
+import org.springframework.roo.project.DependencyType;
 import org.springframework.roo.project.Path;
 import org.springframework.roo.support.style.ToStringCreator;
 import org.springframework.roo.support.util.Assert;
 
 /**
- * Metadata for {@link RooToString}.
+ * Metadata for {@link RooHashEquals}.
  * 
- * @author Ben Alex
+ * @author stefan.ocke
  * @since 1.0
- *
+ * 
  */
-public class HashEqualsMetadata extends AbstractItdTypeDetailsProvidingMetadataItem {
+public class HashEqualsMetadata extends
+		AbstractItdTypeDetailsProvidingMetadataItem {
 
-	private static Logger logger = LoggerFactory.getLogger(HashEqualsMetadata.class);
-	private static final String PROVIDES_TYPE_STRING = HashEqualsMetadata.class.getName();
-	private static final String PROVIDES_TYPE = MetadataIdentificationUtils.create(PROVIDES_TYPE_STRING);
-	
+	private static Logger logger = LoggerFactory
+			.getLogger(HashEqualsMetadata.class);
+	private static final String PROVIDES_TYPE_STRING = HashEqualsMetadata.class
+			.getName();
+	private static final String PROVIDES_TYPE = MetadataIdentificationUtils
+			.create(PROVIDES_TYPE_STRING);
+	private static final JavaType EQUALS_BUILDER = new JavaType(
+			"org.apache.commons.lang.builder.EqualsBuilder");
+
 	private BeanInfoMetadata beanInfoMetadata;
-	
+
 	// From annotation
 	// @AutoPopulate private String toStringMethod = "toString";
 
-	public HashEqualsMetadata(String identifier, JavaType aspectName, PhysicalTypeMetadata governorPhysicalTypeMetadata, BeanInfoMetadata beanInfoMetadata) {
+	public HashEqualsMetadata(String identifier, JavaType aspectName,
+			PhysicalTypeMetadata governorPhysicalTypeMetadata,
+			BeanInfoMetadata beanInfoMetadata) {
 		super(identifier, aspectName, governorPhysicalTypeMetadata);
-		Assert.isTrue(isValid(identifier), "Metadata identification string '" + identifier + "' does not appear to be a valid");
+
+		Assert.isTrue(isValid(identifier), "Metadata identification string '"
+				+ identifier + "' does not appear to be a valid");
 		Assert.notNull(beanInfoMetadata, "Bean info metadata required");
-		
+
 		if (!isValid()) {
 			return;
 		}
-		
+
 		this.beanInfoMetadata = beanInfoMetadata;
 
 		// Process values from the annotation, if present
-		AnnotationMetadata annotation = MemberFindingUtils.getDeclaredTypeAnnotation(governorTypeDetails, new JavaType(RooHashEquals.class.getName()));
+		AnnotationMetadata annotation = MemberFindingUtils
+				.getDeclaredTypeAnnotation(governorTypeDetails, new JavaType(
+						RooHashEquals.class.getName()));
 		if (annotation != null) {
 			AutoPopulationUtils.populate(this, annotation);
 		}
@@ -68,22 +81,26 @@ public class HashEqualsMetadata extends AbstractItdTypeDetailsProvidingMetadataI
 		// Generate equals method
 		MethodMetadata equalsMethod = getEqualsMethod();
 		builder.addMethod(equalsMethod);
-		
+
 		// Create a representation of the desired output ITD
 		itdTypeDetails = builder.build();
 	}
-	
+
 	/**
-	 * Obtains the "toString" method for this type, if available.
+	 * Obtains the "equals" method for this type, if available.
 	 * 
 	 * <p>
-	 * If the user provided a non-default name for "toString", that method will be returned.
+	 * If the user provided a non-default name for "equals", that method will be
+	 * returned.
 	 * 
-	 * @return the "toString" method declared on this type or that will be introduced (or null if undeclared and not introduced)
+	 * @return the "equals" method declared on this type or that will be
+	 *         introduced (or null if undeclared and not introduced)
 	 */
 	public MethodMetadata getEqualsMethod() {
 
 		JavaSymbolName methodName = new JavaSymbolName("equals");
+		final String simpleTypeName = governorTypeDetails.getName()
+				.getSimpleTypeName();
 
 		// See if the type itself declared the method
 		MethodMetadata result = MemberFindingUtils.getDeclaredMethod(
@@ -92,68 +109,86 @@ public class HashEqualsMetadata extends AbstractItdTypeDetailsProvidingMetadataI
 		if (result != null) {
 			return result;
 		}
-		
-		
-			InvocableMemberBodyBuilder builder = new InvocableMemberBodyBuilder();
-			for (MethodMetadata accessor : beanInfoMetadata.getPublicAccessors(false)) {
-				logger.warn("Accessor: "+accessor);
-			}
-			List<? extends FieldMetadata> declaredFields = governorTypeDetails.getDeclaredFields();
-			for (FieldMetadata fieldMetadata : declaredFields) {
-				logger.warn("FieldMetadata: "+fieldMetadata);
-			}
-			
-			
-			/*	builder.appendFormalLine("StringBuilder sb = new StringBuilder();");
-			
-			*//** key: field name, value: accessor name*//*
-			Map<String, String> map = new HashMap<String, String>();
-			
-			*//** field names*//*
-			List<String> order = new ArrayList<String>();
 
-			for (MethodMetadata accessor : beanInfoMetadata.getPublicAccessors(false)) {
-				String accessorName = accessor.getMethodName().getSymbolName();
-				String fieldName = beanInfoMetadata.getPropertyNameForJavaBeanMethod(accessor).getSymbolName();
-				String accessorText = accessorName + "()";
-				if (accessor.getReturnType().isCommonCollectionType()) {
-					accessorText = accessorName + "() == null ? \"null\" : " + accessorName + "().size()";
-				} else if (accessor.getReturnType().isArray()) {
-					accessorText = "java.util.Arrays.toString(" + accessorName + "())";
-				} else if (new JavaType(Calendar.class.getName()).equals(accessor.getReturnType())) {
-					accessorText = accessorName + "().getTime()";
-				}
-				map.put(fieldName, accessorText);
-				order.add(fieldName);
-			}
+		InvocableMemberBodyBuilder bodyBuilder = new InvocableMemberBodyBuilder();
+		for (MethodMetadata accessor : beanInfoMetadata
+				.getPublicAccessors(false)) {
+			logger.warn("Accessor: " + accessor);
+		}
+		List<? extends FieldMetadata> declaredFields = governorTypeDetails
+				.getDeclaredFields();
+		for (FieldMetadata fieldMetadata : declaredFields) {
+			logger.warn("FieldMetadata: " + fieldMetadata);
+		}
 
-			int index = 0;
-			int size = map.keySet().size();
-			for (String fieldName : order) {
-				index++;
-				String accessorText = map.get(fieldName);
-				StringBuilder string = new StringBuilder();
-				string.append("sb.append(\"" + fieldName  + ": \").append(" + accessorText + ")");
-				if (index < size) {
-					string.append(".append(\", \")");
-				}
-				string.append(";");
-				builder.appendFormalLine(string.toString());
-			}*/
-					
-		builder.appendFormalLine("return true;");
+		/*
+		 * builder.appendFormalLine("StringBuilder sb = new StringBuilder();");
+		 */
+		/** key: field name, value: accessor name */
+		Map<String, String> map = new HashMap<String, String>();
+
+		/** field names */
+		List<String> order = new ArrayList<String>();
+
+		for (MethodMetadata accessor : beanInfoMetadata
+				.getPublicAccessors(false)) {
+			String accessorName = accessor.getMethodName().getSymbolName();
+			String fieldName = beanInfoMetadata
+					.getPropertyNameForJavaBeanMethod(accessor).getSymbolName();
+			String accessorText = accessorName + "()";
+			if (accessor.getReturnType().isCommonCollectionType()) {
+				accessorText = accessorName + "() == null ? \"null\" : "
+						+ accessorName + "().size()";
+			} else if (accessor.getReturnType().isArray()) {
+				accessorText = "java.util.Arrays.toString(" + accessorName
+						+ "())";
+			} else if (new JavaType(Calendar.class.getName()).equals(accessor
+					.getReturnType())) {
+				accessorText = accessorName + "().getTime()";
+			}
+			map.put(fieldName, accessorText);
+			order.add(fieldName);
+		}
+
+		bodyBuilder.appendFormalLine("if (other == null) { return false; }");
+		bodyBuilder.appendFormalLine("if (other == this) { return true; }");
+		bodyBuilder.appendFormalLine("if (other.getClass() != getClass()) {");
+		bodyBuilder.indent();
+		bodyBuilder.appendFormalLine("return false;");
+		bodyBuilder.indentRemove();
+		bodyBuilder.appendFormalLine("}");
+
+		bodyBuilder.appendFormalLine(simpleTypeName + " rhs = ("
+				+ simpleTypeName + ") other;");
+		bodyBuilder.appendFormalLine("return new "
+				+ EQUALS_BUILDER.getNameIncludingTypeParameters(false, builder
+						.getImportRegistrationResolver()) + "()");
+		bodyBuilder.indent();
+		bodyBuilder.appendFormalLine(".appendSuper(super.equals(other))");
+		// TODO append comparisons
+		for (FieldMetadata field : declaredFields) {
+			if (!Modifier.isTransient(field.getModifier())
+					&& !Modifier.isStatic(field.getModifier())) {
+				bodyBuilder.appendFormalLine(".append("
+						+ field.getFieldName().getSymbolName() + ", rhs."
+						+ field.getFieldName().getSymbolName() + ")");
+			}
+		}
+
+		bodyBuilder.appendFormalLine(".isEquals();");
+		bodyBuilder.indentRemove();
 
 		result = new DefaultMethodMetadata(getId(), Modifier.PUBLIC,
-				methodName, JavaType.BOOLEAN_PRIMITIVE, AnnotatedJavaType
-						.convertFromJavaTypes(Collections
-								.singletonList(new JavaType("java.lang.Object"))),
-								Collections
-								.singletonList(new JavaSymbolName("other")),
-				new ArrayList<AnnotationMetadata>(), null, builder.getOutput());
+				methodName, JavaType.BOOLEAN_PRIMITIVE,
+				AnnotatedJavaType.convertFromJavaTypes(Collections
+						.singletonList(new JavaType("java.lang.Object"))),
+				Collections.singletonList(new JavaSymbolName("other")),
+				new ArrayList<AnnotationMetadata>(), null, bodyBuilder
+						.getOutput());
 
 		return result;
 	}
-	
+
 	public String toString() {
 		ToStringCreator tsc = new ToStringCreator(this);
 		tsc.append("identifier", getId());
@@ -168,22 +203,24 @@ public class HashEqualsMetadata extends AbstractItdTypeDetailsProvidingMetadataI
 	public static final String getMetadataIdentiferType() {
 		return PROVIDES_TYPE;
 	}
-	
+
 	public static final String createIdentifier(JavaType javaType, Path path) {
-		return PhysicalTypeIdentifierNamingUtils.createIdentifier(PROVIDES_TYPE_STRING, javaType, path);
+		return PhysicalTypeIdentifierNamingUtils.createIdentifier(
+				PROVIDES_TYPE_STRING, javaType, path);
 	}
 
 	public static final JavaType getJavaType(String metadataIdentificationString) {
-		return PhysicalTypeIdentifierNamingUtils.getJavaType(PROVIDES_TYPE_STRING, metadataIdentificationString);
+		return PhysicalTypeIdentifierNamingUtils.getJavaType(
+				PROVIDES_TYPE_STRING, metadataIdentificationString);
 	}
 
 	public static final Path getPath(String metadataIdentificationString) {
-		return PhysicalTypeIdentifierNamingUtils.getPath(PROVIDES_TYPE_STRING, metadataIdentificationString);
+		return PhysicalTypeIdentifierNamingUtils.getPath(PROVIDES_TYPE_STRING,
+				metadataIdentificationString);
 	}
 
 	public static boolean isValid(String metadataIdentificationString) {
-		return PhysicalTypeIdentifierNamingUtils.isValid(PROVIDES_TYPE_STRING, metadataIdentificationString);
+		return PhysicalTypeIdentifierNamingUtils.isValid(PROVIDES_TYPE_STRING,
+				metadataIdentificationString);
 	}
-
-	
 }
