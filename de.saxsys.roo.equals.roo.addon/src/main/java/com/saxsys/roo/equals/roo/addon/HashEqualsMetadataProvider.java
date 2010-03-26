@@ -10,12 +10,14 @@ import org.springframework.roo.metadata.MetadataDependencyRegistry;
 import org.springframework.roo.metadata.MetadataService;
 import org.springframework.roo.model.JavaType;
 import org.springframework.roo.process.manager.FileManager;
+import org.springframework.roo.project.Dependency;
 import org.springframework.roo.project.Path;
+import org.springframework.roo.project.ProjectMetadataProvider;
 import org.springframework.roo.support.lifecycle.ScopeDevelopment;
 import org.springframework.roo.support.util.Assert;
 
 /**
- *
+ * @author stefan.ocke
  */
 @ScopeDevelopment
 public final class HashEqualsMetadataProvider extends
@@ -24,13 +26,19 @@ public final class HashEqualsMetadataProvider extends
 	public HashEqualsMetadataProvider(MetadataService metadataService,
 			MetadataDependencyRegistry metadataDependencyRegistry,
 			FileManager fileManager,
-			BeanInfoMetadataProvider beanInfoMetadataProvider) {
+			BeanInfoMetadataProvider beanInfoMetadataProvider,
+			ProjectMetadataProvider projectMetadataProvider) {
 		super(metadataService, metadataDependencyRegistry, fileManager);
 		Assert.notNull(beanInfoMetadataProvider,
 				"Bean info metadata provider required");
+		Assert.notNull(projectMetadataProvider,
+				"Project metadata provider required");
 		beanInfoMetadataProvider.addMetadataTrigger(new JavaType(
 				RooHashEquals.class.getName()));
 		addMetadataTrigger(new JavaType(RooHashEquals.class.getName()));
+
+		// TODO is this the right place to add a dependency? [SB]
+		addCommonsLangToClasspath(projectMetadataProvider);
 	}
 
 	protected ItdTypeDetailsProvidingMetadataItem getMetadata(
@@ -81,4 +89,10 @@ public final class HashEqualsMetadataProvider extends
 		return HashEqualsMetadata.getMetadataIdentiferType();
 	}
 
+	protected void addCommonsLangToClasspath(
+			final ProjectMetadataProvider projectMetadataProvider) {
+		Dependency dependency = new Dependency("org.apache.commons",
+				"com.springsource.org.apache.commons.lang", "2.4.0");
+		projectMetadataProvider.addDependency(dependency);
+	}
 }
