@@ -1,0 +1,1 @@
+@set ROO_ADDON_CLASSPATH_FILE="D:\Projekte\Roo\workspace\de.saxsys.roo.equals.roo.addon\target\roo_classpath.txt"
