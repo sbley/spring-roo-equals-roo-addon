@@ -58,13 +58,14 @@ public final class HashEqualsMetadataProvider extends
 		BeanInfoMetadata beanInfoMetadata = (BeanInfoMetadata) metadataService
 				.get(beanInfoMetadataKey);
 
+		// TODO do we need beanInfoMetadata? [SB]
 		if (beanInfoMetadata == null) {
 			return null;
 		}
 
 		// Create the metadata
 		return new HashEqualsMetadata(metadataIdentificationString, aspectName,
-				governorPhysicalTypeMetadata, beanInfoMetadata);
+				governorPhysicalTypeMetadata);
 	}
 
 	public String getItdUniquenessFilenameSuffix() {
