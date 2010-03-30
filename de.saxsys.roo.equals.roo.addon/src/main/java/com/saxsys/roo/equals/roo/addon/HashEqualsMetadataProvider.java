@@ -13,6 +13,7 @@ import org.springframework.roo.process.manager.FileManager;
 import org.springframework.roo.project.Dependency;
 import org.springframework.roo.project.Path;
 import org.springframework.roo.project.ProjectMetadataProvider;
+import org.springframework.roo.project.ProjectOperations;
 import org.springframework.roo.support.lifecycle.ScopeDevelopment;
 import org.springframework.roo.support.util.Assert;
 
@@ -22,29 +23,34 @@ import org.springframework.roo.support.util.Assert;
 @ScopeDevelopment
 public final class HashEqualsMetadataProvider extends
 		AbstractItdMetadataProvider {
+	private ProjectOperations projectOperations;
 
 	public HashEqualsMetadataProvider(MetadataService metadataService,
 			MetadataDependencyRegistry metadataDependencyRegistry,
 			FileManager fileManager,
 			BeanInfoMetadataProvider beanInfoMetadataProvider,
-			ProjectMetadataProvider projectMetadataProvider) {
+			ProjectOperations projectOperations) {
 		super(metadataService, metadataDependencyRegistry, fileManager);
 		Assert.notNull(beanInfoMetadataProvider,
 				"Bean info metadata provider required");
-		Assert.notNull(projectMetadataProvider,
-				"Project metadata provider required");
+		Assert.notNull(projectOperations,
+				"Project operations required");
 		beanInfoMetadataProvider.addMetadataTrigger(new JavaType(
 				RooHashEquals.class.getName()));
 		addMetadataTrigger(new JavaType(RooHashEquals.class.getName()));
 
-		// TODO is this the right place to add a dependency? [SB]
-		addCommonsLangToClasspath(projectMetadataProvider);
+		this.projectOperations=projectOperations;
+		
 	}
 
 	protected ItdTypeDetailsProvidingMetadataItem getMetadata(
 			String metadataIdentificationString, JavaType aspectName,
 			PhysicalTypeMetadata governorPhysicalTypeMetadata,
 			String itdFilename) {
+		
+		
+		addCommonsLangToClasspath(projectOperations);
+		
 		// Acquire bean info
 		JavaType javaType = HashEqualsMetadata
 				.getJavaType(metadataIdentificationString);
@@ -91,9 +97,9 @@ public final class HashEqualsMetadataProvider extends
 	}
 
 	protected void addCommonsLangToClasspath(
-			final ProjectMetadataProvider projectMetadataProvider) {
+			final ProjectOperations projectOperations) {
 		Dependency dependency = new Dependency("org.apache.commons",
 				"com.springsource.org.apache.commons.lang", "2.4.0");
-		projectMetadataProvider.addDependency(dependency);
+		projectOperations.dependencyUpdate(dependency);
 	}
 }
