@@ -85,10 +85,10 @@
 						<configuration>
 							<tasks>
 								<property name="line.separator" value="${line.separator}" />
-								<echo append="false" file="${basedir}/setup.bat">@set
-									ROO_ADDON_CLASSPATH_FILE="${project.build.directory}\roo_classpath.txt"</echo>
-								<echo append="false" file="${basedir}/setup.env">export
-									ROO_ADDON_CLASSPATH_FILE="${project.build.directory}/roo_classpath.txt"</echo>
+								<echo append="false" file="${basedir}/setup.bat"
+									message="@set ROO_ADDON_CLASSPATH_FILE=&quot;${project.build.directory}\roo_classpath.txt&quot;" />
+								<echo append="false" file="${basedir}/setup.env"
+									message="export ROO_ADDON_CLASSPATH_FILE=&quot;${project.build.directory}/roo_classpath.txt&quot;" />
 								<echo
 									message="Created '${basedir}/setup.env' and '${basedir}\setup.bat'" />
 								<echo
