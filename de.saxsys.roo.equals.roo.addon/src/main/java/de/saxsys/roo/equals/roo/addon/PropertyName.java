@@ -1,4 +1,4 @@
-package com.saxsys.roo.equals.roo.addon;
+package de.saxsys.roo.equals.roo.addon;
 
 import org.springframework.roo.support.style.ToStringCreator;
 import org.springframework.roo.support.util.Assert;

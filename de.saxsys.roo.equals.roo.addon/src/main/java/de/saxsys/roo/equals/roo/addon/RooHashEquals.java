@@ -1,4 +1,4 @@
-package com.saxsys.roo.equals.roo.addon;
+package de.saxsys.roo.equals.roo.addon;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
