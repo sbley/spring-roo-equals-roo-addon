@@ -1,4 +1,4 @@
-package com.saxsys.roo.equals.roo.addon;
+package de.saxsys.roo.equals.roo.addon;
 
 import java.io.File;
 import java.io.IOException;

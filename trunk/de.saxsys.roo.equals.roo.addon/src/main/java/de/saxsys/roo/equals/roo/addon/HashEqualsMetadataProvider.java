@@ -1,4 +1,4 @@
-package com.saxsys.roo.equals.roo.addon;
+package de.saxsys.roo.equals.roo.addon;
 
 import org.springframework.roo.addon.beaninfo.BeanInfoMetadata;
 import org.springframework.roo.addon.beaninfo.BeanInfoMetadataProvider;
@@ -12,7 +12,6 @@ import org.springframework.roo.model.JavaType;
 import org.springframework.roo.process.manager.FileManager;
 import org.springframework.roo.project.Dependency;
 import org.springframework.roo.project.Path;
-import org.springframework.roo.project.ProjectMetadataProvider;
 import org.springframework.roo.project.ProjectOperations;
 import org.springframework.roo.support.lifecycle.ScopeDevelopment;
 import org.springframework.roo.support.util.Assert;
