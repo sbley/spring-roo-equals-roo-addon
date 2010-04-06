@@ -1,4 +1,4 @@
-package de.saxsys.roo.equals.roo.addon;
+package com.saxsys.roo.equals.roo.addon;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,34 +16,34 @@ import org.springframework.roo.support.lifecycle.ScopeDevelopment;
 import org.springframework.roo.support.util.Assert;
 import org.springframework.roo.support.util.FileCopyUtils;
 
-
 /**
  * Implementation of commands that are available via the Roo shell.
- *
+ * 
  * @author Ben Alex
  * @since 1.0
  */
 @ScopeDevelopment
 public class Operations {
-	
+
 	private static Logger logger = Logger.getLogger(Operations.class.getName());
-	
+
 	private FileManager fileManager;
 	private MetadataService metadataService;
-	
+
 	public Operations(FileManager fileManager, MetadataService metadataService) {
 		Assert.notNull(fileManager, "File manager required");
 		Assert.notNull(metadataService, "Metadata service required");
 		this.fileManager = fileManager;
 		this.metadataService = metadataService;
 	}
-	
+
 	public boolean isProjectAvailable() {
 		return getPathResolver() != null;
 	}
-	
+
 	/**
-	 * @param propertyName to obtain (required)
+	 * @param propertyName
+	 *            to obtain (required)
 	 * @return a message that will ultimately be displayed on the shell
 	 */
 	public String getProperty(PropertyName propertyName) {
@@ -52,9 +52,10 @@ public class Operations {
 		if (PropertyName.HOME_DIRECTORY.equals(propertyName)) {
 			internalName = "user.home";
 		}
-		return propertyName.getPropertyName() + " : " + System.getProperty(internalName);
+		return propertyName.getPropertyName() + " : "
+				+ System.getProperty(internalName);
 	}
-	
+
 	/**
 	 * @return true if the user's project has a /[name].txt file
 	 */
@@ -80,7 +81,8 @@ public class Operations {
 		} else {
 			mutableFile = fileManager.createFile(path);
 		}
-		byte[] input = new String("Write text file method called at " + new Date().toString()).getBytes();
+		byte[] input = new String("Write text file method called at "
+				+ new Date().toString()).getBytes();
 		try {
 			FileCopyUtils.copy(input, mutableFile.getOutputStream());
 		} catch (IOException ioe) {
@@ -88,12 +90,13 @@ public class Operations {
 		}
 		logger.log(Level.WARNING, "Wrote: " + new String(input));
 	}
-	
+
 	/**
 	 * @return the path resolver or null if there is no user project
 	 */
 	private PathResolver getPathResolver() {
-		ProjectMetadata projectMetadata = (ProjectMetadata) metadataService.get(ProjectMetadata.getProjectIdentifier());
+		ProjectMetadata projectMetadata = (ProjectMetadata) metadataService
+				.get(ProjectMetadata.getProjectIdentifier());
 		if (projectMetadata == null) {
 			return null;
 		}

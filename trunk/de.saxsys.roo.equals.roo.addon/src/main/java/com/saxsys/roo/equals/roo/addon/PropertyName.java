@@ -1,34 +1,40 @@
-package de.saxsys.roo.equals.roo.addon;
+package com.saxsys.roo.equals.roo.addon;
 
 import org.springframework.roo.support.style.ToStringCreator;
 import org.springframework.roo.support.util.Assert;
 
 /**
- * Sample of an enum-like, tab-completion-aware property name. You are free to add
- * extra methods or other members to this class. Just ensure the "key" field remains
- * a unique key (which also ensures the equals and hashCode methods remain correct).
+ * Sample of an enum-like, tab-completion-aware property name. You are free to
+ * add extra methods or other members to this class. Just ensure the "key" field
+ * remains a unique key (which also ensures the equals and hashCode methods
+ * remain correct).
  * 
  */
 public class PropertyName implements Comparable<PropertyName> {
 
-	/** You can change this field name, but ensure getKey() returns a unique value */
+	/**
+	 * You can change this field name, but ensure getKey() returns a unique
+	 * value
+	 */
 	private String propertyName;
 
 	public static final PropertyName USERNAME = new PropertyName("Username");
-	public static final PropertyName HOME_DIRECTORY = new PropertyName("Home Directory");
-	
+	public static final PropertyName HOME_DIRECTORY = new PropertyName(
+			"Home Directory");
+
 	private PropertyName(String propertyName) {
 		Assert.hasText(propertyName, "Property name required");
 		this.propertyName = propertyName;
 	}
-	
+
 	public String getPropertyName() {
 		return propertyName;
 	}
 
 	@Override
 	public final boolean equals(Object obj) {
-		return obj != null && obj instanceof PropertyName && this.compareTo((PropertyName) obj) == 0;
+		return obj != null && obj instanceof PropertyName
+				&& this.compareTo((PropertyName) obj) == 0;
 	}
 
 	public final int compareTo(PropertyName o) {

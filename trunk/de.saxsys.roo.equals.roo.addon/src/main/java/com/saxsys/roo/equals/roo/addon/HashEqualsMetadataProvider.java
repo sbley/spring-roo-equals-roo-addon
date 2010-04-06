@@ -1,4 +1,4 @@
-package de.saxsys.roo.equals.roo.addon;
+package com.saxsys.roo.equals.roo.addon;
 
 import org.springframework.roo.addon.beaninfo.BeanInfoMetadata;
 import org.springframework.roo.addon.beaninfo.BeanInfoMetadataProvider;
@@ -32,24 +32,22 @@ public final class HashEqualsMetadataProvider extends
 		super(metadataService, metadataDependencyRegistry, fileManager);
 		Assert.notNull(beanInfoMetadataProvider,
 				"Bean info metadata provider required");
-		Assert.notNull(projectOperations,
-				"Project operations required");
+		Assert.notNull(projectOperations, "Project operations required");
 		beanInfoMetadataProvider.addMetadataTrigger(new JavaType(
 				RooHashEquals.class.getName()));
 		addMetadataTrigger(new JavaType(RooHashEquals.class.getName()));
 
-		this.projectOperations=projectOperations;
-		
+		this.projectOperations = projectOperations;
+
 	}
 
 	protected ItdTypeDetailsProvidingMetadataItem getMetadata(
 			String metadataIdentificationString, JavaType aspectName,
 			PhysicalTypeMetadata governorPhysicalTypeMetadata,
 			String itdFilename) {
-		
-		
+
 		addCommonsLangToClasspath(projectOperations);
-		
+
 		// Acquire bean info
 		JavaType javaType = HashEqualsMetadata
 				.getJavaType(metadataIdentificationString);
