@@ -44,6 +44,8 @@ public class HashEqualsMetadata extends
 			.create(PROVIDES_TYPE_STRING);
 	private static final JavaType EQUALS_BUILDER = new JavaType(
 			"org.apache.commons.lang.builder.EqualsBuilder");
+	private static final JavaType HASHCODE_BUILDER = new JavaType(
+			"org.apache.commons.lang.builder.HashCodeBuilder");
 	private static final JavaType OBJECT = new JavaType("java.lang.Object");
 
 	// From annotation
@@ -72,18 +74,22 @@ public class HashEqualsMetadata extends
 		MethodMetadata equalsMethod = getEqualsMethod();
 		builder.addMethod(equalsMethod);
 
+		// Generate hashCode method
+		MethodMetadata hashCodeMethod = getHashCodeMethod();
+		builder.addMethod(hashCodeMethod);
+
 		// Create a representation of the desired output ITD
 		itdTypeDetails = builder.build();
 	}
 
 	/**
-	 * Obtains the "equals" method for this type, if available.
+	 * Obtains the {@code equals} method for this type, if available.
 	 * 
 	 * <p>
-	 * If the user provided a non-default name for "equals", that method will be
-	 * returned.
+	 * If the user provided a non-default name for {@code equals}, that method
+	 * will be returned.
 	 * 
-	 * @return the "equals" method declared on this type or that will be
+	 * @return the {@code equals} method declared on this type or that will be
 	 *         introduced (or null if undeclared and not introduced)
 	 */
 	public MethodMetadata getEqualsMethod() {
@@ -151,6 +157,10 @@ public class HashEqualsMetadata extends
 		return result;
 	}
 
+	public MethodMetadata getHashCodeMethod() {
+		return new HashCodeMethodBuilder().createHashCodeMethod();
+	}
+
 	public String toString() {
 		ToStringCreator tsc = new ToStringCreator(this);
 		tsc.append("identifier", getId());
@@ -184,5 +194,89 @@ public class HashEqualsMetadata extends
 	public static boolean isValid(String metadataIdentificationString) {
 		return PhysicalTypeIdentifierNamingUtils.isValid(PROVIDES_TYPE_STRING,
 				metadataIdentificationString);
+	}
+
+	/**
+	 * Creates a {@code hashCode()} method.
+	 * 
+	 * @author Stefan Bley
+	 * @since 1.0
+	 */
+	class HashCodeMethodBuilder {
+
+		InvocableMemberBodyBuilder bodyBuilder = new InvocableMemberBodyBuilder();
+		final JavaSymbolName methodName = new JavaSymbolName("hashCode");
+
+		/**
+		 * Obtains the {@code hashCode()} method for this type, if available.
+		 * 
+		 * <p>
+		 * If the user provided a non-default name for {@code hashCode}, that
+		 * method will be returned.
+		 * 
+		 * @return the {@code hashCode()} method declared on this type or that
+		 *         will be introduced (or {@code null} if undeclared and not
+		 *         introduced)
+		 */
+		MethodMetadata createHashCodeMethod() {
+
+			// See if the type itself declared the method
+			MethodMetadata result = MemberFindingUtils.getDeclaredMethod(
+					governorTypeDetails, methodName, null);
+			if (result != null) {
+				return result;
+			}
+
+			initHashCodeBuilder();
+			appendSuper(); // TODO make call to super configurable [SB]
+			appendFields();
+			finishHashCodeBuilder();
+			return createMethodMetadata();
+		}
+
+		/** Initializes the {@link HashCodeBuilder}. */
+		private InvocableMemberBodyBuilder initHashCodeBuilder() {
+			bodyBuilder.appendFormalLine("return new "
+					+ HASHCODE_BUILDER.getNameIncludingTypeParameters(false,
+							builder.getImportRegistrationResolver())
+					+ "(43, 11)");
+			return bodyBuilder;
+		}
+
+		/** Calls {@code super.hashCode()}. */
+		private InvocableMemberBodyBuilder appendSuper() {
+			bodyBuilder.indent();
+			bodyBuilder.appendFormalLine(".appendSuper(super.hashCode())");
+			return bodyBuilder;
+		}
+
+		/** Calls {@code append} for each non-transient non-static field. */
+		private InvocableMemberBodyBuilder appendFields() {
+			List<? extends FieldMetadata> declaredFields = governorTypeDetails
+					.getDeclaredFields();
+			for (FieldMetadata field : declaredFields) {
+				if (!Modifier.isTransient(field.getModifier())
+						&& !Modifier.isStatic(field.getModifier())) {
+					bodyBuilder.appendFormalLine(".append("
+							+ field.getFieldName().getSymbolName() + ")");
+				}
+			}
+			return bodyBuilder;
+		}
+
+		/** Calls {@code toHashCode()}. */
+		private InvocableMemberBodyBuilder finishHashCodeBuilder() {
+			bodyBuilder.appendFormalLine(".toHashCode();");
+			bodyBuilder.indentRemove();
+			return bodyBuilder;
+		}
+
+		/** Creates the {@link MethodMetadata} for {@code hashCode()}. */
+		private MethodMetadata createMethodMetadata() {
+			return new DefaultMethodMetadata(getId(), Modifier.PUBLIC,
+					methodName, JavaType.INT_PRIMITIVE, null, null,
+					new ArrayList<AnnotationMetadata>(), null, bodyBuilder
+							.getOutput());
+		}
 	}
 }

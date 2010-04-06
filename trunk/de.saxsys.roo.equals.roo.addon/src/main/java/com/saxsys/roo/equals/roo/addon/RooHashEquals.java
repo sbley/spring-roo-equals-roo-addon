@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Provides {@link Object#equals()} and {@link Object#hashCode()} methods if
+ * Provides {@link Object#equals(Object)} and {@link Object#hashCode()} methods if
  * requested.
  * 
  * @author stefan.bley
