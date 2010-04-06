@@ -1,4 +1,4 @@
-package de.saxsys.roo.equals.roo.addon;
+package com.saxsys.roo.equals.roo.addon;
 
 import java.util.logging.Logger;
 
