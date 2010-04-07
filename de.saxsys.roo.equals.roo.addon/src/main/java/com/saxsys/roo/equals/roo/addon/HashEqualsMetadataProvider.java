@@ -1,5 +1,7 @@
 package com.saxsys.roo.equals.roo.addon;
 
+import java.util.logging.Logger;
+
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
@@ -14,6 +16,7 @@ import org.springframework.roo.model.JavaType;
 import org.springframework.roo.project.Dependency;
 import org.springframework.roo.project.Path;
 import org.springframework.roo.project.ProjectOperations;
+import org.springframework.roo.support.logging.HandlerUtils;
 
 /**
  * @author stefan.ocke
@@ -22,11 +25,14 @@ import org.springframework.roo.project.ProjectOperations;
 @Service
 public final class HashEqualsMetadataProvider extends
 		AbstractItdMetadataProvider {
+	
+	protected final Logger logger = HandlerUtils.getLogger(getClass());
+	
 	@Reference
 	private ProjectOperations projectOperations;
 	// TODO do we actually need BeanInfoMetadataProvider? [SB]
-	@Reference
-	private BeanInfoMetadataProvider beanInfoMetadataProvider;
+	//@Reference
+	//private BeanInfoMetadataProvider beanInfoMetadataProvider;
 
 	protected void activate(ComponentContext context) {
 		metadataDependencyRegistry.registerDependency(PhysicalTypeIdentifier
@@ -50,19 +56,20 @@ public final class HashEqualsMetadataProvider extends
 		JavaType javaType = HashEqualsMetadata
 				.getJavaType(metadataIdentificationString);
 		Path path = HashEqualsMetadata.getPath(metadataIdentificationString);
-		String beanInfoMetadataKey = BeanInfoMetadata.createIdentifier(
-				javaType, path);
+		//String beanInfoMetadataKey = BeanInfoMetadata.createIdentifier(
+			//	javaType, path);
 
 		// We want to be notified if bean info metadata changes in any way
-		metadataDependencyRegistry.registerDependency(beanInfoMetadataKey,
-				metadataIdentificationString);
-		BeanInfoMetadata beanInfoMetadata = (BeanInfoMetadata) metadataService
-				.get(beanInfoMetadataKey);
+		//metadataDependencyRegistry.registerDependency(beanInfoMetadataKey,
+		//		metadataIdentificationString);
+//		BeanInfoMetadata beanInfoMetadata = (BeanInfoMetadata) metadataService
+//				.get(beanInfoMetadataKey);
 
 		// TODO do we need beanInfoMetadata? [SB]
-		if (beanInfoMetadata == null) {
-			return null;
-		}
+//		if (beanInfoMetadata == null) {
+//			
+//			return null;
+//		}
 
 		// Create the metadata
 		return new HashEqualsMetadata(metadataIdentificationString, aspectName,
