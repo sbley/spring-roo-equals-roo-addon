@@ -2,13 +2,16 @@ package com.saxsys.roo.equals.roo.addon;
 
 import java.util.logging.Logger;
 
+import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Reference;
+import org.apache.felix.scr.annotations.Service;
+import org.osgi.service.component.ComponentContext;
 import org.springframework.roo.shell.CliAvailabilityIndicator;
 import org.springframework.roo.shell.CliCommand;
 import org.springframework.roo.shell.CliOption;
 import org.springframework.roo.shell.CommandMarker;
 import org.springframework.roo.shell.converters.StaticFieldConverter;
-import org.springframework.roo.support.lifecycle.ScopeDevelopmentShell;
-import org.springframework.roo.support.util.Assert;
+import org.springframework.roo.support.logging.HandlerUtils;
 
 /**
  * Sample of a command class. The command class is registered by the Roo shell
@@ -18,21 +21,23 @@ import org.springframework.roo.support.util.Assert;
  * different severity (and therefore different colours on non-Windows systems).
  * 
  */
-@ScopeDevelopmentShell
-public class Commands implements CommandMarker {
+@Component
+@Service
+public class HashEqualsCommands implements CommandMarker {
 
-	private static Logger logger = Logger.getLogger(Commands.class.getName());
+	private final Logger logger = HandlerUtils.getLogger(getClass());
 
-	private Operations operations;
+	@Reference
+	private HashEqualsOperationsImpl operations;
+	@Reference
+	private StaticFieldConverter staticFieldConverter;
 
-	public Commands(StaticFieldConverter staticFieldConverter,
-			Operations operations) {
-		Assert.notNull(staticFieldConverter, "Static field converter required");
-		Assert.notNull(operations, "Operations object required");
+	protected void activate(ComponentContext context) {
 		staticFieldConverter.add(PropertyName.class);
-		this.operations = operations;
-		logger.warning("Loaded " + Commands.class.getName()
-				+ "; try the 'welcome' commands");
+	}
+
+	protected void deactivate(ComponentContext context) {
+		staticFieldConverter.remove(PropertyName.class);
 	}
 
 	@CliAvailabilityIndicator("welcome property")
