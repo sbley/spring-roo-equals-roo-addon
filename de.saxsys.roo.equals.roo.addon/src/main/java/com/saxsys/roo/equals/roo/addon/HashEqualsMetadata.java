@@ -4,9 +4,8 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.roo.classpath.PhysicalTypeIdentifierNamingUtils;
 import org.springframework.roo.classpath.PhysicalTypeMetadata;
 import org.springframework.roo.classpath.details.DefaultMethodMetadata;
@@ -22,6 +21,7 @@ import org.springframework.roo.metadata.MetadataIdentificationUtils;
 import org.springframework.roo.model.JavaSymbolName;
 import org.springframework.roo.model.JavaType;
 import org.springframework.roo.project.Path;
+import org.springframework.roo.support.logging.HandlerUtils;
 import org.springframework.roo.support.style.ToStringCreator;
 import org.springframework.roo.support.util.Assert;
 
@@ -36,8 +36,7 @@ import org.springframework.roo.support.util.Assert;
 public class HashEqualsMetadata extends
 		AbstractItdTypeDetailsProvidingMetadataItem {
 
-	private static Logger logger = LoggerFactory
-			.getLogger(HashEqualsMetadata.class);
+	protected final Logger logger = HandlerUtils.getLogger(getClass());
 	private static final String PROVIDES_TYPE_STRING = HashEqualsMetadata.class
 			.getName();
 	private static final String PROVIDES_TYPE = MetadataIdentificationUtils
@@ -109,7 +108,7 @@ public class HashEqualsMetadata extends
 		List<? extends FieldMetadata> declaredFields = governorTypeDetails
 				.getDeclaredFields();
 		for (FieldMetadata fieldMetadata : declaredFields) {
-			logger.warn("FieldMetadata: " + fieldMetadata);
+			logger.fine("FieldMetadata: " + fieldMetadata);
 		}
 
 		InvocableMemberBodyBuilder bodyBuilder = new InvocableMemberBodyBuilder();

@@ -1,44 +1,42 @@
 package com.saxsys.roo.equals.roo.addon;
 
+import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Reference;
+import org.apache.felix.scr.annotations.Service;
+import org.osgi.service.component.ComponentContext;
 import org.springframework.roo.addon.beaninfo.BeanInfoMetadata;
 import org.springframework.roo.addon.beaninfo.BeanInfoMetadataProvider;
 import org.springframework.roo.classpath.PhysicalTypeIdentifier;
 import org.springframework.roo.classpath.PhysicalTypeMetadata;
 import org.springframework.roo.classpath.itd.AbstractItdMetadataProvider;
 import org.springframework.roo.classpath.itd.ItdTypeDetailsProvidingMetadataItem;
-import org.springframework.roo.metadata.MetadataDependencyRegistry;
-import org.springframework.roo.metadata.MetadataService;
 import org.springframework.roo.model.JavaType;
-import org.springframework.roo.process.manager.FileManager;
 import org.springframework.roo.project.Dependency;
 import org.springframework.roo.project.Path;
 import org.springframework.roo.project.ProjectOperations;
-import org.springframework.roo.support.lifecycle.ScopeDevelopment;
-import org.springframework.roo.support.util.Assert;
 
 /**
  * @author stefan.ocke
  */
-@ScopeDevelopment
+@Component(immediate = true)
+@Service
 public final class HashEqualsMetadataProvider extends
 		AbstractItdMetadataProvider {
+	@Reference
 	private ProjectOperations projectOperations;
+	// TODO do we actually need BeanInfoMetadataProvider? [SB]
+	@Reference
+	private BeanInfoMetadataProvider beanInfoMetadataProvider;
 
-	public HashEqualsMetadataProvider(MetadataService metadataService,
-			MetadataDependencyRegistry metadataDependencyRegistry,
-			FileManager fileManager,
-			BeanInfoMetadataProvider beanInfoMetadataProvider,
-			ProjectOperations projectOperations) {
-		super(metadataService, metadataDependencyRegistry, fileManager);
-		Assert.notNull(beanInfoMetadataProvider,
-				"Bean info metadata provider required");
-		Assert.notNull(projectOperations, "Project operations required");
-		beanInfoMetadataProvider.addMetadataTrigger(new JavaType(
-				RooHashEquals.class.getName()));
+	protected void activate(ComponentContext context) {
+		metadataDependencyRegistry.registerDependency(PhysicalTypeIdentifier
+				.getMetadataIdentiferType(), getProvidesType());
 		addMetadataTrigger(new JavaType(RooHashEquals.class.getName()));
+	}
 
-		this.projectOperations = projectOperations;
-
+	public HashEqualsMetadataProvider() {
+		// beanInfoMetadataProvider.addMetadataTrigger(new JavaType(
+		// RooHashEquals.class.getName()));
 	}
 
 	protected ItdTypeDetailsProvidingMetadataItem getMetadata(

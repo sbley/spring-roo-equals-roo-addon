@@ -6,36 +6,35 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.felix.scr.annotations.Component;
+import org.apache.felix.scr.annotations.Reference;
+import org.apache.felix.scr.annotations.Service;
 import org.springframework.roo.metadata.MetadataService;
 import org.springframework.roo.process.manager.FileManager;
 import org.springframework.roo.process.manager.MutableFile;
 import org.springframework.roo.project.Path;
 import org.springframework.roo.project.PathResolver;
 import org.springframework.roo.project.ProjectMetadata;
-import org.springframework.roo.support.lifecycle.ScopeDevelopment;
+import org.springframework.roo.support.logging.HandlerUtils;
 import org.springframework.roo.support.util.Assert;
 import org.springframework.roo.support.util.FileCopyUtils;
 
 /**
  * Implementation of commands that are available via the Roo shell.
  * 
- * @author Ben Alex
+ * @author stefan.bley
  * @since 1.0
  */
-@ScopeDevelopment
-public class Operations {
+@Component
+@Service
+public class HashEqualsOperationsImpl implements HashEqualsOperations {
 
-	private static Logger logger = Logger.getLogger(Operations.class.getName());
+	private final Logger logger = HandlerUtils.getLogger(getClass());
 
+	@Reference
 	private FileManager fileManager;
+	@Reference
 	private MetadataService metadataService;
-
-	public Operations(FileManager fileManager, MetadataService metadataService) {
-		Assert.notNull(fileManager, "File manager required");
-		Assert.notNull(metadataService, "Metadata service required");
-		this.fileManager = fileManager;
-		this.metadataService = metadataService;
-	}
 
 	public boolean isProjectAvailable() {
 		return getPathResolver() != null;
@@ -94,7 +93,7 @@ public class Operations {
 	/**
 	 * @return the path resolver or null if there is no user project
 	 */
-	private PathResolver getPathResolver() {
+	PathResolver getPathResolver() {
 		ProjectMetadata projectMetadata = (ProjectMetadata) metadataService
 				.get(ProjectMetadata.getProjectIdentifier());
 		if (projectMetadata == null) {
