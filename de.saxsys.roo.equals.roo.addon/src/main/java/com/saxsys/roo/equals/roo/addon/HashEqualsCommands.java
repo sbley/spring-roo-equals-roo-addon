@@ -28,7 +28,7 @@ public class HashEqualsCommands implements CommandMarker {
 	private final Logger logger = HandlerUtils.getLogger(getClass());
 
 	@Reference
-	private HashEqualsOperationsImpl operations;
+	private HashEqualsOperations operations;
 	@Reference
 	private StaticFieldConverter staticFieldConverter;
 
