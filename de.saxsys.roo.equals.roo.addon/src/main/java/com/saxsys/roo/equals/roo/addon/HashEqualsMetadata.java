@@ -14,6 +14,7 @@ import org.springframework.roo.classpath.details.MemberFindingUtils;
 import org.springframework.roo.classpath.details.MethodMetadata;
 import org.springframework.roo.classpath.details.annotations.AnnotatedJavaType;
 import org.springframework.roo.classpath.details.annotations.AnnotationMetadata;
+import org.springframework.roo.classpath.details.annotations.populator.AutoPopulate;
 import org.springframework.roo.classpath.details.annotations.populator.AutoPopulationUtils;
 import org.springframework.roo.classpath.itd.AbstractItdTypeDetailsProvidingMetadataItem;
 import org.springframework.roo.classpath.itd.InvocableMemberBodyBuilder;
@@ -36,7 +37,7 @@ import org.springframework.roo.support.util.Assert;
 public class HashEqualsMetadata extends
 		AbstractItdTypeDetailsProvidingMetadataItem {
 
-	protected final Logger logger = HandlerUtils.getLogger(getClass());
+	protected Logger logger = HandlerUtils.getLogger(getClass());
 	private static final String PROVIDES_TYPE_STRING = HashEqualsMetadata.class
 			.getName();
 	private static final String PROVIDES_TYPE = MetadataIdentificationUtils
@@ -47,8 +48,12 @@ public class HashEqualsMetadata extends
 			"org.apache.commons.lang.builder.HashCodeBuilder");
 	private static final JavaType OBJECT = new JavaType("java.lang.Object");
 
-	// From annotation
-	// @AutoPopulate private String toStringMethod = "toString";
+	/** append super equals and hashCode method calls */
+	@AutoPopulate
+	private boolean callSuper = true;
+	/** use instanceof rather than getClass() */
+	@AutoPopulate
+	private boolean callInstanceof = false;
 
 	public HashEqualsMetadata(String identifier, JavaType aspectName,
 			PhysicalTypeMetadata governorPhysicalTypeMetadata) {
@@ -70,94 +75,17 @@ public class HashEqualsMetadata extends
 		}
 
 		// Generate equals method
-		MethodMetadata equalsMethod = getEqualsMethod();
+		MethodMetadata equalsMethod = new EqualsMethodBuilder()
+				.createEqualsMethod();
 		builder.addMethod(equalsMethod);
 
 		// Generate hashCode method
-		MethodMetadata hashCodeMethod = getHashCodeMethod();
+		MethodMetadata hashCodeMethod = new HashCodeMethodBuilder()
+				.createHashCodeMethod();
 		builder.addMethod(hashCodeMethod);
 
 		// Create a representation of the desired output ITD
 		itdTypeDetails = builder.build();
-	}
-
-	/**
-	 * Obtains the {@code equals} method for this type, if available.
-	 * 
-	 * <p>
-	 * If the user provided a non-default name for {@code equals}, that method
-	 * will be returned.
-	 * 
-	 * @return the {@code equals} method declared on this type or that will be
-	 *         introduced (or null if undeclared and not introduced)
-	 */
-	public MethodMetadata getEqualsMethod() {
-
-		JavaSymbolName methodName = new JavaSymbolName("equals");
-		final String simpleTypeName = governorTypeDetails.getName()
-				.getSimpleTypeName();
-
-		// See if the type itself declared the method
-		MethodMetadata result = MemberFindingUtils.getDeclaredMethod(
-				governorTypeDetails, methodName, Collections
-						.singletonList(OBJECT));
-		if (result != null) {
-			return result;
-		}
-
-		List<? extends FieldMetadata> declaredFields = governorTypeDetails
-				.getDeclaredFields();
-		for (FieldMetadata fieldMetadata : declaredFields) {
-			logger.fine("FieldMetadata: " + fieldMetadata);
-		}
-
-		InvocableMemberBodyBuilder bodyBuilder = new InvocableMemberBodyBuilder();
-		// simple checks
-		bodyBuilder.appendFormalLine("if (other == null) { return false; }");
-		bodyBuilder.appendFormalLine("if (other == this) { return true; }");
-		bodyBuilder.appendFormalLine("if (other.getClass() != getClass()) {");
-		bodyBuilder.indent();
-		bodyBuilder.appendFormalLine("return false;");
-		bodyBuilder.indentRemove();
-		bodyBuilder.appendFormalLine("}");
-
-		// cast other object
-		bodyBuilder.appendFormalLine(simpleTypeName + " rhs = ("
-				+ simpleTypeName + ") other;");
-		bodyBuilder.appendFormalLine("return new "
-				+ EQUALS_BUILDER.getNameIncludingTypeParameters(false, builder
-						.getImportRegistrationResolver()) + "()");
-
-		// call super.equals()
-		bodyBuilder.indent();
-		bodyBuilder.appendFormalLine(".appendSuper(super.equals(other))");
-
-		// add comparisons
-		for (FieldMetadata field : declaredFields) {
-			if (!Modifier.isTransient(field.getModifier())
-					&& !Modifier.isStatic(field.getModifier())) {
-				bodyBuilder.appendFormalLine(".append("
-						+ field.getFieldName().getSymbolName() + ", rhs."
-						+ field.getFieldName().getSymbolName() + ")");
-			}
-		}
-
-		bodyBuilder.appendFormalLine(".isEquals();");
-		bodyBuilder.indentRemove();
-
-		result = new DefaultMethodMetadata(getId(), Modifier.PUBLIC,
-				methodName, JavaType.BOOLEAN_PRIMITIVE,
-				AnnotatedJavaType.convertFromJavaTypes(Collections
-						.singletonList(OBJECT)), Collections
-						.singletonList(new JavaSymbolName("other")),
-				new ArrayList<AnnotationMetadata>(), null, bodyBuilder
-						.getOutput());
-
-		return result;
-	}
-
-	public MethodMetadata getHashCodeMethod() {
-		return new HashCodeMethodBuilder().createHashCodeMethod();
 	}
 
 	public String toString() {
@@ -196,13 +124,119 @@ public class HashEqualsMetadata extends
 	}
 
 	/**
+	 * Creates an {@code equals(Object)} method.
+	 * 
+	 * @author Stefan Bley
+	 * @since 1.0
+	 */
+	class EqualsMethodBuilder {
+		InvocableMemberBodyBuilder bodyBuilder = new InvocableMemberBodyBuilder();
+		final JavaSymbolName methodName = new JavaSymbolName("equals");
+		final String simpleTypeName = governorTypeDetails.getName()
+				.getSimpleTypeName();
+
+		/**
+		 * Obtains the {@code equals} method for this type, if available.
+		 * 
+		 * <p>
+		 * If the user provided a non-default name for {@code equals}, that
+		 * method will be returned.
+		 * 
+		 * @return the {@code equals} method declared on this type or that will
+		 *         be introduced (or null if undeclared and not introduced)
+		 */
+		MethodMetadata createEqualsMethod() {
+
+			// See if the type itself declared the method
+			MethodMetadata result = MemberFindingUtils.getDeclaredMethod(
+					governorTypeDetails, methodName, Collections
+							.singletonList(OBJECT));
+			if (result != null) {
+				return result;
+			}
+
+			appendClassComparison();
+			initEqualsBuilder();
+			if (callSuper) {
+				appendSuper();
+			}
+			appendFields();
+			finishEqualsBuilder();
+			return createMethodMetadata();
+		}
+
+		private InvocableMemberBodyBuilder appendClassComparison() {
+			bodyBuilder
+					.appendFormalLine("if (other == null) { return false; }");
+			bodyBuilder.appendFormalLine("if (other == this) { return true; }");
+			if (callInstanceof) {
+				bodyBuilder.appendFormalLine("if (!(other instanceof "
+						+ simpleTypeName + ")) {");
+			} else {
+				bodyBuilder
+						.appendFormalLine("if (other.getClass() != getClass()) {");
+			}
+			bodyBuilder.indent();
+			bodyBuilder.appendFormalLine("return false;");
+			bodyBuilder.indentRemove();
+			bodyBuilder.appendFormalLine("}");
+			return bodyBuilder;
+		}
+
+		private InvocableMemberBodyBuilder initEqualsBuilder() {
+			bodyBuilder.appendFormalLine(simpleTypeName + " rhs = ("
+					+ simpleTypeName + ") other;");
+			bodyBuilder.appendFormalLine("return new "
+					+ EQUALS_BUILDER.getNameIncludingTypeParameters(false,
+							builder.getImportRegistrationResolver()) + "()");
+			bodyBuilder.indent();
+			return bodyBuilder;
+		}
+
+		private InvocableMemberBodyBuilder appendSuper() {
+			bodyBuilder.appendFormalLine(".appendSuper(super.equals(other))");
+			return bodyBuilder;
+		}
+
+		private InvocableMemberBodyBuilder appendFields() {
+			List<? extends FieldMetadata> declaredFields = governorTypeDetails
+					.getDeclaredFields();
+			for (FieldMetadata field : declaredFields) {
+				logger.fine("FieldMetadata: " + field);
+				if (!Modifier.isTransient(field.getModifier())
+						&& !Modifier.isStatic(field.getModifier())) {
+					bodyBuilder.appendFormalLine(".append("
+							+ field.getFieldName().getSymbolName() + ", rhs."
+							+ field.getFieldName().getSymbolName() + ")");
+				}
+			}
+			return bodyBuilder;
+		}
+
+		private InvocableMemberBodyBuilder finishEqualsBuilder() {
+			bodyBuilder.appendFormalLine(".isEquals();");
+			bodyBuilder.indentRemove();
+			return bodyBuilder;
+		}
+
+		private MethodMetadata createMethodMetadata() {
+			return new DefaultMethodMetadata(getId(), Modifier.PUBLIC,
+					methodName, JavaType.BOOLEAN_PRIMITIVE, AnnotatedJavaType
+							.convertFromJavaTypes(Collections
+									.singletonList(OBJECT)), Collections
+							.singletonList(new JavaSymbolName("other")),
+					new ArrayList<AnnotationMetadata>(), null, bodyBuilder
+							.getOutput());
+		}
+	}
+
+	/**
 	 * Creates a {@code hashCode()} method.
 	 * 
 	 * @author Stefan Bley
 	 * @since 1.0
 	 */
 	class HashCodeMethodBuilder {
-
 		InvocableMemberBodyBuilder bodyBuilder = new InvocableMemberBodyBuilder();
 		final JavaSymbolName methodName = new JavaSymbolName("hashCode");
 
@@ -227,7 +261,9 @@ public class HashEqualsMetadata extends
 			}
 
 			initHashCodeBuilder();
-			appendSuper(); // TODO make call to super configurable [SB]
+			if (callSuper) {
+				appendSuper();
+			}
 			appendFields();
 			finishHashCodeBuilder();
 			return createMethodMetadata();
@@ -239,12 +275,12 @@ public class HashEqualsMetadata extends
 					+ HASHCODE_BUILDER.getNameIncludingTypeParameters(false,
 							builder.getImportRegistrationResolver())
 					+ "(43, 11)");
+			bodyBuilder.indent();
 			return bodyBuilder;
 		}
 
 		/** Calls {@code super.hashCode()}. */
 		private InvocableMemberBodyBuilder appendSuper() {
-			bodyBuilder.indent();
 			bodyBuilder.appendFormalLine(".appendSuper(super.hashCode())");
 			return bodyBuilder;
 		}
