@@ -20,4 +20,11 @@ public interface HashEqualsOperations {
 
 	public void writeTextFile(String name);
 
+	/**
+	 * @param propertyName
+	 *            to obtain (required)
+	 * @return a message that will ultimately be displayed on the shell
+	 */
+	public String getProperty(PropertyName propertyName);
+
 }
