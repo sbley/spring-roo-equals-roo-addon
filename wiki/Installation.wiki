@@ -1,4 +1,4 @@
-#How to install this addon in Spring Roo
+#summary How to install this addon in Spring Roo
 
 You can install this plugin into Roo 1.1.0.M1 by executing the following commands in the Roo shell:
 
