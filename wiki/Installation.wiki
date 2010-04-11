@@ -10,7 +10,7 @@ You can install this plugin into Roo 1.1.0.M1 by executing the following command
 Now you can verify that the plugin is active by:
   * osgi obr ps
 
-You should see someting like:
+You should see something like:
 {{{
 ...
 [  53] [Active     ] [    1] Spring Roo - Addon - equals() and hashCode() (1.0.0.SNAPSHOT)
