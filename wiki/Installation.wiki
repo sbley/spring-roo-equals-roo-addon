@@ -6,7 +6,7 @@ You can install this plugin into Roo 1.1.0.M1 by executing the following command
   # osgi obr url add --url http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-snapshot-repository/repository.xml
   # osgi obr start --bundleSymbolicName de.saxsys.roo.equals.roo.addon
 
-_ The first step is required since felix OBR currently causes errors during bundle installation in Roo. Later it might be omitted_
+_ The first step is required since Felix OBR currently causes errors during bundle installation in Roo. In future versions of Roo this might be fixed and this step might be omitted._
 
 Now you can verify that the plugin is active by:
   * osgi obr ps
