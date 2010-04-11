@@ -2,5 +2,5 @@
 
 You can install this plugin into Roo 1.1.0.M1 by executing the following commands in the Roo shell:
 
-# osgi obr url add --url http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-snapshot-repository/repository.xml
-#
+  # osgi obr url add --url http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-snapshot-repository/repository.xml
+  #
