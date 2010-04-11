@@ -2,5 +2,15 @@
 
 You can install this plugin into Roo 1.1.0.M1 by executing the following commands in the Roo shell:
 
+  # osgi obr url remove --url http://felix.apache.org/obr/releases.xml
+    * 2010-04-11: the felix OBR currently causes errors during bundle installation. Thus, this step is required. Later it might be omitted
   # osgi obr url add --url http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-snapshot-repository/repository.xml
-  #
+  # osgi obr start --bundleSymbolicName de.saxsys.roo.equals.roo.addon
+
+Now you can verify that the plugin is active by:
+  * osgi obr ps
+
+You should see someting like:
+
+...
+[  53] [Active     ] [    1] Spring Roo - Addon - equals() and hashCode() (1.0.0.SNAPSHOT)
