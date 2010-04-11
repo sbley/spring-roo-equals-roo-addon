@@ -11,6 +11,7 @@ Now you can verify that the plugin is active by:
   * osgi obr ps
 
 You should see someting like:
-
+{{{
 ...
 [  53] [Active     ] [    1] Spring Roo - Addon - equals() and hashCode() (1.0.0.SNAPSHOT)
+}}}
