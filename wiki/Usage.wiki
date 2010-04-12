@@ -1,3 +1,42 @@
-#summary how to use the plugin
+#summary How to use this addon in a Roo managed Java project
 
-TODO
+  # You can create a Roo managed project from the Roo shell:
+{{{
+project --topLevelPackage com.example.app
+}}}
+  # In order to use the @!RooEquals annotation you need to add a dependency to your project's pom.xml. The annotation jar file is hosted in the addon's maven repository on Google Code.
+{{{
+<repositories>
+...
+  <repository>
+    <id>googlecode.rooequals.repo</id>
+    <url>https://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/</url>
+    <releases>
+      <enabled>true</enabled>
+    </releases>
+    <snapshots>
+      <enabled>false</enabled>
+    </snapshots>
+  </repository>
+  <repository>
+    <id>googlecode.rooequals.snapshotrepo</id>
+    <url>https://spring-roo-equals-roo-addon.googlecode.com/svn/maven-snapshot-repository/</url>
+    <releases>
+      <enabled>false</enabled>
+    </releases>
+    <snapshots>
+      <enabled>true</enabled>
+    </snapshots>
+  </repository>
+</repositories>
+
+<dependencies>
+...
+  <dependency>
+    <groupId>de.saxsys.roo</groupId>
+    <artifactId>de.saxsys.roo.equals.annotations</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </dependency>
+</dependencies>
+}}}
+  # Create a class in your IDE and annotate it with @!RooEquals.
