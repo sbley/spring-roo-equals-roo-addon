@@ -1,5 +1,6 @@
 #summary How to use this addon in a Roo managed Java project
 
+===Project Configuration===
   # You can create a Roo managed project from the Roo shell:
 {{{
 project --topLevelPackage com.example.app
@@ -39,7 +40,12 @@ project --topLevelPackage com.example.app
   </dependency>
 </dependencies>
 }}}
-  # Create a class in your IDE and annotate it with @!RooEquals.
+Now you are ready to use the @!RooEquals annotation.
+
+===Usage of @!RooEquals===
+
+Annotating a class with @!RooEquals will trigger the creation of the equals() and hashCode() methods in a separate AspectJ file.
+The implementation delegates to the [http://commons.apache.org/lang/api-release/org/apache/commons/lang/builder/EqualsBuilder.html EqualsBuilder] and [http://commons.apache.org/lang/api-release/org/apache/commons/lang/builder/HashCodeBuilder.html HashCodeBuilder] provided by the Apache Commons Lang project.
 {{{
 TODO
 }}}
