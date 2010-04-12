@@ -13,6 +13,14 @@
 		<version>1.1.0.M1</version>
 	</parent>
 
+	<properties>
+		<annotations.groupId>${project.groupId}</annotations.groupId>
+		<annotations.artifactId>${project.groupId}.equals.annotations</annotations.artifactId>
+		<annotations.version>${project.version}</annotations.version>
+		<annotations.repo.id>${project.distributionManagementArtifactRepository.id}</annotations.repo.id>		
+		<annotations.repo.url>${project.distributionManagementArtifactRepository.name}</annotations.repo.url>
+	</properties>
+
 	<dependencies>
 		<!--  OSGi -->
 		<dependency>
@@ -108,14 +116,18 @@
 		</developer>
 	</developers>
 	<build>
-		<!--  <extensions>
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-webdav</artifactId>
-				<version>1.0-beta-2</version>
-			</extension>
-		</extensions>-->
-		
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<!--
+			<extensions> <extension> <groupId>org.apache.maven.wagon</groupId>
+			<artifactId>wagon-webdav</artifactId> <version>1.0-beta-2</version>
+			</extension> </extensions>
+		-->
+
 		<extensions>
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
@@ -123,7 +135,7 @@
 				<version>1.0-beta-6</version>
 			</extension>
 		</extensions>
-		
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
