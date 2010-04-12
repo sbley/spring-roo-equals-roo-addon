@@ -1,5 +1,7 @@
 package de.saxsys.roo.equals.addon;
 
+import org.springframework.roo.model.JavaType;
+
 /**
  * Interface to {@link EqualsOperationsImpl}.
  * 
@@ -13,18 +15,7 @@ public interface EqualsOperations {
 
 	public boolean isProjectAvailable();
 
-	/**
-	 * @return true if the user's project has a /[name].txt file
-	 */
-	public boolean isTextFileAvailable(String name);
+	public void addEquals(JavaType typeName);
 
-	public void writeTextFile(String name);
-
-	/**
-	 * @param propertyName
-	 *            to obtain (required)
-	 * @return a message that will ultimately be displayed on the shell
-	 */
-	public String getProperty(PropertyName propertyName);
 
 }
