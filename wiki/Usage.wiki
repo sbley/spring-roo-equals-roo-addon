@@ -40,3 +40,6 @@ project --topLevelPackage com.example.app
 </dependencies>
 }}}
   # Create a class in your IDE and annotate it with @!RooEquals.
+{{{
+TODO
+}}}
