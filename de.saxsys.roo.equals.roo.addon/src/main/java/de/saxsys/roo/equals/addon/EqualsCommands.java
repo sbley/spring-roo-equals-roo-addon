@@ -23,12 +23,12 @@ import org.springframework.roo.support.logging.HandlerUtils;
  */
 @Component
 @Service
-public class HashEqualsCommands implements CommandMarker {
+public class EqualsCommands implements CommandMarker {
 
 	private final Logger logger = HandlerUtils.getLogger(getClass());
 
 	@Reference
-	private HashEqualsOperations operations;
+	private EqualsOperations operations;
 	@Reference
 	private StaticFieldConverter staticFieldConverter;
 

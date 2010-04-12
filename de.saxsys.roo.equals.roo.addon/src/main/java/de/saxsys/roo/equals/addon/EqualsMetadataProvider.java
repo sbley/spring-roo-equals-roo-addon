@@ -21,7 +21,7 @@ import org.springframework.roo.support.logging.HandlerUtils;
  */
 @Component(immediate = true)
 @Service
-public final class HashEqualsMetadataProvider extends
+public final class EqualsMetadataProvider extends
 		AbstractItdMetadataProvider {
 
 	protected final Logger logger = HandlerUtils.getLogger(getClass());
@@ -32,7 +32,7 @@ public final class HashEqualsMetadataProvider extends
 	protected void activate(ComponentContext context) {
 		metadataDependencyRegistry.registerDependency(PhysicalTypeIdentifier
 				.getMetadataIdentiferType(), getProvidesType());
-		addMetadataTrigger(new JavaType(RooHashEquals.class.getName()));
+		addMetadataTrigger(new JavaType(RooEquals.class.getName()));
 	}
 
 	protected ItdTypeDetailsProvidingMetadataItem getMetadata(
@@ -43,7 +43,7 @@ public final class HashEqualsMetadataProvider extends
 		addCommonsLangToClasspath(projectOperations);
 
 		// Create the metadata
-		return new HashEqualsMetadata(metadataIdentificationString, aspectName,
+		return new EqualsMetadata(metadataIdentificationString, aspectName,
 				governorPhysicalTypeMetadata);
 	}
 
@@ -53,20 +53,20 @@ public final class HashEqualsMetadataProvider extends
 
 	protected String getGovernorPhysicalTypeIdentifier(
 			String metadataIdentificationString) {
-		JavaType javaType = HashEqualsMetadata
+		JavaType javaType = EqualsMetadata
 				.getJavaType(metadataIdentificationString);
-		Path path = HashEqualsMetadata.getPath(metadataIdentificationString);
+		Path path = EqualsMetadata.getPath(metadataIdentificationString);
 		String physicalTypeIdentifier = PhysicalTypeIdentifier
 				.createIdentifier(javaType, path);
 		return physicalTypeIdentifier;
 	}
 
 	protected String createLocalIdentifier(JavaType javaType, Path path) {
-		return HashEqualsMetadata.createIdentifier(javaType, path);
+		return EqualsMetadata.createIdentifier(javaType, path);
 	}
 
 	public String getProvidesType() {
-		return HashEqualsMetadata.getMetadataIdentiferType();
+		return EqualsMetadata.getMetadataIdentiferType();
 	}
 
 	protected void addCommonsLangToClasspath(

@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.SOURCE)
-public @interface RooHashEquals {
+public @interface RooEquals {
 	/**
 	 * If {@code true} (default) then inserts calls to the super class equals()
 	 * and hashCode() methods.

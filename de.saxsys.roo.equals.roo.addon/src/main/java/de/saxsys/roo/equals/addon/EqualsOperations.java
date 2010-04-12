@@ -1,7 +1,7 @@
 package de.saxsys.roo.equals.addon;
 
 /**
- * Interface to {@link HashEqualsOperationsImpl}.
+ * Interface to {@link EqualsOperationsImpl}.
  * 
  * <p>
  * By now, only contains stub operations from the addon archetype.
@@ -9,7 +9,7 @@ package de.saxsys.roo.equals.addon;
  * 
  * @author stefan.bley
  */
-public interface HashEqualsOperations {
+public interface EqualsOperations {
 
 	public boolean isProjectAvailable();
 

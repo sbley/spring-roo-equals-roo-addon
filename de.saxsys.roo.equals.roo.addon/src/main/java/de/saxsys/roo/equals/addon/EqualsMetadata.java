@@ -27,18 +27,18 @@ import org.springframework.roo.support.style.ToStringCreator;
 import org.springframework.roo.support.util.Assert;
 
 /**
- * Metadata for {@link RooHashEquals}.
+ * Metadata for {@link RooEquals}.
  * 
  * @author stefan.ocke
  * @author stefan.bley
  * @since 1.0
  * 
  */
-public class HashEqualsMetadata extends
+public class EqualsMetadata extends
 		AbstractItdTypeDetailsProvidingMetadataItem {
 
 	protected Logger logger = HandlerUtils.getLogger(getClass());
-	private static final String PROVIDES_TYPE_STRING = HashEqualsMetadata.class
+	private static final String PROVIDES_TYPE_STRING = EqualsMetadata.class
 			.getName();
 	private static final String PROVIDES_TYPE = MetadataIdentificationUtils
 			.create(PROVIDES_TYPE_STRING);
@@ -55,7 +55,7 @@ public class HashEqualsMetadata extends
 	@AutoPopulate
 	private boolean callInstanceof = false;
 
-	public HashEqualsMetadata(String identifier, JavaType aspectName,
+	public EqualsMetadata(String identifier, JavaType aspectName,
 			PhysicalTypeMetadata governorPhysicalTypeMetadata) {
 		super(identifier, aspectName, governorPhysicalTypeMetadata);
 
@@ -69,7 +69,7 @@ public class HashEqualsMetadata extends
 		// Process values from the annotation, if present
 		AnnotationMetadata annotation = MemberFindingUtils
 				.getDeclaredTypeAnnotation(governorTypeDetails, new JavaType(
-						RooHashEquals.class.getName()));
+						RooEquals.class.getName()));
 		if (annotation != null) {
 			AutoPopulationUtils.populate(this, annotation);
 		}

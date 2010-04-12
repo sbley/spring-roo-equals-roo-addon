@@ -27,7 +27,7 @@ import org.springframework.roo.support.util.FileCopyUtils;
  */
 @Component
 @Service
-public class HashEqualsOperationsImpl implements HashEqualsOperations {
+public class EqualsOperationsImpl implements EqualsOperations {
 
 	private final Logger logger = HandlerUtils.getLogger(getClass());
 
