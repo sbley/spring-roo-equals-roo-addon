@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>de.saxsys.roo</groupId>
+  <artifactId>de.saxsys.roo.equals.addon</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <versioning>
+    <versions>
+      <version>1.0.0-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20100412135254</lastUpdated>
+  </versioning>
+</metadata>
