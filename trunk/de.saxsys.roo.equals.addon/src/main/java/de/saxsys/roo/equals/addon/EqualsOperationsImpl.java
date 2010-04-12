@@ -10,11 +10,16 @@ import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
 import org.springframework.roo.metadata.MetadataService;
+import org.springframework.roo.model.JavaType;
 import org.springframework.roo.process.manager.FileManager;
 import org.springframework.roo.process.manager.MutableFile;
+import org.springframework.roo.project.Dependency;
 import org.springframework.roo.project.Path;
 import org.springframework.roo.project.PathResolver;
 import org.springframework.roo.project.ProjectMetadata;
+import org.springframework.roo.project.ProjectMetadataProvider;
+import org.springframework.roo.project.ProjectOperations;
+import org.springframework.roo.project.Repository;
 import org.springframework.roo.support.logging.HandlerUtils;
 import org.springframework.roo.support.util.Assert;
 import org.springframework.roo.support.util.FileCopyUtils;
@@ -32,74 +37,45 @@ public class EqualsOperationsImpl implements EqualsOperations {
 	private final Logger logger = HandlerUtils.getLogger(getClass());
 
 	@Reference
-	private FileManager fileManager;
-	@Reference
 	private MetadataService metadataService;
 
+	@Reference
+	private ProjectOperations projectOperations;
+
+	@Reference
+	ProjectMetadataProvider projectMetadataProvider;
+
 	public boolean isProjectAvailable() {
-		return getPathResolver() != null;
+		return getProjectMetadata() != null;
 	}
 
 	/**
-	 * @param propertyName
-	 *            to obtain (required)
-	 * @return a message that will ultimately be displayed on the shell
+	 * @return the project metadata or null if there is no user project
 	 */
-	public String getProperty(PropertyName propertyName) {
-		Assert.notNull(propertyName, "Property name required");
-		String internalName = "user.name";
-		if (PropertyName.HOME_DIRECTORY.equals(propertyName)) {
-			internalName = "user.home";
-		}
-		return propertyName.getPropertyName() + " : "
-				+ System.getProperty(internalName);
-	}
-
-	/**
-	 * @return true if the user's project has a /[name].txt file
-	 */
-	public boolean isTextFileAvailable(String name) {
-		Assert.hasText(name, "Text file name to check for is required");
-		PathResolver pr = getPathResolver();
-		if (pr == null) {
-			return false;
-		}
-		File file = new File(pr.getIdentifier(Path.ROOT, name + ".txt"));
-		return file.exists();
-	}
-
-	public void writeTextFile(String name) {
-		Assert.hasText(name, "Text file name to write is required");
-		PathResolver pr = getPathResolver();
-		Assert.notNull(pr, "Path resolver not found");
-		String path = pr.getIdentifier(Path.ROOT, name + ".txt");
-		File file = new File(path);
-		MutableFile mutableFile;
-		if (file.exists()) {
-			mutableFile = fileManager.updateFile(path);
-		} else {
-			mutableFile = fileManager.createFile(path);
-		}
-		byte[] input = new String("Write text file method called at "
-				+ new Date().toString()).getBytes();
-		try {
-			FileCopyUtils.copy(input, mutableFile.getOutputStream());
-		} catch (IOException ioe) {
-			throw new IllegalStateException(ioe);
-		}
-		logger.log(Level.WARNING, "Wrote: " + new String(input));
-	}
-
-	/**
-	 * @return the path resolver or null if there is no user project
-	 */
-	PathResolver getPathResolver() {
+	ProjectMetadata getProjectMetadata() {
 		ProjectMetadata projectMetadata = (ProjectMetadata) metadataService
 				.get(ProjectMetadata.getProjectIdentifier());
-		if (projectMetadata == null) {
-			return null;
-		}
-		return projectMetadata.getPathResolver();
+		return projectMetadata;
+	}
+
+	public void addEquals(JavaType typeName) {
+
+		String repoId =	"googlecode.rooequals.snapshotrepo";
+		String repoName= "SNAPSHOT repository for Roo equals addon";
+		String repoUrl= "https://spring-roo-equals-roo-addon.googlecode.com/svn/maven-snapshot-repository/";
+
+		projectOperations.addRepository(repoId, repoName, repoUrl);
+
+		Dependency dependencyAnno = new Dependency("de.saxsys.roo", "de.saxsys.roo.equals.annotations",
+				"1.0.0-SNAPSHOT");
+		projectOperations.dependencyUpdate(dependencyAnno);
+
+		Dependency dependencyCmnLang = new Dependency("commons-lang", "commons-lang",
+				"2.5");
+		projectOperations.dependencyUpdate(dependencyCmnLang );
+
+		logger.severe(typeName.toString());
+
 	}
 
 }

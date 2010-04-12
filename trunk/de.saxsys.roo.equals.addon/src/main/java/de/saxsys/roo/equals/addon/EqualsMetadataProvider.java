@@ -70,8 +70,8 @@ public final class EqualsMetadataProvider extends AbstractItdMetadataProvider {
 
 	protected void addCommonsLangToClasspath(
 			final ProjectOperations projectOperations) {
-		Dependency dependency = new Dependency("commons-lang", "commons-lang",
-				"2.5");
-		projectOperations.dependencyUpdate(dependency);
+//		Dependency dependency = new Dependency("commons-lang", "commons-lang",
+//				"2.5");
+//		projectOperations.dependencyUpdate(dependency);
 	}
 }
