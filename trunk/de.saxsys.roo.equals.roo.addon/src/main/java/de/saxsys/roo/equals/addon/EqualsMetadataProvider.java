@@ -21,8 +21,7 @@ import org.springframework.roo.support.logging.HandlerUtils;
  */
 @Component(immediate = true)
 @Service
-public final class EqualsMetadataProvider extends
-		AbstractItdMetadataProvider {
+public final class EqualsMetadataProvider extends AbstractItdMetadataProvider {
 
 	protected final Logger logger = HandlerUtils.getLogger(getClass());
 
@@ -48,7 +47,7 @@ public final class EqualsMetadataProvider extends
 	}
 
 	public String getItdUniquenessFilenameSuffix() {
-		return "HashEquals";
+		return "Equals";
 	}
 
 	protected String getGovernorPhysicalTypeIdentifier(
