@@ -1,7 +1,5 @@
 package de.saxsys.roo.equals.addon;
 
-import java.util.logging.Logger;
-
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.Service;
@@ -11,8 +9,6 @@ import org.springframework.roo.shell.CliAvailabilityIndicator;
 import org.springframework.roo.shell.CliCommand;
 import org.springframework.roo.shell.CliOption;
 import org.springframework.roo.shell.CommandMarker;
-import org.springframework.roo.shell.converters.StaticFieldConverter;
-import org.springframework.roo.support.logging.HandlerUtils;
 
 /**
  * Commands for the roo-equals addon.
@@ -24,8 +20,6 @@ public class EqualsCommands implements CommandMarker {
 
 	@Reference
 	private EqualsOperations operations;
-	@Reference
-	private StaticFieldConverter staticFieldConverter;
 
 	protected void activate(ComponentContext context) {
 	}

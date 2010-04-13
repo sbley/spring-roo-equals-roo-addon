@@ -17,8 +17,10 @@
 		<annotations.groupId>${project.groupId}</annotations.groupId>
 		<annotations.artifactId>${project.groupId}.equals.annotations</annotations.artifactId>
 		<annotations.version>${project.version}</annotations.version>
-		<annotations.repo.id>${project.distributionManagementArtifactRepository.id}</annotations.repo.id>		
-		<annotations.repo.url>${project.distributionManagementArtifactRepository.name}</annotations.repo.url>
+		<repo.id>googlecode.rooequals.repo</repo.id>
+		<repo.url>https://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/</repo.url>
+		<snapshotrepo.id>googlecode.rooequals.snapshotrepo</snapshotrepo.id>
+		<snapshotrepo.url>https://spring-roo-equals-roo-addon.googlecode.com/svn/maven-snapshot-repository/</snapshotrepo.url>
 	</properties>
 
 	<dependencies>
@@ -86,12 +88,12 @@
 	</dependencies>
 	<distributionManagement>
 		<repository>
-			<id>googlecode.rooequals.repo</id>
-			<url>dav:https://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/</url>
+			<id>${repo.id}</id>
+			<url>dav:${repo.url}</url>
 		</repository>
 		<snapshotRepository>
-			<id>googlecode.rooequals.snapshotrepo</id>
-			<url>dav:https://spring-roo-equals-roo-addon.googlecode.com/svn/maven-snapshot-repository/</url>
+			<id>${snapshotrepo.id}</id>
+			<url>dav:${snapshotrepo.url}</url>
 			<uniqueVersion>false</uniqueVersion>
 		</snapshotRepository>
 	</distributionManagement>
@@ -122,11 +124,6 @@
 				<filtering>true</filtering>
 			</resource>
 		</resources>
-		<!--
-			<extensions> <extension> <groupId>org.apache.maven.wagon</groupId>
-			<artifactId>wagon-webdav</artifactId> <version>1.0-beta-2</version>
-			</extension> </extensions>
-		-->
 
 		<extensions>
 			<extension>
