@@ -46,6 +46,7 @@ Now you are ready to use the @!RooEquals annotation.
 
 Annotating a class with @!RooEquals will trigger the creation of the equals() and hashCode() methods into a separate AspectJ file.
 The implementation delegates to the [http://commons.apache.org/lang/api-release/org/apache/commons/lang/builder/EqualsBuilder.html EqualsBuilder] and [http://commons.apache.org/lang/api-release/org/apache/commons/lang/builder/HashCodeBuilder.html HashCodeBuilder] provided by the [http://commons.apache.org/lang/ Apache Commons Lang] project.
+The determination of equality is based on instance variable comparison. Note that static and transient fields are not taken into account.
 
 Example:
 
@@ -87,4 +88,9 @@ privileged aspect Customer_Roo_Equals {
 
 ====Configure the generation====
 
-The @!RooEquals annotation provides two attributes which you can use to influence the method generation.
+The @!RooEquals annotation provides two attributes which can be used to influence the method generation:
+
+  * `callSuper : boolean = true`
+  Setting this attribute to false will omit the call to super.equals() and super.hashCode() in the generated methods.
+  * `callInstanceOf : boolean = false`
+  Setting this attribute to true will create instanceof comparison instead of getClass() in the generated equals() method.
