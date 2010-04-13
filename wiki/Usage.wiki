@@ -9,9 +9,9 @@ equals --class Customer
 
 This will:
   # Add the required dependencies and repository to the project's POM, if not already there.
-  # Add the @RooEquals annotation to the class Customer, which will in turn trigger generation of equals() and hashCode() in an ITD.
+  # Add the @!RooEquals annotation to the class Customer, which will in turn trigger generation of equals() and hashCode() in an ITD.
 
-The equals command has two options that have the same meaning as the according attributes in the @RooEquals annotation (see further below):
+The equals command has two options that have the same meaning as the according attributes in the @!RooEquals annotation (see further below):
   * `--callSuper`
   * `--callInstanceof`
 
