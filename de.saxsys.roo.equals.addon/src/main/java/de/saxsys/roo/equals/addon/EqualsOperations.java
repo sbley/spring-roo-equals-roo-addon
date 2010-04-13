@@ -20,6 +20,8 @@ public interface EqualsOperations {
 	 * 
 	 * @param typeName
 	 *            a class
+	 * @param callInstanceOf 
+	 * @param callSuper 
 	 */
-	void addEquals(JavaType typeName);
+	void addEquals(JavaType typeName, Boolean callSuper, Boolean callInstanceOf);
 }
