@@ -1,5 +1,7 @@
 #summary How to use this addon in a Roo managed Java project
 
+<font color="red">TODO explain equals command, update project configuration section</font>
+
 ===Project Configuration===
   # You can create a Roo managed project from the Roo shell:
 {{{
