@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
-<repository lastmodified="20100413173930.785" name="MyRepository">
+<repository lastmodified="20100413220207.937" name="MyRepository">
 <resource id="de.saxsys.roo.equals.addon/1.0.0.SNAPSHOT" presentationname="Spring Roo - Addon - equals() and hashCode()" symbolicname="de.saxsys.roo.equals.addon" uri="de/saxsys/roo/de.saxsys.roo.equals.addon/1.0.0-SNAPSHOT/de.saxsys.roo.equals.addon-1.0.0-SNAPSHOT.jar" version="1.0.0.SNAPSHOT">
 <description>This project provides an addon for Spring Roo which aims to generate equals() and hashCode() methods.</description>
-<size>22048</size>
+<size>22490</size>
 <documentation>http://code.google.com/p/spring-roo-equals-roo-addon/</documentation>
 <source>de/saxsys/roo/de.saxsys.roo.equals.addon/1.0.0-SNAPSHOT/de.saxsys.roo.equals.addon-1.0.0-SNAPSHOT-sources.jar</source>
 <license>http://www.gnu.org/copyleft/gpl.html</license>
