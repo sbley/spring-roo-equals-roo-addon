@@ -16,8 +16,10 @@ import org.springframework.roo.classpath.details.MemberFindingUtils;
 import org.springframework.roo.classpath.details.MutableClassOrInterfaceTypeDetails;
 import org.springframework.roo.classpath.details.annotations.AnnotationAttributeValue;
 import org.springframework.roo.classpath.details.annotations.AnnotationMetadata;
+import org.springframework.roo.classpath.details.annotations.BooleanAttributeValue;
 import org.springframework.roo.classpath.details.annotations.DefaultAnnotationMetadata;
 import org.springframework.roo.metadata.MetadataService;
+import org.springframework.roo.model.JavaSymbolName;
 import org.springframework.roo.model.JavaType;
 import org.springframework.roo.project.Dependency;
 import org.springframework.roo.project.ProjectMetadata;
@@ -35,6 +37,12 @@ import org.springframework.roo.support.util.Assert;
 @Component
 @Service
 public class EqualsOperationsImpl implements EqualsOperations {
+
+	private static final JavaSymbolName CALLSUPER = new JavaSymbolName(
+			"callSuper");
+
+	private static final JavaSymbolName CALLINSTANCEOF = new JavaSymbolName(
+			"callInstanceof");
 
 	private final Logger logger = HandlerUtils.getLogger(getClass());
 
@@ -60,9 +68,10 @@ public class EqualsOperationsImpl implements EqualsOperations {
 		return projectMetadata;
 	}
 
-	public void addEquals(final JavaType typeName) {
+	public void addEquals(final JavaType typeName, final Boolean callSuper,
+			final Boolean callInstanceOf) {
 		addDependencies();
-		addEqualsAnnotation(typeName);
+		addEqualsAnnotation(typeName, callSuper, callInstanceOf);
 	}
 
 	/**
@@ -119,8 +128,11 @@ public class EqualsOperationsImpl implements EqualsOperations {
 	 * 
 	 * @param typeName
 	 *            a class
+	 * @param callInstanceOf
+	 * @param callSuper
 	 */
-	private void addEqualsAnnotation(final JavaType typeName) {
+	private void addEqualsAnnotation(final JavaType typeName,
+			Boolean callSuper, Boolean callInstanceOf) {
 		String id = physicalTypeMetadataProvider.findIdentifier(typeName);
 		if (id == null) {
 			logger.warning("Cannot locate source for '"
@@ -157,6 +169,14 @@ public class EqualsOperationsImpl implements EqualsOperations {
 
 		// add the new annotation
 		List<AnnotationAttributeValue<?>> attributes = new ArrayList<AnnotationAttributeValue<?>>();
+		if (callSuper != null) {
+
+			attributes.add(new BooleanAttributeValue(CALLSUPER, callSuper));
+		}
+		if (callInstanceOf != null) {
+
+			attributes.add(new BooleanAttributeValue(CALLINSTANCEOF, callInstanceOf));
+		}
 		AnnotationMetadata annotation = new DefaultAnnotationMetadata(
 				annotationType, attributes);
 		mutable.addTypeAnnotation(annotation);
