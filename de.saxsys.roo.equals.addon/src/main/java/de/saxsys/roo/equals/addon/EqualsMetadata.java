@@ -50,10 +50,10 @@ public class EqualsMetadata extends
 
 	/** append super equals and hashCode method calls */
 	@AutoPopulate
-	private boolean callSuper = true;
+	private boolean callSuper;
 	/** use instanceof rather than getClass() */
 	@AutoPopulate
-	private boolean callInstanceof = false;
+	private boolean callInstanceof;
 
 	public EqualsMetadata(String identifier, JavaType aspectName,
 			PhysicalTypeMetadata governorPhysicalTypeMetadata) {

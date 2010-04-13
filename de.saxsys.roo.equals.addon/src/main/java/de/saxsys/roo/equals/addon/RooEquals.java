@@ -15,10 +15,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 public @interface RooEquals {
 	/**
-	 * If {@code true} (default) then inserts calls to the super class equals()
+	 * If {@code true} then inserts calls to the super class equals()
 	 * and hashCode() methods.
 	 */
-	boolean callSuper() default true;
+	boolean callSuper() default false;
 
 	/**
 	 * <p>
