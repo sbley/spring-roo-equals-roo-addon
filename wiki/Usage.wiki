@@ -2,7 +2,7 @@
 
 ==Using the equals command==
 
-The simplest way to use this plugin is to type the equals plugin in the Roo shell:
+The simplest way to use this plugin is to type the equals command in the Roo shell:
 {{{
 equals --class Customer
 }}}
