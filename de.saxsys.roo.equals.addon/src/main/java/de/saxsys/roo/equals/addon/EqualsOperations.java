@@ -5,17 +5,21 @@ import org.springframework.roo.model.JavaType;
 /**
  * Interface to {@link EqualsOperationsImpl}.
  * 
- * <p>
- * By now, only contains stub operations from the addon archetype.
- * </p>
- * 
  * @author stefan.bley
+ * @since 1.0.0
  */
 public interface EqualsOperations {
 
-	public boolean isProjectAvailable();
+	/**
+	 * Returns if a project is available in the current Roo Shell.
+	 */
+	boolean isProjectAvailable();
 
-	public void addEquals(JavaType typeName);
-
-
+	/**
+	 * Provides equals() and hashCode() method for the given class.
+	 * 
+	 * @param typeName
+	 *            a class
+	 */
+	void addEquals(JavaType typeName);
 }
