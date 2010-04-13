@@ -12,8 +12,8 @@ This will:
   # Add the @RooEquals annotation to the class Customer, which will in turn trigger generation of equals() and hashCode() in an ITD.
 
 The equals command has two options that have the same meaning as the according attributes in the @RooEquals annotation (see further below):
-  * ´--callSuper´
-  * ´--callInstanceOf´
+  * `--callSuper`
+  * `--callInstanceof`
 
 ==Using the plugin without the equals command==
 You can also use the plugin without the equals command. Then, you have to perform the step described in the following manually:
@@ -114,5 +114,5 @@ The @!RooEquals annotation provides two attributes which can be used to influenc
 
   * `callSuper : boolean = false`
   Setting this attribute to true will include a call to super.equals() and super.hashCode() in the generated methods.
-  * `callInstanceOf : boolean = false`
+  * `callInstanceof : boolean = false`
   Setting this attribute to true will create instanceof comparison instead of getClass() in the generated equals() method.
