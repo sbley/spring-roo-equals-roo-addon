@@ -97,7 +97,7 @@ privileged aspect Customer_Roo_Equals {
 
 The @!RooEquals annotation provides two attributes which can be used to influence the method generation:
 
-  * `callSuper : boolean = true`
-  Setting this attribute to false will omit the call to super.equals() and super.hashCode() in the generated methods.
+  * `callSuper : boolean = false
+  Setting this attribute to true will include a call to super.equals() and super.hashCode() in the generated methods.
   * `callInstanceOf : boolean = false`
   Setting this attribute to true will create instanceof comparison instead of getClass() in the generated equals() method.
