@@ -1,7 +1,22 @@
 #summary How to use this addon in a Roo managed Java project
 
-<font color="red">TODO explain equals command, update project configuration section</font>
+==Using the equals command==
 
+The simplest way to use this plugin is to type the equals plugin in the Roo shell:
+{{{
+equals --class Customer
+}}}
+
+This will:
+  # Add the required dependencies and repository to the project's POM, if not already there.
+  # Add the @RooEquals annotation to the class Customer, which will in turn trigger generation of equals() and hashCode() in an ITD.
+
+The equals command has two options that have the same meaning as the according attributes in the @RooEquals annotation (see further below):
+  * ´--callSuper´
+  * ´--callInstanceOf´
+
+==Using the plugin without the equals command==
+You can also use the plugin without the equals command. Then, you have to perform the step described in the following manually:
 ===Project Configuration===
   # You can create a Roo managed project from the Roo shell:
 {{{
@@ -51,7 +66,7 @@ Now you are ready to use the @!RooEquals annotation.
 
 ===Usage of @!RooEquals===
 
-Annotating a class with @!RooEquals will trigger the creation of the equals() and hashCode() methods into a separate AspectJ file.
+Annotating a class with @!RooEquals will trigger the creation of the equals() and hashCode() methods in an ITD.
 The implementation delegates to the [http://commons.apache.org/lang/api-release/org/apache/commons/lang/builder/EqualsBuilder.html EqualsBuilder] and [http://commons.apache.org/lang/api-release/org/apache/commons/lang/builder/HashCodeBuilder.html HashCodeBuilder] provided by the [http://commons.apache.org/lang/ Apache Commons Lang] project.
 The determination of equality is based on instance variable comparison. Note that static and transient fields are not taken into account.
 
