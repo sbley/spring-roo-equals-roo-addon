@@ -24,6 +24,7 @@ import org.springframework.roo.model.JavaType;
 import org.springframework.roo.project.Dependency;
 import org.springframework.roo.project.ProjectMetadata;
 import org.springframework.roo.project.ProjectOperations;
+import org.springframework.roo.project.Repository;
 import org.springframework.roo.support.logging.HandlerUtils;
 import org.springframework.roo.support.util.Assert;
 
@@ -98,7 +99,8 @@ public class EqualsOperationsImpl implements EqualsOperations {
 			annotationsArtifactId = properties
 					.getProperty("annotations.artifactId");
 			annotationsVersion = properties.getProperty("annotations.version");
-			if (annotationsVersion.endsWith("SNAPSHOT")) {
+			boolean isSnapshot = annotationsVersion.endsWith("SNAPSHOT");
+			if (isSnapshot) {
 				repoId = properties.getProperty("annotations.snapshotrepo.id");
 				repoUrl = properties
 						.getProperty("annotations.snapshotrepo.url");
@@ -109,7 +111,7 @@ public class EqualsOperationsImpl implements EqualsOperations {
 			String commonslangVersion = properties
 					.getProperty("commonslang.version");
 
-			projectOperations.addRepository(repoId, repoName, repoUrl);
+			projectOperations.addRepository(new Repository(repoId, repoName, repoUrl, isSnapshot));
 
 			Dependency dependencyAnno = new Dependency(annotationsGroupId,
 					annotationsArtifactId, annotationsVersion);
