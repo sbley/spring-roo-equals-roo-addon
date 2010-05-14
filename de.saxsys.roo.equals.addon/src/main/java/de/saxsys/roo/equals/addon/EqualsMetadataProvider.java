@@ -20,8 +20,6 @@ import org.springframework.roo.support.logging.HandlerUtils;
 @Service
 public final class EqualsMetadataProvider extends AbstractItdMetadataProvider {
 
-	protected final Logger logger = HandlerUtils.getLogger(getClass());
-
 	protected void activate(ComponentContext context) {
 		metadataDependencyRegistry.registerDependency(PhysicalTypeIdentifier
 				.getMetadataIdentiferType(), getProvidesType());
