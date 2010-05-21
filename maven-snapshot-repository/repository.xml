@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
-<repository lastmodified="20100421200741.328" name="MyRepository">
+<repository lastmodified="20100521193042.078" name="MyRepository">
 <resource id="de.saxsys.roo.equals.addon/1.0.0.SNAPSHOT" presentationname="Spring Roo - Addon - equals() and hashCode()" symbolicname="de.saxsys.roo.equals.addon" uri="de/saxsys/roo/de.saxsys.roo.equals.addon/1.0.0-SNAPSHOT/de.saxsys.roo.equals.addon-1.0.0-SNAPSHOT.jar" version="1.0.0.SNAPSHOT">
 <description>This project provides an addon for Spring Roo which aims to generate equals() and hashCode() methods.</description>
-<size>22553</size>
+<size>21991</size>
 <documentation>http://code.google.com/p/spring-roo-equals-roo-addon/</documentation>
 <source>de/saxsys/roo/de.saxsys.roo.equals.addon/1.0.0-SNAPSHOT/de.saxsys.roo.equals.addon-1.0.0-SNAPSHOT-sources.jar</source>
 <license>http://www.gnu.org/copyleft/gpl.html</license>
@@ -15,7 +15,7 @@
 </capability>
 <capability name="package">
 <p n="package" v="de.saxsys.roo.equals.addon"/>
-<p n="uses" v="org.springframework.roo.model,org.springframework.roo.shell,org.osgi.service.component,org.springframework.roo.classpath.details,org.springframework.roo.classpath.itd,org.springframework.roo.classpath.details.annotations,org.springframework.roo.project,org.springframework.roo.metadata,org.springframework.roo.classpath,org.springframework.roo.classpath.details.annotations.populator,org.springframework.roo.support.util,org.springframework.roo.support.logging,org.springframework.roo.support.style"/>
+<p n="uses" v="org.springframework.roo.model,org.springframework.roo.shell,org.osgi.service.component,org.springframework.roo.classpath.details,org.springframework.roo.classpath.details.annotations,org.springframework.roo.classpath.itd,org.springframework.roo.project,org.springframework.roo.metadata,org.springframework.roo.classpath,org.springframework.roo.classpath.details.annotations.populator,org.springframework.roo.support.util,org.springframework.roo.support.logging,org.springframework.roo.support.style"/>
 <p n="version" t="version" v="0.0.0"/>
 </capability>
 <require extend="false" filter="(&amp;(package=de.saxsys.roo.equals.addon)(version&gt;=0.0.0))" multiple="false" name="package" optional="false">Import package de.saxsys.roo.equals.addon</require>
