@@ -1,6 +1,8 @@
 #summary How to install this addon in Spring Roo
 #labels Phase-Deploy
 
+_ Note: If you do the installation from a Roo shell running within STS 2.3.3.M1 you likely won't see any output of the osgi commands mentioned below. So, you might prefer to use a standalone Roo shell instead for this._
+
 You can install this plugin into Roo 1.1.0.M1 by executing the following commands in the Roo shell (Hint: Roo code completion works for  everything below except from the URLs):
 
   # osgi obr url remove --url http://felix.apache.org/obr/releases.xml
@@ -8,6 +10,7 @@ You can install this plugin into Roo 1.1.0.M1 by executing the following command
   # osgi obr start --bundleSymbolicName de.saxsys.roo.equals.addon
 
 _ The first step is required since Felix OBR currently causes errors during bundle installation in Roo. In future versions of Roo this might be fixed and this step might be omitted._
+
 
 Now you can verify that the plugin is active by:
   * osgi ps
