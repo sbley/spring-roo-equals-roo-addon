@@ -5,9 +5,9 @@ _ Note: If you do the installation from a Roo shell running within STS 2.3.3.M1 
 
 You can install this plugin into Roo 1.1.0.M1 by executing the following commands in the Roo shell (Hint: Roo code completion works for  everything below except from the URLs):
 
-  # osgi obr url remove --url http://felix.apache.org/obr/releases.xml
-  # osgi obr url add --url http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-snapshot-repository/repository.xml
-  # osgi obr start --bundleSymbolicName de.saxsys.roo.equals.addon
+osgi obr url remove --url http://felix.apache.org/obr/releases.xml
+osgi obr url add --url http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-snapshot-repository/repository.xml
+osgi obr start --bundleSymbolicName de.saxsys.roo.equals.addon
 
 _ The first step is required since Felix OBR currently causes errors during bundle installation in Roo. In future versions of Roo this might be fixed and this step might be omitted._
 
