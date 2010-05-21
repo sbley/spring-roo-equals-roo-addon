@@ -1,7 +1,7 @@
 #summary How to install this addon in Spring Roo
 #labels Phase-Deploy
 
-_ Note: If you do the installation from a Roo shell running within STS 2.3.3.M1 you likely won't see any output of the osgi commands mentioned below. So, you might prefer to use a standalone Roo shell instead for this._
+_ Note: If you do the installation from a Roo shell running within STS 2.3.3.M1 you likely won't see any output of the osgi commands mentioned below. So, you might prefer to use a standalone Roo shell instead for this. But be aware that than the addon will only be available in standalone Roo shell. The reason is, that each Roo shell in STS creates its own cache directory in the system's temp directory. An this is (currently) the only place, where information about installed third party addons is stored. This even means, that if you want to use the addon in STS Roo shell, you have to install it EVERY time you open or re-open the Roo shell for a project. We assume, such issues will be fixed with final Roo 1.1.0 release ... _
 
 You can install this plugin into Roo 1.1.0.M1 by executing the following commands in the Roo shell (Hint: Roo code completion works for  everything below except from the URLs):
 
