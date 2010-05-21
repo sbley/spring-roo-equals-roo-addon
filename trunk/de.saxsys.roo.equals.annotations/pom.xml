@@ -5,7 +5,7 @@
 	<packaging>jar</packaging>
 	<version>1.0.0</version>
 	<name>Spring Roo - Addon annotations - equals() and hashCode()</name>
-	<description>This project provides the annotations for the Spring Roo equals() addon.</description>
+	<description>This project provides annotations for the Spring Roo equals() addon.</description>
 	<url>http://code.google.com/p/spring-roo-equals-roo-addon/</url>
 	<dependencies>
 	</dependencies>
