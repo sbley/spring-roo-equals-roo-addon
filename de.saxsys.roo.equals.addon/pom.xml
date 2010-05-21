@@ -104,6 +104,8 @@
 	</issueManagement>
 	<scm>
 		<url>http://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/</url>
+		<connection>scm:svn:http://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/</connection>
+		<developerConnection>scm:svn:https://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/</developerConnection>
 	</scm>
 	<developers>
 		<developer>
