@@ -1,7 +1,5 @@
 package de.saxsys.roo.equals.addon;
 
-import java.util.logging.Logger;
-
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Service;
 import org.osgi.service.component.ComponentContext;
@@ -11,50 +9,49 @@ import org.springframework.roo.classpath.itd.AbstractItdMetadataProvider;
 import org.springframework.roo.classpath.itd.ItdTypeDetailsProvidingMetadataItem;
 import org.springframework.roo.model.JavaType;
 import org.springframework.roo.project.Path;
-import org.springframework.roo.support.logging.HandlerUtils;
 
 /**
  * @author stefan.ocke
  */
 @Component(immediate = true)
 @Service
-public final class EqualsMetadataProvider extends AbstractItdMetadataProvider {
+public class EqualsMetadataProvider extends AbstractItdMetadataProvider {
 
-	protected void activate(ComponentContext context) {
-		metadataDependencyRegistry.registerDependency(PhysicalTypeIdentifier
-				.getMetadataIdentiferType(), getProvidesType());
-		addMetadataTrigger(new JavaType(RooEquals.class.getName()));
-	}
+  protected void activate(ComponentContext context) {
+    metadataDependencyRegistry.registerDependency(PhysicalTypeIdentifier
+        .getMetadataIdentiferType(), getProvidesType());
+    addMetadataTrigger(new JavaType(RooEquals.class.getName()));
+  }
 
-	protected ItdTypeDetailsProvidingMetadataItem getMetadata(
-			String metadataIdentificationString, JavaType aspectName,
-			PhysicalTypeMetadata governorPhysicalTypeMetadata,
-			String itdFilename) {
+  protected ItdTypeDetailsProvidingMetadataItem getMetadata(String metadataId,
+      JavaType aspectName, PhysicalTypeMetadata governorPhysicalTypeMetadata,
+      String itdFilename) {
 
-		// Create the metadata
-		return new EqualsMetadata(metadataIdentificationString, aspectName,
-				governorPhysicalTypeMetadata);
-	}
+    // Create the metadata
+    return new EqualsMetadata(metadataId, aspectName,
+        governorPhysicalTypeMetadata);
+  }
 
-	public String getItdUniquenessFilenameSuffix() {
-		return "Equals";
-	}
+  public String getItdUniquenessFilenameSuffix() {
+    return "Equals";
+  }
 
-	protected String getGovernorPhysicalTypeIdentifier(
-			String metadataIdentificationString) {
-		JavaType javaType = EqualsMetadata
-				.getJavaType(metadataIdentificationString);
-		Path path = EqualsMetadata.getPath(metadataIdentificationString);
-		String physicalTypeIdentifier = PhysicalTypeIdentifier
-				.createIdentifier(javaType, path);
-		return physicalTypeIdentifier;
-	}
+  protected String getGovernorPhysicalTypeIdentifier(String metadataId) {
+    JavaType javaType = EqualsMetadata.getJavaType(metadataId);
+    Path path = EqualsMetadata.getPath(metadataId);
+    String physicalTypeId = PhysicalTypeIdentifier.createIdentifier(javaType,
+        path);
+    return physicalTypeId;
+  }
 
-	protected String createLocalIdentifier(JavaType javaType, Path path) {
-		return EqualsMetadata.createIdentifier(javaType, path);
-	}
+  // returns for example (for a class de.foo.Bar)
+  // MID:d.s.r.e.a.EqualsMetadata#SRC_MAIN_JAVA?de.foo.Bar
+  protected String createLocalIdentifier(JavaType javaType, Path path) {
+    return EqualsMetadata.createIdentifier(javaType, path);
+  }
 
-	public String getProvidesType() {
-		return EqualsMetadata.getMetadataIdentiferType();
-	}
+  // returns MID:d.s.r.e.a.EqualsMetadata
+  public String getProvidesType() {
+    return EqualsMetadata.getMetadataIdentiferType();
+  }
 }
