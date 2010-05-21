@@ -1,12 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.saxsys.roo</groupId>
 	<artifactId>de.saxsys.roo.equals.annotations</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>Spring Roo - Addon annotations - equals() and hashCode()</name>
-	<description>This project provides annotations for the Spring Roo equals() addon.</description>
+	<description>This project provides the annotations for the Spring Roo equals() addon.</description>
 	<url>http://code.google.com/p/spring-roo-equals-roo-addon/</url>
 	<dependencies>
 	</dependencies>
@@ -25,9 +24,9 @@
 		<url>http://code.google.com/p/spring-roo-equals-roo-addon/issues/list</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:svn:http://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/</connection>
-		<developerConnection>scm:svn:https://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/</developerConnection>
-		<url>http://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/</url>
+		<connection>scm:svn:http://spring-roo-equals-roo-addon.googlecode.com/svn/tags/de.saxsys.roo.equals.annotations-1.0.0</connection>
+		<developerConnection>scm:svn:https://spring-roo-equals-roo-addon.googlecode.com/svn/tags/de.saxsys.roo.equals.annotations-1.0.0</developerConnection>
+		<url>http://spring-roo-equals-roo-addon.googlecode.com/svn/tags/de.saxsys.roo.equals.annotations-1.0.0</url>
 	</scm>
 	<developers>
 		<developer>
@@ -86,8 +85,7 @@
 								<echo message="Deleting current content" />
 								<delete dir="${basedir}/src/main/java/de/" />
 								<echo message="Copying over annotations" />
-								<copy todir="${basedir}/src/main/java/"
-									preservelastmodified="true">
+								<copy todir="${basedir}/src/main/java/" preservelastmodified="true">
 									<fileset dir="${basedir}/../de.saxsys.roo.equals.addon">
 										<include name="**/Roo*.java" />
 										<exclude name="core/**" />
