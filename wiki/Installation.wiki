@@ -7,7 +7,7 @@ You can install this plugin into Roo 1.1.0.M1 by executing the following command
 
 {{{
 osgi obr url remove --url http://felix.apache.org/obr/releases.xml
-osgi obr url add --url http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-snapshot-repository/repository.xml
+osgi obr url add --url http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/repository.xml
 osgi obr start --bundleSymbolicName de.saxsys.roo.equals.addon
 }}}
 
@@ -20,7 +20,7 @@ Now you can verify that the plugin is active by:
 You should see something like:
 {{{
 ...
-[  53] [Active     ] [    1] Spring Roo - Addon - equals() and hashCode() (1.0.0.SNAPSHOT)
+[  53] [Active     ] [    1] Spring Roo - Addon - equals() and hashCode() (1.0.0)
 }}}
 
 Next step: See [Usage how to use] the equals addon.
