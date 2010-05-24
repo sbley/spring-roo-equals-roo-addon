@@ -195,7 +195,7 @@
 							Reserved.</Bundle-Copyright>
 						<Bundle-DocURL>${pom.url}</Bundle-DocURL>
 					</instructions>
-					<remoteOBR/>
+					<remoteOBR>true</remoteOBR>
 				</configuration>
 			</plugin>
 			<plugin>
