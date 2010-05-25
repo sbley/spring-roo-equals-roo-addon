@@ -12,7 +12,7 @@ osgi obr start --bundleSymbolicName de.saxsys.roo.equals.addon
 }}}
 
 _ The first step is required since Felix OBR currently causes errors (some NullPointerException) during bundle (step 3) installation. In future versions of Roo this might be fixed and this step might be omitted._
-_ As an alterantive to the first two steps, you can also edit conf/config.properties of your Roo installation and replace http://felix.apache.org/obr/releases.xml with http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/repository.xml there. You can also add more third party addon repositories there (separated by space), but in any case you should remove URL of Felix OBR._
+_ As an alternative to the first two steps, you can also edit conf/config.properties of your Roo installation and replace http://felix.apache.org/obr/releases.xml with http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/repository.xml there. You can also add more third party addon repositories there (separated by space), but in any case you should remove URL of Felix OBR._
 
 
 Now you can verify that the plugin is active by:
