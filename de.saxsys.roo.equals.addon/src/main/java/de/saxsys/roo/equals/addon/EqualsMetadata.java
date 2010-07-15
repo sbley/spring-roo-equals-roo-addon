@@ -34,8 +34,7 @@ import org.springframework.roo.support.util.Assert;
  * @since 1.0
  * 
  */
-public class EqualsMetadata extends
-		AbstractItdTypeDetailsProvidingMetadataItem {
+public class EqualsMetadata extends AbstractItdTypeDetailsProvidingMetadataItem {
 
 	protected Logger logger = HandlerUtils.getLogger(getClass());
 	private static final String PROVIDES_TYPE_STRING = EqualsMetadata.class
@@ -194,7 +193,7 @@ public class EqualsMetadata extends
 		}
 
 		private InvocableMemberBodyBuilder appendSuper() {
-			bodyBuilder.appendFormalLine(".appendSuper(super.equals(other))");
+			bodyBuilder.appendFormalLine(".appendSuper(super.equals(rhs))");
 			return bodyBuilder;
 		}
 
