@@ -1,9 +1,7 @@
 package de.saxsys.roo.equals.addon;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.logging.Logger;
 
 import org.apache.felix.scr.annotations.Component;
@@ -27,6 +25,8 @@ import org.springframework.roo.project.ProjectOperations;
 import org.springframework.roo.project.Repository;
 import org.springframework.roo.support.logging.HandlerUtils;
 import org.springframework.roo.support.util.Assert;
+import org.springframework.roo.support.util.XmlUtils;
+import org.w3c.dom.Element;
 
 /**
  * Implementation of commands that are available via the Roo shell.
@@ -84,42 +84,78 @@ public class EqualsOperationsImpl implements EqualsOperations {
 	 * </p>
 	 */
 	private void addDependencies() {
-		String repoId = "";
-		String repoName = "Repository for Roo equals addon";
-		String repoUrl = "";
-		String annotationsGroupId = "";
-		String annotationsArtifactId = "";
-		String annotationsVersion = "";
-		InputStream inputStream = getClass().getClassLoader()
-				.getResourceAsStream("dependencies.properties");
+		// String repoId = "";
+		// String repoName = "Repository for Roo equals addon";
+		// String repoUrl = "";
+		// String annotationsGroupId = "";
+		// String annotationsArtifactId = "";
+		// String annotationsVersion = "";
+		// InputStream inputStream = getClass().getClassLoader()
+		// .getResourceAsStream("dependencies.properties");
 		try {
-			Properties properties = new Properties();
-			properties.load(inputStream);
-			annotationsGroupId = properties.getProperty("annotations.groupId");
-			annotationsArtifactId = properties
-					.getProperty("annotations.artifactId");
-			annotationsVersion = properties.getProperty("annotations.version");
-			boolean isSnapshot = annotationsVersion.endsWith("SNAPSHOT");
-			if (isSnapshot) {
-				repoId = properties.getProperty("annotations.snapshotrepo.id");
-				repoUrl = properties
-						.getProperty("annotations.snapshotrepo.url");
-			} else {
-				repoId = properties.getProperty("annotations.repo.id");
-				repoUrl = properties.getProperty("annotations.repo.url");
+			// Properties properties = new Properties();
+			// properties.load(inputStream);
+			// annotationsGroupId =
+			// properties.getProperty("annotations.groupId");
+			// annotationsArtifactId = properties
+			// .getProperty("annotations.artifactId");
+			// annotationsVersion =
+			// properties.getProperty("annotations.version");
+			// boolean isSnapshot = annotationsVersion.endsWith("SNAPSHOT");
+			// if (isSnapshot) {
+			// repoId = properties.getProperty("annotations.snapshotrepo.id");
+			// repoUrl = properties
+			// .getProperty("annotations.snapshotrepo.url");
+			// } else {
+			// repoId = properties.getProperty("annotations.repo.id");
+			// repoUrl = properties.getProperty("annotations.repo.url");
+			// }
+			// // String commonslangVersion = properties
+			// // .getProperty("commonslang.version");
+			//
+			// projectOperations.addRepository(new Repository(repoId, repoName,
+			// repoUrl, isSnapshot));
+			//
+			// Dependency dependencyAnno = new Dependency(annotationsGroupId,
+			// annotationsArtifactId, annotationsVersion);
+			// projectOperations.dependencyUpdate(dependencyAnno);
+			// Dependency dependencyCmnLang = new Dependency("commons-lang",
+			// "commons-lang", commonslangVersion);
+			// projectOperations.dependencyUpdate(dependencyCmnLang);
+
+			Element configuration = XmlUtils.getConfiguration(getClass());
+			boolean snapshot = false;
+
+			// add dependencies
+			List<Element> dependencies = XmlUtils.findElements(
+					"/configuration/dependencies/dependency", configuration);
+			for (Element dependencyElement : dependencies) {
+				Dependency dependency = new Dependency(dependencyElement);
+				projectOperations.dependencyUpdate(dependency);
+
+				// WORKAROUND:
+				// We have to check for SNAPSHOT dependency of annotation
+				// project
+				// because Roo 1.1.0.M2 still does not add snapshot tag to the
+				// repository
+				// section in the pom.
+				if ("de.saxsys.roo.equals.annotations".equals(dependency
+						.getArtifactId().getSymbolName())) {
+					snapshot = dependency.getVersionId().endsWith("SNAPSHOT");
+				}
 			}
-			String commonslangVersion = properties
-					.getProperty("commonslang.version");
 
-			projectOperations.addRepository(new Repository(repoId, repoName, repoUrl, isSnapshot));
-
-			Dependency dependencyAnno = new Dependency(annotationsGroupId,
-					annotationsArtifactId, annotationsVersion);
-			projectOperations.dependencyUpdate(dependencyAnno);
-
-			Dependency dependencyCmnLang = new Dependency("commons-lang",
-					"commons-lang", commonslangVersion);
-			projectOperations.dependencyUpdate(dependencyCmnLang);
+			// add repository
+			List<Element> repositories = XmlUtils.findElements(
+					"/configuration/repositories/repository", configuration);
+			for (Element repositoryElement : repositories) {
+				Repository repository = new Repository(repositoryElement);
+				// WORKAROUND:
+				// See above.
+				if (repository.isEnableSnapshots() == snapshot) {
+					projectOperations.addRepository(repository);
+				}
+			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -147,10 +183,8 @@ public class EqualsOperationsImpl implements EqualsOperations {
 		if (physicalTypeMetadata == null) {
 			// For some reason we found the source file a few lines ago, but
 			// suddenly it has gone away
-			logger
-					.warning("Cannot provide equals because '"
-							+ typeName.getFullyQualifiedTypeName()
-							+ "' is unavailable");
+			logger.warning("Cannot provide equals because '"
+					+ typeName.getFullyQualifiedTypeName() + "' is unavailable");
 			return;
 		}
 
@@ -177,7 +211,8 @@ public class EqualsOperationsImpl implements EqualsOperations {
 		}
 		if (callInstanceOf != null) {
 
-			attributes.add(new BooleanAttributeValue(CALLINSTANCEOF, callInstanceOf));
+			attributes.add(new BooleanAttributeValue(CALLINSTANCEOF,
+					callInstanceOf));
 		}
 		AnnotationMetadata annotation = new DefaultAnnotationMetadata(
 				annotationType, attributes);
