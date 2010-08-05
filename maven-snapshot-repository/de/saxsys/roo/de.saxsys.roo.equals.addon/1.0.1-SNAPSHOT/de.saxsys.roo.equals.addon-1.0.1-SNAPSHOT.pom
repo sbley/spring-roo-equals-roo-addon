@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.saxsys.roo</groupId>
+	<artifactId>de.saxsys.roo.equals.addon</artifactId>
+	<packaging>bundle</packaging>
+	<version>1.0.1-SNAPSHOT</version>
+	<name>Spring Roo - Addon - equals() and hashCode()</name>
+	<parent>
+		<groupId>org.springframework.roo</groupId>
+		<artifactId>org.springframework.roo.osgi.roo.bundle</artifactId>
+		<version>1.1.0.M2</version>
+	</parent>
+	<properties>
+		<roo.version>1.1.0.M2</roo.version>
+		<repo.id>googlecode.rooequals.repo</repo.id>
+		<repo.url>https://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/</repo.url>
+		<snapshotrepo.id>googlecode.rooequals.snapshotrepo</snapshotrepo.id>
+		<snapshotrepo.url>https://spring-roo-equals-roo-addon.googlecode.com/svn/maven-snapshot-repository/</snapshotrepo.url>
+	</properties>
+	<dependencies>
+		<!--  OSGi -->
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>4.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.compendium</artifactId>
+			<version>4.1.0</version>
+		</dependency>
+		<!-- Apache Felix -->
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.apache.felix.scr.annotations</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<!-- Spring Roo -->
+		<dependency>
+			<groupId>org.springframework.roo</groupId>
+			<artifactId>org.springframework.roo.classpath</artifactId>
+			<version>${roo.version}</version>
+			<type>bundle</type>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.roo</groupId>
+			<artifactId>org.springframework.roo.metadata</artifactId>
+			<version>${roo.version}</version>
+			<type>bundle</type>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.roo</groupId>
+			<artifactId>org.springframework.roo.model</artifactId>
+			<version>${roo.version}</version>
+			<type>bundle</type>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.roo</groupId>
+			<artifactId>org.springframework.roo.process.manager</artifactId>
+			<version>${roo.version}</version>
+			<type>bundle</type>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.roo</groupId>
+			<artifactId>org.springframework.roo.project</artifactId>
+			<version>${roo.version}</version>
+			<type>bundle</type>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.roo</groupId>
+			<artifactId>org.springframework.roo.shell</artifactId>
+			<version>${roo.version}</version>
+			<type>bundle</type>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.roo</groupId>
+			<artifactId>org.springframework.roo.support</artifactId>
+			<version>${roo.version}</version>
+			<type>bundle</type>
+		</dependency>
+		<!-- Other modules (if any) -->
+	</dependencies>
+	<distributionManagement>
+		<repository>
+			<id>${repo.id}</id>
+			<url>dav:${repo.url}</url>
+		</repository>
+		<snapshotRepository>
+			<id>${snapshotrepo.id}</id>
+			<url>dav:${snapshotrepo.url}</url>
+			<uniqueVersion>false</uniqueVersion>
+		</snapshotRepository>
+	</distributionManagement>
+	<description>This project provides an addon for Spring Roo which aims to generate equals() and hashCode() methods. </description>
+	<url>http://code.google.com/p/spring-roo-equals-roo-addon/</url>
+	<issueManagement>
+		<url>http://code.google.com/p/spring-roo-equals-roo-addon/issues/list</url>
+	</issueManagement>
+	<scm>
+		<url>http://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/</url>
+		<connection>scm:svn:http://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/</connection>
+		<developerConnection>scm:svn:https://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/</developerConnection>
+	</scm>
+	<developers>
+		<developer>
+			<name>Stefan Bley</name>
+			<email>stefan.bley@saxsys.de</email>
+			<timezone>1</timezone>
+		</developer>
+		<developer>
+			<name>Stefan Ocke</name>
+			<email>stefan.ocke@saxsys.de</email>
+			<timezone>1</timezone>
+		</developer>
+	</developers>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-webdav-jackrabbit</artifactId>
+				<version>1.0-beta-6</version>
+			</extension>
+		</extensions>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2-beta-5</version>
+				<configuration>
+					<descriptors>
+						<descriptor>src/main/assembly/assembly.xml</descriptor>
+					</descriptors>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
