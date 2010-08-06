@@ -1,4 +1,4 @@
-<repository name='MyRepository' lastmodified='20100805054558.682'>
+<repository name='MyRepository' lastmodified='20100806063031.156'>
   <resource id='de.saxsys.roo.equals.addon/1.0.0.SNAPSHOT' symbolicname='de.saxsys.roo.equals.addon' presentationname='Spring Roo - Addon - equals() and hashCode()' uri='file:/C:/DOKUME~1/STEFAN~1.BLE/LOKALE~1/Temp/de/saxsys/roo/de.saxsys.roo.equals.addon/1.0.0-SNAPSHOT/de.saxsys.roo.equals.addon-1.0.0-SNAPSHOT.jar' version='1.0.0.SNAPSHOT'>
     <description>This project provides an addon for Spring Roo which aims to generate equals() and hashCode() methods.</description>
     <size>22390</size>
@@ -30,9 +30,9 @@
     <require name='package' filter='(&amp;(package=org.springframework.roo.support.style))' extend='false' multiple='false' optional='false'>Import package org.springframework.roo.support.style</require>
     <require name='package' filter='(&amp;(package=org.springframework.roo.support.util))' extend='false' multiple='false' optional='false'>Import package org.springframework.roo.support.util</require>
   </resource>
-  <resource id='de.saxsys.roo.equals.addon/1.0.1.SNAPSHOT' symbolicname='de.saxsys.roo.equals.addon' presentationname='Spring Roo - Addon - equals() and hashCode()' uri='file:/C:/DOKUME~1/STEFAN~1.BLE/LOKALE~1/Temp/de/saxsys/roo/de.saxsys.roo.equals.addon/1.0.1-SNAPSHOT/de.saxsys.roo.equals.addon-1.0.1-SNAPSHOT.jar' version='1.0.1.SNAPSHOT'>
+  <resource id='de.saxsys.roo.equals.addon/1.0.1.SNAPSHOT' symbolicname='de.saxsys.roo.equals.addon' presentationname='Spring Roo - Addon - equals() and hashCode()' uri='file:/e:/Temp/de/saxsys/roo/de.saxsys.roo.equals.addon/1.0.1-SNAPSHOT/de.saxsys.roo.equals.addon-1.0.1-SNAPSHOT.jar' version='1.0.1.SNAPSHOT'>
     <description>This project provides an addon for Spring Roo which aims to generate equals() and hashCode() methods.</description>
-    <size>22803</size>
+    <size>22474</size>
     <documentation>http://code.google.com/p/spring-roo-equals-roo-addon/</documentation>
     <license>http://www.gnu.org/copyleft/gpl.html</license>
     <capability name='bundle'>
@@ -44,7 +44,7 @@
     <capability name='package'>
       <p n='package' v='de.saxsys.roo.equals.addon'/>
       <p n='version' t='version' v='1.0.1.SNAPSHOT'/>
-      <p n='uses:' v='org.springframework.roo.model,org.springframework.roo.shell,org.osgi.service.component,org.springframework.roo.classpath.details,org.springframework.roo.classpath.itd,org.springframework.roo.classpath.details.annotations,org.springframework.roo.project,org.springframework.roo.metadata,org.springframework.roo.classpath,org.springframework.roo.classpath.details.annotations.populator,org.springframework.roo.support.util,org.springframework.roo.support.logging,org.springframework.roo.support.style,org.w3c.dom'/>
+      <p n='uses:' v='org.springframework.roo.model,org.springframework.roo.shell,org.osgi.service.component,org.springframework.roo.classpath.details,org.springframework.roo.classpath.details.annotations,org.springframework.roo.classpath.itd,org.springframework.roo.project,org.springframework.roo.metadata,org.springframework.roo.classpath,org.springframework.roo.classpath.details.annotations.populator,org.springframework.roo.support.util,org.springframework.roo.support.logging,org.springframework.roo.support.style,org.w3c.dom'/>
     </capability>
     <require name='package' filter='(&amp;(package=de.saxsys.roo.equals.addon)(version&gt;=1.0.0))' extend='false' multiple='false' optional='false'>Import package de.saxsys.roo.equals.addon;version=1.0</require>
     <require name='package' filter='(&amp;(package=org.osgi.service.component)(version&gt;=1.0.0))' extend='false' multiple='false' optional='false'>Import package org.osgi.service.component;version=1.0</require>
