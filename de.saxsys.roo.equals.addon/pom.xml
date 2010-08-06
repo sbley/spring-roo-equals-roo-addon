@@ -16,7 +16,7 @@
 		<repo.id>googlecode.rooequals.repo</repo.id>
 		<repo.url>https://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/</repo.url>
 		<snapshotrepo.id>googlecode.rooequals.snapshotrepo</snapshotrepo.id>
-		<snapshotrepo.url>https://spring-roo-equals-roo-addon.googlecode.com/svn/maven-snapshot-repository/</snapshotrepo.url>-->
+		<snapshotrepo.url>https://spring-roo-equals-roo-addon.googlecode.com/svn/maven-snapshot-repository/</snapshotrepo.url>
 	</properties>
 	<dependencies>
 		<!--  OSGi -->
