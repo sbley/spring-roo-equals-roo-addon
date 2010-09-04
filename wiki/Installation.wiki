@@ -1,8 +1,6 @@
 #summary How to install this addon in Spring Roo
 #labels Phase-Deploy
 
-_ Note: If you do the following with a Roo shell within STS, use at least version 3.5.0.M3 _
-
 You can install the addon in Roo 1.1.0 like this (tested with milestones M2, M3):
 
 At first edit conf/config.properties of your Roo installation to add http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/repository.xml as OBR repository there:
@@ -18,6 +16,8 @@ Now open a Roo shell and type:
 {{{
 osgi obr start --bundleSymbolicName de.saxsys.roo.equals.addon
 }}}
+
+_ Note: There are currently  some issues with this when using STS (tested with versions up to 2.5.0.M3). For instance, the addon disappears when restarting STS and you have to repeat to command above to install it again._
 
 You can verify that the plugin is active by typing:
 {{{
