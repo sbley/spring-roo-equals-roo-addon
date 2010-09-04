@@ -17,7 +17,7 @@ Now open a Roo shell and type:
 osgi obr start --bundleSymbolicName de.saxsys.roo.equals.addon
 }}}
 
-_ Note: There are currently  some issues with this when using STS (tested with versions up to 2.5.0.M3). For instance, the addon disappears when restarting STS and you have to repeat to command above to install it again._
+_ Note: There are currently  some issues with this when using Roo shell within STS (tested with versions up to 2.5.0.M3). For instance, the addon disappears when restarting STS and you have to repeat to command above to install it again._
 
 You can verify that the plugin is active by typing:
 {{{
