@@ -19,8 +19,10 @@ Now open a Roo shell and type:
 osgi obr start --bundleSymbolicName de.saxsys.roo.equals.addon
 }}}
 
-Now you can verify that the plugin is active by:
-  * osgi ps
+You can verify that the plugin is active by typing:
+{{{
+osgi ps
+}}}
 
 You should see something like:
 {{{
