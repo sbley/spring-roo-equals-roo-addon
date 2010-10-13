@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.saxsys.roo</groupId>
 	<artifactId>de.saxsys.roo.equals.addon</artifactId>
@@ -9,17 +10,17 @@
 	<parent>
 		<groupId>org.springframework.roo</groupId>
 		<artifactId>org.springframework.roo.osgi.roo.bundle</artifactId>
-		<version>1.1.0.M2</version>
+		<version>1.1.0.RC1</version>
 	</parent>
 	<properties>
-		<roo.version>1.1.0.M2</roo.version>
+		<roo.version>1.1.0.RC1</roo.version>
 		<repo.id>googlecode.rooequals.repo</repo.id>
 		<repo.url>https://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/</repo.url>
 		<snapshotrepo.id>googlecode.rooequals.snapshotrepo</snapshotrepo.id>
 		<snapshotrepo.url>https://spring-roo-equals-roo-addon.googlecode.com/svn/maven-snapshot-repository/</snapshotrepo.url>
 	</properties>
 	<dependencies>
-		<!--  OSGi -->
+		<!-- OSGi -->
 		<dependency>
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
@@ -141,21 +142,21 @@
 					</descriptors>
 				</configuration>
 			</plugin>
-<plugin>
-                                <groupId>org.apache.felix</groupId>
-                                <artifactId>maven-bundle-plugin</artifactId>
-                                <version>2.0.1</version>
-                                <extensions>true</extensions>
-                                <configuration>
-                                        <instructions>
-                                                <Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
-                                                <Bundle-Copyright>Copyright ${pom.organization.name}. All Rights
-                                                        Reserved.</Bundle-Copyright>
-                                                <Bundle-DocURL>${pom.url}</Bundle-DocURL>
-                                        </instructions>
-                                        <remoteOBR>true</remoteOBR>
-                                </configuration>
-                        </plugin>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.0.1</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>${pom.artifactId}</Bundle-SymbolicName>
+						<Bundle-Copyright>Copyright ${pom.organization.name}. All Rights
+							Reserved.</Bundle-Copyright>
+						<Bundle-DocURL>${pom.url}</Bundle-DocURL>
+					</instructions>
+					<remoteOBR>true</remoteOBR>
+				</configuration>
+			</plugin>
 		</plugins>
 
 

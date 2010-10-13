@@ -14,8 +14,8 @@ import org.springframework.roo.classpath.details.MemberFindingUtils;
 import org.springframework.roo.classpath.details.MutableClassOrInterfaceTypeDetails;
 import org.springframework.roo.classpath.details.annotations.AnnotationAttributeValue;
 import org.springframework.roo.classpath.details.annotations.AnnotationMetadata;
+import org.springframework.roo.classpath.details.annotations.AnnotationMetadataBuilder;
 import org.springframework.roo.classpath.details.annotations.BooleanAttributeValue;
-import org.springframework.roo.classpath.details.annotations.DefaultAnnotationMetadata;
 import org.springframework.roo.metadata.MetadataService;
 import org.springframework.roo.model.JavaSymbolName;
 import org.springframework.roo.model.JavaType;
@@ -195,7 +195,7 @@ public class EqualsOperationsImpl implements EqualsOperations {
 		JavaType annotationType = new JavaType(RooEquals.class.getName());
 		// remove the old annotation
 		List<? extends AnnotationMetadata> annotations = mutable
-				.getTypeAnnotations();
+				.getAnnotations();
 
 		AnnotationMetadata found = MemberFindingUtils.getAnnotationOfType(
 				annotations, annotationType);
@@ -214,8 +214,8 @@ public class EqualsOperationsImpl implements EqualsOperations {
 			attributes.add(new BooleanAttributeValue(CALLINSTANCEOF,
 					callInstanceOf));
 		}
-		AnnotationMetadata annotation = new DefaultAnnotationMetadata(
-				annotationType, attributes);
+		AnnotationMetadata annotation = new AnnotationMetadataBuilder(
+				annotationType, attributes).build();
 		mutable.addTypeAnnotation(annotation);
 	}
 }

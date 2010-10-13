@@ -12,6 +12,7 @@ import org.springframework.roo.classpath.details.DefaultMethodMetadata;
 import org.springframework.roo.classpath.details.FieldMetadata;
 import org.springframework.roo.classpath.details.MemberFindingUtils;
 import org.springframework.roo.classpath.details.MethodMetadata;
+import org.springframework.roo.classpath.details.MethodMetadataBuilder;
 import org.springframework.roo.classpath.details.annotations.AnnotatedJavaType;
 import org.springframework.roo.classpath.details.annotations.AnnotationMetadata;
 import org.springframework.roo.classpath.details.annotations.populator.AutoPopulate;
@@ -148,8 +149,8 @@ public class EqualsMetadata extends AbstractItdTypeDetailsProvidingMetadataItem 
 
 			// See if the type itself declared the method
 			MethodMetadata result = MemberFindingUtils.getDeclaredMethod(
-					governorTypeDetails, methodName, Collections
-							.singletonList(OBJECT));
+					governorTypeDetails, methodName,
+					Collections.singletonList(OBJECT));
 			if (result != null) {
 				return result;
 			}
@@ -219,13 +220,12 @@ public class EqualsMetadata extends AbstractItdTypeDetailsProvidingMetadataItem 
 		}
 
 		private MethodMetadata createMethodMetadata() {
-			return new DefaultMethodMetadata(getId(), Modifier.PUBLIC,
-					methodName, JavaType.BOOLEAN_PRIMITIVE, AnnotatedJavaType
-							.convertFromJavaTypes(Collections
-									.singletonList(OBJECT)), Collections
-							.singletonList(new JavaSymbolName("other")),
-					new ArrayList<AnnotationMetadata>(), null, bodyBuilder
-							.getOutput());
+			return new MethodMetadataBuilder(getId(), Modifier.PUBLIC,
+					methodName, JavaType.BOOLEAN_PRIMITIVE,
+					AnnotatedJavaType.convertFromJavaTypes(Collections
+							.singletonList(OBJECT)),
+					Collections.singletonList(new JavaSymbolName("other")),
+					bodyBuilder).build();
 		}
 	}
 
@@ -307,10 +307,9 @@ public class EqualsMetadata extends AbstractItdTypeDetailsProvidingMetadataItem 
 
 		/** Creates the {@link MethodMetadata} for {@code hashCode()}. */
 		private MethodMetadata createMethodMetadata() {
-			return new DefaultMethodMetadata(getId(), Modifier.PUBLIC,
-					methodName, JavaType.INT_PRIMITIVE, null, null,
-					new ArrayList<AnnotationMetadata>(), null, bodyBuilder
-							.getOutput());
+			return new MethodMetadataBuilder(getId(), Modifier.PUBLIC,
+					methodName, JavaType.INT_PRIMITIVE, null, null,				
+					bodyBuilder).build();
 		}
 	}
 }
