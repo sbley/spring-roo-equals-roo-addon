@@ -17,7 +17,21 @@ Now open a Roo shell and type:
 osgi obr start --bundleSymbolicName de.saxsys.roo.equals.addon
 }}}
 
-_ Note: There may be some issues with this when using Roo shell within STS. For instance, with STS 2.3.3.M2 the addon disappears when restarting STS (since the OSGi bundle cache is hold in a temp folder) and you have to repeat the command above to install it again. We suggest to use at least STS 2.5.0.M3, since there those issues seem to be fixed._
+You should see something like
+
+{{{
+Download URL 'http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/de/saxsys/roo/de.saxsys.roo.equals.addon/1.2.0/de.saxsys.roo.equals.addon-1.2.0.jar' failed
+This resource was signed with PGP key ID '0xC3A61B10', which is not currently trusted
+Use 'pgp key view' to view this key, 'pgp trust' to trust it, or 'pgp automatic trust' to trust any keys
+Target resource(s):
+-------------------
+   Spring Roo - Addon - equals() and hashCode() (1.2.0)
+
+Deploying...done.
+}}}
+
+
+
 
 You can verify that the plugin is active by typing:
 {{{
