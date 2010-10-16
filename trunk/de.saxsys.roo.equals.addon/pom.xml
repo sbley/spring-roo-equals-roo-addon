@@ -16,12 +16,15 @@
 		<snapshotrepo.id>googlecode.rooequals.snapshotrepo</snapshotrepo.id>
 		<snapshotrepo.url>https://${google.code.svnroot}/maven-snapshot-repository/</snapshotrepo.url>
 		<repo.folder>de/saxsys/roo</repo.folder>
-		<!-- During release:perform, this will be overrridden by the releas profile -->
+		<!-- During release:perform, this will be overridden by the releas profile -->
 		<repo.name>maven-snapshot-repository</repo.name>
 		<bundle.url>httppgp://${google.code.svnroot}/${repo.name}/${repo.folder}/${project.artifactId}/${project.version}/${project.artifactId}-${project.version}.jar</bundle.url>
 	</properties>
 	<profiles>
 		<profile>
+		<!-- Due to http://jira.codehaus.org/browse/MRELEASE-459, this profile is unfortunately
+		not activated automatically during release. You have to do this by doing the release like
+		this: mvn release:perform -Darguments="-Prelease" -->
 			<id>release</id>
 			<properties>
 				<repo.name>maven-repository</repo.name>
