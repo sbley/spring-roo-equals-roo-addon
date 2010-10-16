@@ -16,7 +16,7 @@
 		<snapshotrepo.id>googlecode.rooequals.snapshotrepo</snapshotrepo.id>
 		<snapshotrepo.url>https://${google.code.project.name}.googlecode.com/svn/maven-snapshot-repository/</snapshotrepo.url>
 		<repo.folder>de/saxsys/roo</repo.folder>
-		<bundle.url>httppgp://spring-roo-equals-roo-addon.googlecode.com/svn/maven-snapshot-repository/${repo.folder}/${project.artifactId}/${project.version}/${project.artifactId}-${project.version}.jar</bundle.url>
+		<bundle.url>httppgp://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/${repo.folder}/${project.artifactId}/${project.version}/${project.artifactId}-${project.version}.jar</bundle.url>
 	</properties>
 	<dependencies>
 		<!-- Annotations introduced by this Add-on -->
