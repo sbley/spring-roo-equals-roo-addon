@@ -12,12 +12,23 @@
 		<annotation.version>1.2.0</annotation.version>
 		<repo.id>googlecode.rooequals.repo</repo.id>
 		<google.code.project.name>spring-roo-equals-roo-addon</google.code.project.name>
-		<repo.url>https://${google.code.project.name}.googlecode.com/svn/maven-repository/</repo.url>
+		<google.code.svnroot>${google.code.project.name}.googlecode.com/svn</google.code.svnroot>
+		<repo.url>https://${google.code.svnroot}/maven-repository/</repo.url>
 		<snapshotrepo.id>googlecode.rooequals.snapshotrepo</snapshotrepo.id>
-		<snapshotrepo.url>https://${google.code.project.name}.googlecode.com/svn/maven-snapshot-repository/</snapshotrepo.url>
+		<snapshotrepo.url>https://${google.code.svnroot}/maven-snapshot-repository/</snapshotrepo.url>
 		<repo.folder>de/saxsys/roo</repo.folder>
-		<bundle.url>httppgp://spring-roo-equals-roo-addon.googlecode.com/svn/maven-snapshot-repository/${repo.folder}/${project.artifactId}/${project.version}/${project.artifactId}-${project.version}.jar</bundle.url>
+		<!-- During release:perform, this will be overrridden by the releas profile -->
+		<repo.name>maven-snapshot-repository</repo.name>
+		<bundle.url>httppgp://${google.code.svnroot}/${repo.name}/${repo.folder}/${project.artifactId}/${project.version}/${project.artifactId}-${project.version}.jar</bundle.url>
 	</properties>
+	<profiles>
+		<profile>
+			<id>release</id>
+			<properties>
+				<repo.name>maven-repository</repo.name>
+			</properties>
+		</profile>
+	</profiles>
 	<dependencies>
 		<!-- Annotations introduced by this Add-on -->
 		<dependency>
@@ -173,6 +184,7 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.0</version>
 				<configuration>
+					<releaseProfiles>release</releaseProfiles>
 					<mavenExecutorId>forked-path</mavenExecutorId>
 				</configuration>
 			</plugin>
