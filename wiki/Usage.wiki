@@ -43,7 +43,7 @@ project --topLevelPackage com.example.app
   <dependency>
     <groupId>de.saxsys.roo</groupId>
     <artifactId>de.saxsys.roo.equals.annotations</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
   </dependency>
   <dependency>
     <groupId>commons-lang</groupId>
