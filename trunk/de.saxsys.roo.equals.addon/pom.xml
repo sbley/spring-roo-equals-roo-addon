@@ -115,9 +115,9 @@
 		<url>http://code.google.com/p/spring-roo-equals-roo-addon/issues/list</url>
 	</issueManagement>
 	<scm>
-		<url>http://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/</url>
-		<connection>scm:svn:http://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/</connection>
-		<developerConnection>scm:svn:https://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/</developerConnection>
+		<url>http://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/${project.artifactId}</url>
+		<connection>scm:svn:http://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/${project.artifactId}</connection>
+		<developerConnection>scm:svn:https://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/${project.artifactId}</developerConnection>
 	</scm>
 	<developers>
 		<developer>
