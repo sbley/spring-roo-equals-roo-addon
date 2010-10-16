@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.saxsys.roo</groupId>
 	<artifactId>de.saxsys.roo.equals.addon</artifactId>
 	<packaging>bundle</packaging>
-	<version>1.1.1-SNAPSHOT</version>
+	<version>1.2.0</version>
 	<name>Spring Roo - Addon - equals() and hashCode()</name>
 	<properties>
 		<roo.version>1.1.0.RC1</roo.version>
@@ -115,9 +114,9 @@
 		<url>http://code.google.com/p/spring-roo-equals-roo-addon/issues/list</url>
 	</issueManagement>
 	<scm>
-		<url>http://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/${project.artifactId}</url>
-		<connection>scm:svn:http://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/${project.artifactId}</connection>
-		<developerConnection>scm:svn:https://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/${project.artifactId}</developerConnection>
+		<url>http://spring-roo-equals-roo-addon.googlecode.com/svn/tags/de.saxsys.roo.equals.addon-1.2.0</url>
+		<connection>scm:svn:http://spring-roo-equals-roo-addon.googlecode.com/svn/tags/de.saxsys.roo.equals.addon-1.2.0</connection>
+		<developerConnection>scm:svn:https://spring-roo-equals-roo-addon.googlecode.com/svn/tags/de.saxsys.roo.equals.addon-1.2.0</developerConnection>
 	</scm>
 	<developers>
 		<developer>
