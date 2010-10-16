@@ -1,7 +1,7 @@
 #summary How to install this addon in Spring Roo
 #labels Phase-Deploy
 
-You can install the addon in Roo 1.1.0 like this (tested with milestones M2, M3):
+You can install the addon in Roo 1.1.0 like this (tested with RC1 and STS 2.5.0.RC1):
 
 At first edit conf/config.properties of your Roo installation to add http://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/repository.xml as OBR repository there:
 
