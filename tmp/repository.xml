@@ -68,7 +68,7 @@
 <require extend="false" filter="(&amp;(package=org.springframework.roo.support.util)(version&gt;=1.1.0))" multiple="false" name="package" optional="false">Import package org.springframework.roo.support.util ;version=1.1.0</require>
 <require extend="false" filter="(&amp;(package=org.w3c.dom)(version&gt;=0.0.0))" multiple="false" name="package" optional="false">Import package org.w3c.dom</require>
 </resource>
-<resource id="de.saxsys.roo.equals.addon/1.2.0" presentationname="Spring Roo - Addon - equals() and hashCode()" symbolicname="de.saxsys.roo.equals.addon" uri="httppgp://spring-roo-equals-roo-addon.googlecode.com/svn/maven-snapshot-repository/de/saxsys/roo/de.saxsys.roo.equals.addon/1.2.0/de.saxsys.roo.equals.addon-1.2.0.jar" version="1.2.0">
+<resource id="de.saxsys.roo.equals.addon/1.2.0" presentationname="Spring Roo - Addon - equals() and hashCode()" symbolicname="de.saxsys.roo.equals.addon" uri="httppgp://spring-roo-equals-roo-addon.googlecode.com/svn/maven-repository/de/saxsys/roo/de.saxsys.roo.equals.addon/1.2.0/de.saxsys.roo.equals.addon-1.2.0.jar" version="1.2.0">
 <description>This project provides an addon for Spring Roo which aims to generate equals() and hashCode() methods.</description>
 <size>21183</size>
 <documentation>http://code.google.com/p/spring-roo-equals-roo-addon/</documentation>
