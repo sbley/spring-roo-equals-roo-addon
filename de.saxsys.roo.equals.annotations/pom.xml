@@ -3,7 +3,7 @@
 	<groupId>de.saxsys.roo</groupId>
 	<artifactId>de.saxsys.roo.equals.annotations</artifactId>
 	<packaging>jar</packaging>
-	<version>1.1.0</version>
+	<version>1.1.1-SNAPSHOT</version>
 	<name>Spring Roo - Addon annotations - equals() and hashCode()</name>
 	<description>This project provides annotations for the Spring Roo equals() addon.</description>
 	<url>http://code.google.com/p/spring-roo-equals-roo-addon/</url>
@@ -24,9 +24,9 @@
 		<url>http://code.google.com/p/spring-roo-equals-roo-addon/issues/list</url>
 	</issueManagement>
 	<scm>
-		<connection>scm:svn:http://spring-roo-equals-roo-addon.googlecode.com/svn/tags/de.saxsys.roo.equals.annotations-1.1.0</connection>
-		<developerConnection>scm:svn:https://spring-roo-equals-roo-addon.googlecode.com/svn/tags/de.saxsys.roo.equals.annotations-1.1.0</developerConnection>
-		<url>http://spring-roo-equals-roo-addon.googlecode.com/svn/tags/de.saxsys.roo.equals.annotations-1.1.0</url>
+		<connection>scm:svn:http://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/</connection>
+		<developerConnection>scm:svn:https://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/</developerConnection>
+		<url>http://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/</url>
 	</scm>
 	<developers>
 		<developer>
