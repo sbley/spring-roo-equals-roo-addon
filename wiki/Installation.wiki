@@ -30,10 +30,20 @@ Target resource(s):
 Deploying...done.
 }}}
 
+Fix this by trusting the signature key with :
+
+{{{
+pgp trust --keyId 0xC3A61B10
+}}}
+
+Now try again:
+
+{{{
+osgi obr start --bundleSymbolicName de.saxsys.roo.equals.addon
+}}}
 
 
-
-You can verify that the plugin is active by typing:
+Now you can verify that the plugin is active by typing:
 {{{
 osgi ps
 }}}
@@ -41,7 +51,7 @@ osgi ps
 You should see something like:
 {{{
 ...
-[  53] [Active     ] [    1] Spring Roo - Addon - equals() and hashCode() (1.1.0)
+[  53] [Active     ] [    1] Spring Roo - Addon - equals() and hashCode() (1.2.0)
 }}}
 
 Next step: See [Usage how to use] the equals addon.
