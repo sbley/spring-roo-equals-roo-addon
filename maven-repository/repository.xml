@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
-<repository lastmodified="20100524141902.718" name="MyRepository">
+<repository lastmodified="20101016111920.593" name="MyRepository">
 <resource id="de.saxsys.roo.equals.addon/1.0.0" presentationname="Spring Roo - Addon - equals() and hashCode()" symbolicname="de.saxsys.roo.equals.addon" uri="de/saxsys/roo/de.saxsys.roo.equals.addon/1.0.0/de.saxsys.roo.equals.addon-1.0.0.jar" version="1.0.0">
 <description>This project provides an addon for Spring Roo which aims to generate equals() and hashCode() methods.</description>
 <size>22352</size>
@@ -32,5 +32,40 @@
 <require extend="false" filter="(&amp;(package=org.springframework.roo.support.logging)(version&gt;=0.0.0))" multiple="false" name="package" optional="false">Import package org.springframework.roo.support.logging</require>
 <require extend="false" filter="(&amp;(package=org.springframework.roo.support.style)(version&gt;=0.0.0))" multiple="false" name="package" optional="false">Import package org.springframework.roo.support.style</require>
 <require extend="false" filter="(&amp;(package=org.springframework.roo.support.util)(version&gt;=0.0.0))" multiple="false" name="package" optional="false">Import package org.springframework.roo.support.util</require>
+</resource>
+<resource id="de.saxsys.roo.equals.addon/1.1.0" presentationname="Spring Roo - Addon - equals() and hashCode()" symbolicname="de.saxsys.roo.equals.addon" uri="de/saxsys/roo/de.saxsys.roo.equals.addon/1.1.0/de.saxsys.roo.equals.addon-1.1.0.jar" version="1.1.0">
+<description>This project provides an addon for Spring Roo which aims to generate equals() and hashCode() methods.</description>
+<size>22553</size>
+<documentation>http://code.google.com/p/spring-roo-equals-roo-addon/</documentation>
+<source>de/saxsys/roo/de.saxsys.roo.equals.addon/1.1.0/de.saxsys.roo.equals.addon-1.1.0-sources.jar.asc</source>
+<javadoc>de/saxsys/roo/de.saxsys.roo.equals.addon/1.1.0/de.saxsys.roo.equals.addon-1.1.0-javadoc.jar.asc</javadoc>
+<license>http://www.gnu.org/copyleft/gpl.html</license>
+<category id="de.saxsys.roo"/>
+<capability name="bundle">
+<p n="manifestversion" v="2"/>
+<p n="presentationname" v="Spring Roo - Addon - equals() and hashCode()"/>
+<p n="symbolicname" v="de.saxsys.roo.equals.addon"/>
+<p n="version" t="version" v="1.1.0"/>
+</capability>
+<capability name="package">
+<p n="package" v="de.saxsys.roo.equals.addon"/>
+<p n="uses" v="org.springframework.roo.model,org.springframework.roo.shell,org.osgi.service.component,org.springframework.roo.classpath.details,org.springframework.roo.classpath.details.annotations,org.springframework.roo.classpath.itd,org.springframework.roo.project,org.springframework.roo.metadata,org.springframework.roo.classpath,org.springframework.roo.classpath.details.annotations.populator,org.springframework.roo.support.util,org.springframework.roo.support.logging,org.springframework.roo.support.style,org.w3c.dom"/>
+<p n="version" t="version" v="1.1.0"/>
+</capability>
+<require extend="false" filter="(&amp;(package=de.saxsys.roo.equals.addon)(version&gt;=1.1.0))" multiple="false" name="package" optional="false">Import package de.saxsys.roo.equals.addon ;version=1.1.0</require>
+<require extend="false" filter="(&amp;(package=org.osgi.service.component)(version&gt;=1.0.0))" multiple="false" name="package" optional="false">Import package org.osgi.service.component ;version=1.0.0</require>
+<require extend="false" filter="(&amp;(package=org.springframework.roo.classpath)(version&gt;=1.1.0))" multiple="false" name="package" optional="false">Import package org.springframework.roo.classpath ;version=1.1.0</require>
+<require extend="false" filter="(&amp;(package=org.springframework.roo.classpath.details)(version&gt;=1.1.0))" multiple="false" name="package" optional="false">Import package org.springframework.roo.classpath.details ;version=1.1.0</require>
+<require extend="false" filter="(&amp;(package=org.springframework.roo.classpath.details.annotations)(version&gt;=1.1.0))" multiple="false" name="package" optional="false">Import package org.springframework.roo.classpath.details.annotations ;version=1.1.0</require>
+<require extend="false" filter="(&amp;(package=org.springframework.roo.classpath.details.annotations.populator)(version&gt;=1.1.0))" multiple="false" name="package" optional="false">Import package org.springframework.roo.classpath.details.annotations.populator ;version=1.1.0</require>
+<require extend="false" filter="(&amp;(package=org.springframework.roo.classpath.itd)(version&gt;=1.1.0))" multiple="false" name="package" optional="false">Import package org.springframework.roo.classpath.itd ;version=1.1.0</require>
+<require extend="false" filter="(&amp;(package=org.springframework.roo.metadata)(version&gt;=1.1.0))" multiple="false" name="package" optional="false">Import package org.springframework.roo.metadata ;version=1.1.0</require>
+<require extend="false" filter="(&amp;(package=org.springframework.roo.model)(version&gt;=1.1.0))" multiple="false" name="package" optional="false">Import package org.springframework.roo.model ;version=1.1.0</require>
+<require extend="false" filter="(&amp;(package=org.springframework.roo.project)(version&gt;=1.1.0))" multiple="false" name="package" optional="false">Import package org.springframework.roo.project ;version=1.1.0</require>
+<require extend="false" filter="(&amp;(package=org.springframework.roo.shell)(version&gt;=1.1.0))" multiple="false" name="package" optional="false">Import package org.springframework.roo.shell ;version=1.1.0</require>
+<require extend="false" filter="(&amp;(package=org.springframework.roo.support.logging)(version&gt;=1.1.0))" multiple="false" name="package" optional="false">Import package org.springframework.roo.support.logging ;version=1.1.0</require>
+<require extend="false" filter="(&amp;(package=org.springframework.roo.support.style)(version&gt;=1.1.0))" multiple="false" name="package" optional="false">Import package org.springframework.roo.support.style ;version=1.1.0</require>
+<require extend="false" filter="(&amp;(package=org.springframework.roo.support.util)(version&gt;=1.1.0))" multiple="false" name="package" optional="false">Import package org.springframework.roo.support.util ;version=1.1.0</require>
+<require extend="false" filter="(&amp;(package=org.w3c.dom)(version&gt;=0.0.0))" multiple="false" name="package" optional="false">Import package org.w3c.dom</require>
 </resource>
 </repository>
