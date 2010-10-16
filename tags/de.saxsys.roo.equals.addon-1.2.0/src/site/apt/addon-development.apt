@@ -1,0 +1,43 @@
+Addon-Erstellung mit Roo 1.0.x
+
+	[[1]] roo-dev vorbereiten
+	
+		* Roo auschecken
+		
+		* ROO_CLASSPATH_FILE=E:\\spring-roo\\src\\trunk\\bootstrap\\target\\roo_classpath.txt
+		
+		* in trunk: mvn install
+		
+		* E:\\spring-roo\\src\\trunk\\bootstrap\\ zum Klassenpfad hinzufügen
+	
+	[[2]] Plugin anlegen
+	
+		* roo-dev in kommandozeile aufrufen
+		
+		* project  --topLevelPackage de.saxsys.roo.equals.roo.addon --template ROO_ADDON_SIMPLE
+		
+		* muss mit com/net/org beginnen und mit roo.addon enden
+		
+		* exit
+		
+		* mvn compile  (erzeugt u.a. setup.bat)
+		
+		* cd ..  (!)  (sonst kann m2eclipse das Projektverzeichnis nicht passend umbenennen...)
+		
+		* in STS:  File -> Import : General -> Maven projects .  Addon importieren...
+	
+	[[3]] Plugin testen (Roo Shell inklusive Plugin im de mode starten)
+	
+		* Kommandozeile
+		
+		* Verzeichnis für Testprojekt irgendwo anlegen
+		
+		* \{plugin-verzeichnis\}/setup.bat aufrufen -> setzt ROO_ADDON_CLASSPATH_FILE, damit roo-dev das Plugin findet
+		
+		* roo-dev aufrufen
+		
+		* Welcome Commands probieren
+
+
+
+
