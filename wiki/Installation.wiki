@@ -15,7 +15,7 @@ osgi ps
 You should see something like:
 {{{
 ...
-[  53] [Active     ] [    1] Spring Roo - Addon - equals() and hashCode() (1.2.0)
+[  72] [Active     ] [    1] Spring Roo - Addon - equals() and hashCode() (1.2.0)
 }}}
 
 Next step: See [Usage how to use] the equals addon.
