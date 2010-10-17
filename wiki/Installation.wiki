@@ -1,7 +1,7 @@
 #summary How to install this addon in Spring Roo
 #labels Phase-Deploy
 
-Thanks to RooBot, the installation is as simple as this (tested with RC1 and STS 2.5.0.RC1):
+Thanks to 'RooBot', the installation is as simple as this (tested with RC1 and STS 2.5.0.RC1):
 
 {{{
 addon install --bundleSymbolicName de.saxsys.roo.equals.addon
