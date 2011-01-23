@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
-<repository lastmodified="20110123114329.734" name="MyRepository">
+<repository lastmodified="20110123120906.359" name="MyRepository">
   <resource id="de.saxsys.roo.equals.addon/1.0.0.SNAPSHOT" presentationname="Spring Roo - Addon - equals() and hashCode()" symbolicname="de.saxsys.roo.equals.addon" uri="file:/C:/DOKUME~1/STEFAN~1.BLE/LOKALE~1/Temp/de/saxsys/roo/de.saxsys.roo.equals.addon/1.0.0-SNAPSHOT/de.saxsys.roo.equals.addon-1.0.0-SNAPSHOT.jar" version="1.0.0.SNAPSHOT">
     <description>This project provides an addon for Spring Roo which aims to generate equals() and hashCode() methods.</description>
     <size>22390</size>
@@ -99,7 +99,7 @@
 </resource>
 <resource id="de.saxsys.roo.equals.addon/1.2.1.SNAPSHOT" presentationname="Spring Roo - Addon - equals() and hashCode()" symbolicname="de.saxsys.roo.equals.addon" uri="httppgp://spring-roo-equals-roo-addon.googlecode.com/svn/maven-snapshot-repository/de/saxsys/roo/de.saxsys.roo.equals.addon/1.2.1-SNAPSHOT/de.saxsys.roo.equals.addon-1.2.1-SNAPSHOT.jar" version="1.2.1.SNAPSHOT">
 <description>This project provides an addon for Spring Roo which aims to generate equals() and hashCode() methods.</description>
-<size>21776</size>
+<size>21777</size>
 <documentation>http://code.google.com/p/spring-roo-equals-roo-addon/</documentation>
 <category id="de.saxsys.roo"/>
 <capability name="bundle">
