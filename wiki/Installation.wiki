@@ -1,7 +1,7 @@
 #summary How to install this addon in Spring Roo
 #labels Phase-Deploy
 
-Thanks to `RooBot`, the installation is as simple as this (tested with RC1 and STS 2.5.0.RC1):
+Thanks to `RooBot`, the installation in the Roo Shell is as simple as this (tested with Spring Roo 1.1.1 and STS 2.5.2):
 
 {{{
 addon install --bundleSymbolicName de.saxsys.roo.equals.addon
@@ -15,7 +15,7 @@ osgi ps
 You should see something like:
 {{{
 ...
-[  72] [Active     ] [    1] Spring Roo - Addon - equals() and hashCode() (1.2.0)
+[  72] [Active     ] [    1] Spring Roo - Addon - equals() and hashCode() (1.3.0)
 }}}
 
 Next step: See [Usage how to use] the equals addon.
