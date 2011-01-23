@@ -188,7 +188,7 @@ public class EqualsOperationsImpl implements EqualsOperations {
 			return;
 		}
 
-		PhysicalTypeDetails ptd = physicalTypeMetadata.getPhysicalTypeDetails();
+		PhysicalTypeDetails ptd = physicalTypeMetadata.getMemberHoldingTypeDetails();
 		Assert.isInstanceOf(MutableClassOrInterfaceTypeDetails.class, ptd);
 		MutableClassOrInterfaceTypeDetails mutable = (MutableClassOrInterfaceTypeDetails) ptd;
 
