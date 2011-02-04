@@ -23,5 +23,5 @@ public interface EqualsOperations {
 	 * @param callInstanceOf 
 	 * @param callSuper 
 	 */
-	void addEquals(JavaType typeName, Boolean callSuper, Boolean callInstanceOf);
+	void addEquals(JavaType typeName, Boolean callSuper, Boolean callInstanceOf, Boolean exclusiveMode);
 }

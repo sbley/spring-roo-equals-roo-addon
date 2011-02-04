@@ -35,11 +35,12 @@ public class EqualsCommands implements CommandMarker {
 	@CliCommand(value = "equals", help = "Add equals() and hashCode() methods to a class")
 	public void addEquals(
 			@CliOption(key = "class", mandatory = false, unspecifiedDefaultValue = "*", optionContext = "update,project", help = "The name of the class") JavaType typeName,
-			@CliOption(key = "callSuper", mandatory=false, specifiedDefaultValue="true", help="Whether to call super.equals() and super.hashCode()") Boolean callSuper,
-			@CliOption(key="callInstanceof", mandatory=false, specifiedDefaultValue="true", help="Whether to use instanceof in equals()") Boolean callInstanceOf
-			) {
-			
-		operations.addEquals(typeName, callSuper, callInstanceOf);
+			@CliOption(key = "callSuper", mandatory = false, specifiedDefaultValue = "true", help = "Whether to call super.equals() and super.hashCode()") Boolean callSuper,
+			@CliOption(key = "callInstanceof", mandatory = false, specifiedDefaultValue = "true", help = "Whether to use instanceof in equals()") Boolean callInstanceOf,
+			@CliOption(key = "exclusiveMode", mandatory = false, specifiedDefaultValue = "true", help = "Whether to include all fields by default or not") Boolean exclusiveMode) {
+
+		operations
+				.addEquals(typeName, callSuper, callInstanceOf, exclusiveMode);
 	}
 
 }

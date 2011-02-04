@@ -1,14 +1,12 @@
 package de.saxsys.roo.equals.addon;
 
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
 import org.springframework.roo.classpath.PhysicalTypeIdentifierNamingUtils;
 import org.springframework.roo.classpath.PhysicalTypeMetadata;
-import org.springframework.roo.classpath.details.DefaultMethodMetadata;
 import org.springframework.roo.classpath.details.FieldMetadata;
 import org.springframework.roo.classpath.details.MemberFindingUtils;
 import org.springframework.roo.classpath.details.MethodMetadata;
@@ -47,6 +45,8 @@ public class EqualsMetadata extends AbstractItdTypeDetailsProvidingMetadataItem 
 	private static final JavaType HASHCODE_BUILDER = new JavaType(
 			"org.apache.commons.lang.builder.HashCodeBuilder");
 	private static final JavaType OBJECT = new JavaType("java.lang.Object");
+	private static final String EQUALS_EXCLUDE_NAME = EqualsExclude.class.getCanonicalName();
+	private static final String EQUALS_INCLUDE_NAME = EqualsInclude.class.getCanonicalName();
 
 	/** append super equals and hashCode method calls */
 	@AutoPopulate
@@ -54,6 +54,9 @@ public class EqualsMetadata extends AbstractItdTypeDetailsProvidingMetadataItem 
 	/** use instanceof rather than getClass() */
 	@AutoPopulate
 	private boolean callInstanceof;
+	/** only include fields annotated by {@link EqualsInclude} */
+	@AutoPopulate
+	private boolean exclusiveMode;
 
 	public EqualsMetadata(String identifier, JavaType aspectName,
 			PhysicalTypeMetadata governorPhysicalTypeMetadata) {
@@ -123,6 +126,24 @@ public class EqualsMetadata extends AbstractItdTypeDetailsProvidingMetadataItem 
 				metadataIdentificationString);
 	}
 
+	private boolean shouldIncludeField(FieldMetadata field) {
+		if (exclusiveMode) {
+			return containsAnnotation(field.getAnnotations(),
+					EQUALS_INCLUDE_NAME);
+		}
+		return !containsAnnotation(field.getAnnotations(), EQUALS_EXCLUDE_NAME);
+	}
+	
+	private static boolean containsAnnotation(List<AnnotationMetadata> annotationsOnField,
+			String annotationName) {
+		for (AnnotationMetadata annotationMetadata : annotationsOnField) {
+			if (annotationMetadata.getAnnotationType()
+					.getFullyQualifiedTypeName().equals(annotationName))
+				return true;
+		}
+		return false;
+	}
+	
 	/**
 	 * Creates an {@code equals(Object)} method.
 	 * 
@@ -130,7 +151,7 @@ public class EqualsMetadata extends AbstractItdTypeDetailsProvidingMetadataItem 
 	 * @since 1.0
 	 */
 	class EqualsMethodBuilder {
-		InvocableMemberBodyBuilder bodyBuilder = new InvocableMemberBodyBuilder();
+		final InvocableMemberBodyBuilder bodyBuilder = new InvocableMemberBodyBuilder();
 		final JavaSymbolName methodName = new JavaSymbolName("equals");
 		final String simpleTypeName = governorTypeDetails.getName()
 				.getSimpleTypeName();
@@ -204,10 +225,13 @@ public class EqualsMetadata extends AbstractItdTypeDetailsProvidingMetadataItem 
 			for (FieldMetadata field : declaredFields) {
 				logger.fine("FieldMetadata: " + field);
 				if (!Modifier.isTransient(field.getModifier())
-						&& !Modifier.isStatic(field.getModifier())) {
-					bodyBuilder.appendFormalLine(".append("
+						&& !Modifier.isStatic(field.getModifier()) 
+						&& shouldIncludeField(field)
+				) {
+						bodyBuilder.appendFormalLine(".append("
 							+ field.getFieldName().getSymbolName() + ", rhs."
 							+ field.getFieldName().getSymbolName() + ")");
+					
 				}
 			}
 			return bodyBuilder;
@@ -236,7 +260,7 @@ public class EqualsMetadata extends AbstractItdTypeDetailsProvidingMetadataItem 
 	 * @since 1.0
 	 */
 	class HashCodeMethodBuilder {
-		InvocableMemberBodyBuilder bodyBuilder = new InvocableMemberBodyBuilder();
+		final InvocableMemberBodyBuilder bodyBuilder = new InvocableMemberBodyBuilder();
 		final JavaSymbolName methodName = new JavaSymbolName("hashCode");
 
 		/**
@@ -290,7 +314,9 @@ public class EqualsMetadata extends AbstractItdTypeDetailsProvidingMetadataItem 
 					.getDeclaredFields();
 			for (FieldMetadata field : declaredFields) {
 				if (!Modifier.isTransient(field.getModifier())
-						&& !Modifier.isStatic(field.getModifier())) {
+						&& !Modifier.isStatic(field.getModifier())
+						&& shouldIncludeField(field)
+				) {
 					bodyBuilder.appendFormalLine(".append("
 							+ field.getFieldName().getSymbolName() + ")");
 				}
