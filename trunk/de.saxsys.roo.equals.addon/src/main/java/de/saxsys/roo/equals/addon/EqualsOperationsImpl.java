@@ -41,9 +41,10 @@ public class EqualsOperationsImpl implements EqualsOperations {
 
 	private static final JavaSymbolName CALLSUPER = new JavaSymbolName(
 			"callSuper");
-
 	private static final JavaSymbolName CALLINSTANCEOF = new JavaSymbolName(
 			"callInstanceof");
+	private static final JavaSymbolName EXCLUSIVEMODE = new JavaSymbolName(
+			"exclusiveMode");
 
 	private final Logger logger = HandlerUtils.getLogger(getClass());
 
@@ -70,13 +71,13 @@ public class EqualsOperationsImpl implements EqualsOperations {
 	}
 
 	public void addEquals(final JavaType typeName, final Boolean callSuper,
-			final Boolean callInstanceOf) {
+			final Boolean callInstanceOf, final Boolean exclusiveMode) {
 		addDependencies();
-		addEqualsAnnotation(typeName, callSuper, callInstanceOf);
+		addEqualsAnnotation(typeName, callSuper, callInstanceOf, exclusiveMode);
 	}
 
 	/**
-	 * Adds the dependency to the annotation jar and to required libraries to
+	 * Adds the dependency on the annotation jar and on required libraries to
 	 * the project's pom.xml.
 	 * <p>
 	 * Additionally, it inserts the repository which hosts the annotation jar
@@ -84,45 +85,7 @@ public class EqualsOperationsImpl implements EqualsOperations {
 	 * </p>
 	 */
 	private void addDependencies() {
-		// String repoId = "";
-		// String repoName = "Repository for Roo equals addon";
-		// String repoUrl = "";
-		// String annotationsGroupId = "";
-		// String annotationsArtifactId = "";
-		// String annotationsVersion = "";
-		// InputStream inputStream = getClass().getClassLoader()
-		// .getResourceAsStream("dependencies.properties");
 		try {
-			// Properties properties = new Properties();
-			// properties.load(inputStream);
-			// annotationsGroupId =
-			// properties.getProperty("annotations.groupId");
-			// annotationsArtifactId = properties
-			// .getProperty("annotations.artifactId");
-			// annotationsVersion =
-			// properties.getProperty("annotations.version");
-			// boolean isSnapshot = annotationsVersion.endsWith("SNAPSHOT");
-			// if (isSnapshot) {
-			// repoId = properties.getProperty("annotations.snapshotrepo.id");
-			// repoUrl = properties
-			// .getProperty("annotations.snapshotrepo.url");
-			// } else {
-			// repoId = properties.getProperty("annotations.repo.id");
-			// repoUrl = properties.getProperty("annotations.repo.url");
-			// }
-			// // String commonslangVersion = properties
-			// // .getProperty("commonslang.version");
-			//
-			// projectOperations.addRepository(new Repository(repoId, repoName,
-			// repoUrl, isSnapshot));
-			//
-			// Dependency dependencyAnno = new Dependency(annotationsGroupId,
-			// annotationsArtifactId, annotationsVersion);
-			// projectOperations.dependencyUpdate(dependencyAnno);
-			// Dependency dependencyCmnLang = new Dependency("commons-lang",
-			// "commons-lang", commonslangVersion);
-			// projectOperations.dependencyUpdate(dependencyCmnLang);
-
 			Element configuration = XmlUtils.getConfiguration(getClass());
 			boolean snapshot = false;
 
@@ -166,11 +129,9 @@ public class EqualsOperationsImpl implements EqualsOperations {
 	 * 
 	 * @param typeName
 	 *            a class
-	 * @param callInstanceOf
-	 * @param callSuper
 	 */
 	private void addEqualsAnnotation(final JavaType typeName,
-			Boolean callSuper, Boolean callInstanceOf) {
+			Boolean callSuper, Boolean callInstanceOf, Boolean exclusiveMode) {
 		String id = physicalTypeMetadataProvider.findIdentifier(typeName);
 		if (id == null) {
 			logger.warning("Cannot locate source for '"
@@ -206,13 +167,14 @@ public class EqualsOperationsImpl implements EqualsOperations {
 		// add the new annotation
 		List<AnnotationAttributeValue<?>> attributes = new ArrayList<AnnotationAttributeValue<?>>();
 		if (callSuper != null) {
-
 			attributes.add(new BooleanAttributeValue(CALLSUPER, callSuper));
 		}
 		if (callInstanceOf != null) {
-
 			attributes.add(new BooleanAttributeValue(CALLINSTANCEOF,
 					callInstanceOf));
+		}
+		if (exclusiveMode != null) {
+			attributes.add(new BooleanAttributeValue(EXCLUSIVEMODE, exclusiveMode));
 		}
 		AnnotationMetadata annotation = new AnnotationMetadataBuilder(
 				annotationType, attributes).build();

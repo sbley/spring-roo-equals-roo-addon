@@ -8,7 +8,7 @@
 	<name>Spring Roo - Addon - equals() and hashCode()</name>
 	<properties>
 		<roo.version>1.1.1.RELEASE</roo.version>
-		<annotation.version>1.2.0</annotation.version>
+		<annotation.version>1.2.1-SNAPSHOT</annotation.version>
 		<repo.id>googlecode.rooequals.repo</repo.id>
 		<google.code.project.name>spring-roo-equals-roo-addon</google.code.project.name>
 		<google.code.svnroot>${google.code.project.name}.googlecode.com/svn</google.code.svnroot>
@@ -16,7 +16,7 @@
 		<snapshotrepo.id>googlecode.rooequals.snapshotrepo</snapshotrepo.id>
 		<snapshotrepo.url>https://${google.code.svnroot}/maven-snapshot-repository/</snapshotrepo.url>
 		<repo.folder>de/saxsys/roo</repo.folder>
-		<!-- During release:perform, this will be overridden by the releas profile -->
+		<!-- During release:perform, this will be overridden by the release profile -->
 		<repo.name>maven-snapshot-repository</repo.name>
 		<bundle.url>httppgp://${google.code.svnroot}/${repo.name}/${repo.folder}/${project.artifactId}/${project.version}/${project.artifactId}-${project.version}.jar</bundle.url>
 	</properties>
