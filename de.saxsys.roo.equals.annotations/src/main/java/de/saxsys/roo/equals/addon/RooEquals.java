@@ -30,4 +30,13 @@ public @interface RooEquals {
 	 * </p>
 	 */
 	boolean callInstanceof() default false;
+	
+	/**
+	 * If set to {@code true}, exclude all fields except the ones annotated with {@link EqualsInclude}.
+	 * If set to {@code false}, include all fields except for ones annotated with {@link EqualsExclude}.
+	 * <p>
+	 * Defaults to {@code false}.
+	 * </p> 
+	 */
+	boolean exclusiveMode() default false;
 }
