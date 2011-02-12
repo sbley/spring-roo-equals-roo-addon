@@ -98,10 +98,9 @@ public class EqualsOperationsImpl implements EqualsOperations {
 
 				// WORKAROUND:
 				// We have to check for SNAPSHOT dependency of annotation
-				// project
-				// because Roo 1.1.0.M2 still does not add snapshot tag to the
-				// repository
-				// section in the pom.
+				// project because Roo 1.1.1.RELEASE still does not add snapshot tag
+				// to the repository section in the pom.
+				// See: MavenProjectMetadataProvider#createRepositoryElement
 				if ("de.saxsys.roo.equals.annotations".equals(dependency
 						.getArtifactId().getSymbolName())) {
 					snapshot = dependency.getVersionId().endsWith("SNAPSHOT");
