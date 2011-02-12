@@ -11,9 +11,10 @@ This will:
   # Add the required dependencies and repository to the project's POM, if not already there.
   # Add the @!RooEquals annotation to the class Customer, which will in turn trigger generation of equals() and hashCode() in an ITD.
 
-The equals command has two options that have the same meaning as the according attributes in the @!RooEquals annotation (see [#Configure_the_generation further below]):
+The equals command has three options that have the same meaning as the according attributes in the @!RooEquals annotation (see [#Configure_the_generation further below]):
   * `--callSuper`
   * `--callInstanceof`
+  * `--exclusiveMode`
 
 ==Using the plugin without the equals command==
 You can also use the plugin without the equals command. Then, you have to perform the step described in the following manually:
@@ -43,7 +44,7 @@ project --topLevelPackage com.example.app
   <dependency>
     <groupId>de.saxsys.roo</groupId>
     <artifactId>de.saxsys.roo.equals.annotations</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.1</version>
   </dependency>
   <dependency>
     <groupId>commons-lang</groupId>
@@ -58,7 +59,7 @@ Now you are ready to use the @!RooEquals annotation.
 
 Annotating a class with @!RooEquals will trigger the creation of the equals() and hashCode() methods in an ITD.
 The implementation delegates to the [http://commons.apache.org/lang/api-release/org/apache/commons/lang/builder/EqualsBuilder.html EqualsBuilder] and [http://commons.apache.org/lang/api-release/org/apache/commons/lang/builder/HashCodeBuilder.html HashCodeBuilder] provided by the [http://commons.apache.org/lang/ Apache Commons Lang] project.
-The determination of equality is based on instance variable comparison. Note that static and transient fields are not taken into account.
+The determination of equality is based on instance variable comparison. Note that static and transient fields are not taken into account
 
 Example:
 
@@ -100,9 +101,16 @@ privileged aspect Customer_Roo_Equals {
 
 ====Configure the generation====
 
-The @!RooEquals annotation provides two attributes which can be used to influence the method generation:
+The @!RooEquals annotation provides three attributes which can be used to influence the method generation:
 
   * `callSuper : boolean = false`
   Setting this attribute to true will include a call to super.equals() and super.hashCode() in the generated methods.
   * `callInstanceof : boolean = false`
   Setting this attribute to true will create instanceof comparison instead of getClass() in the generated equals() method.
+  * `exclusiveMode : boolean = false`
+  Setting this attribute to true will exclude all fields from the method generation except of those annotated with @!EqualsInclude.
+
+=====Exclusive mode=====
+
+As of version 1.3.1 fields can be excluded from equals/hashCode by annotating them with @!EqualsExclude.
+In contrast, you can use the exclusiveMode to exclude all fields by default. In this case, to include a field into equals/hashCode annotate it with @!EqualsInclude.
