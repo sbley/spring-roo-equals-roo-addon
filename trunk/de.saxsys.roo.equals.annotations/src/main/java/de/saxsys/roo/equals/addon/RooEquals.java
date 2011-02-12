@@ -17,6 +17,9 @@ public @interface RooEquals {
 	/**
 	 * If {@code true} then inserts calls to the super class equals()
 	 * and hashCode() methods.
+	 * <p>
+	 * Defaults to {@code false}.
+	 * </p>
 	 */
 	boolean callSuper() default false;
 
