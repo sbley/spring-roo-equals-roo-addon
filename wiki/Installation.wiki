@@ -19,3 +19,5 @@ You should see something like:
 }}}
 
 Next step: See [Usage how to use] the equals addon.
+
+<font color="red">_Note: Due to [https://jira.springsource.org/browse/ROO-2045 ROO-2045] you may not be able to trust the addon's pgp key in Spring Roo 1.1.1. In that case, either switch back to equals addon 1.3.0 or use a Spring Roo 1.1.2 pre-release._</font>
