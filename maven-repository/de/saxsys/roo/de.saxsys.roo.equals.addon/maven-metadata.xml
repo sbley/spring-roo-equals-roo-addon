@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<metadata>
+<metadata xsi:schemaLocation="http://maven.apache.org/METADATA/1.0.0 http://maven.apache.org/xsd/metadata-1.0.0.xsd" xmlns="http://maven.apache.org/METADATA/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <groupId>de.saxsys.roo</groupId>
   <artifactId>de.saxsys.roo.equals.addon</artifactId>
   <version>1.0.0</version>
   <versioning>
-    <release>1.3.1</release>
+    <release>1.3.2</release>
     <versions>
       <version>1.0.0</version>
       <version>1.1.0</version>
       <version>1.2.0</version>
       <version>1.3.0</version>
       <version>1.3.1</version>
+      <version>1.3.2</version>
     </versions>
-    <lastUpdated>20110212161118</lastUpdated>
+    <lastUpdated>20110320155459</lastUpdated>
   </versioning>
 </metadata>
