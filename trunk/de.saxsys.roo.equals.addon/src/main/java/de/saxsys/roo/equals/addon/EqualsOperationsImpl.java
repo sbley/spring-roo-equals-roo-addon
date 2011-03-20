@@ -87,24 +87,13 @@ public class EqualsOperationsImpl implements EqualsOperations {
 	private void addDependencies() {
 		try {
 			Element configuration = XmlUtils.getConfiguration(getClass());
-			boolean snapshot = false;
 
 			// add dependencies
 			List<Element> dependencies = XmlUtils.findElements(
 					"/configuration/dependencies/dependency", configuration);
 			for (Element dependencyElement : dependencies) {
 				Dependency dependency = new Dependency(dependencyElement);
-				projectOperations.dependencyUpdate(dependency);
-
-				// WORKAROUND:
-				// We have to check for SNAPSHOT dependency of annotation
-				// project because Roo 1.1.1.RELEASE still does not add snapshot tag
-				// to the repository section in the pom.
-				// See: MavenProjectMetadataProvider#createRepositoryElement
-				if ("de.saxsys.roo.equals.annotations".equals(dependency
-						.getArtifactId().getSymbolName())) {
-					snapshot = dependency.getVersionId().endsWith("SNAPSHOT");
-				}
+				projectOperations.addDependency(dependency);
 			}
 
 			// add repository
@@ -112,11 +101,7 @@ public class EqualsOperationsImpl implements EqualsOperations {
 					"/configuration/repositories/repository", configuration);
 			for (Element repositoryElement : repositories) {
 				Repository repository = new Repository(repositoryElement);
-				// WORKAROUND:
-				// See above.
-				if (repository.isEnableSnapshots() == snapshot) {
 					projectOperations.addRepository(repository);
-				}
 			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);
