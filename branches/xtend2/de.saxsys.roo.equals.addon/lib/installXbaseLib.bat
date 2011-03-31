@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=org.eclipse.xtext.xbase.lib_2.0.0.v201103151224.jar -DgroupId=org.eclipse.xtext -DartifactId=xbase.lib -Dversion=2.0.0.v201103151224 -Dpackaging=jar -DgeneratePom=true
