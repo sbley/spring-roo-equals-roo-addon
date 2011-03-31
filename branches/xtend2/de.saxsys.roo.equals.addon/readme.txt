@@ -1,1 +1,0 @@
-See http://code.google.com/p/spring-roo-equals-roo-addon/
