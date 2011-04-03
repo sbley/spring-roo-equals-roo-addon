@@ -2,9 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.saxsys.roo</groupId>
-	<artifactId>de.saxsys.roo.equals.addon</artifactId>
+	<artifactId>de.saxsys.roo.equals.addon.xtend2</artifactId>
 	<packaging>bundle</packaging>
-	<version>1.3.3-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>Spring Roo - Addon - equals() and hashCode()</name>
 	<properties>
 		<roo.version>1.1.2.RELEASE</roo.version>
@@ -98,7 +98,24 @@
 			<version>${roo.version}</version>
 			<type>bundle</type>
 		</dependency>
-		<!-- Other modules (if any) -->
+		<!-- Xtend2 Dependencies (Must be installed in local Repo) -->
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
+			<version>2.0.0.v201103151224</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.xtext</groupId>
+			<artifactId>org.eclipse.xtext.xtend2.lib</artifactId>
+			<version>2.0.0.v201103151224</version>
+		</dependency>
+		<!-- Google Collections -->
+		<dependency>
+			<groupId>com.google.collections</groupId>
+			<artifactId>google-collections</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
 	</dependencies>
 	<repositories>
 		<repository>
@@ -126,6 +143,10 @@
 			<name>Spring Roo Repository</name>
 			<url>http://spring-roo-repository.springsource.org/release</url>
 		</repository>
+		<repository>
+			<id>xtext4roo</id>
+			<url>http://xtext4roo.googlecode.com/svn/repo</url>
+		</repository>
 	</repositories>
 	<distributionManagement>
 		<repository>
@@ -138,15 +159,15 @@
 			<uniqueVersion>false</uniqueVersion>
 		</snapshotRepository>
 	</distributionManagement>
-	<description>This project provides an addon for Spring Roo which aims to generate equals() and hashCode() methods. </description>
+	<description>This project provides an addon for Spring Roo generates equals() and hashCode() methods. It uses Xtend2 for code generation.</description>
 	<url>http://code.google.com/p/spring-roo-equals-roo-addon/</url>
 	<issueManagement>
 		<url>http://code.google.com/p/spring-roo-equals-roo-addon/issues/list</url>
 	</issueManagement>
 	<scm>
-		<url>http://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/de.saxsys.roo.equals.addon</url>
-		<connection>scm:svn:http://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/de.saxsys.roo.equals.addon</connection>
-		<developerConnection>scm:svn:https://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/de.saxsys.roo.equals.addon</developerConnection>
+		<url>http://spring-roo-equals-roo-addon.googlecode.com/svn/tags/de.saxsys.roo.equals.addon.xtend2-1.0.0</url>
+		<connection>scm:svn:http://spring-roo-equals-roo-addon.googlecode.com/svn/tags/de.saxsys.roo.equals.addon.xtend2-1.0.0</connection>
+		<developerConnection>scm:svn:https://spring-roo-equals-roo-addon.googlecode.com/svn/tags/de.saxsys.roo.equals.addon.xtend2-1.0.0</developerConnection>
 	</scm>
 	<developers>
 		<developer>
@@ -177,6 +198,24 @@
 		</extensions>
 
 		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>xtend-gen</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
