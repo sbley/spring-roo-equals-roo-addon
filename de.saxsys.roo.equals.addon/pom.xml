@@ -3,9 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.saxsys.roo</groupId>
-	<artifactId>de.saxsys.roo.equals.addon</artifactId>
+	<artifactId>de.saxsys.roo.equals.addon.xtend2</artifactId>
 	<packaging>bundle</packaging>
-	<version>1.3.3-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>Spring Roo - Addon - equals() and hashCode()</name>
 	<properties>
 		<roo.version>1.1.2.RELEASE</roo.version>
@@ -102,12 +102,12 @@
 		<!-- Xtend2 Dependencies (Must be installed in local Repo) -->
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>xbase.lib</artifactId>
+			<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
 			<version>2.0.0.v201103151224</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.xtext</groupId>
-			<artifactId>xtend2.lib</artifactId>
+			<artifactId>org.eclipse.xtext.xtend2.lib</artifactId>
 			<version>2.0.0.v201103151224</version>
 		</dependency>
 		<!-- Google Collections -->
@@ -116,6 +116,7 @@
 			<artifactId>google-collections</artifactId>
 			<version>1.0</version>
 		</dependency>
+		
 	</dependencies>
 	<repositories>
 		<repository>
@@ -143,6 +144,10 @@
 			<name>Spring Roo Repository</name>
 			<url>http://spring-roo-repository.springsource.org/release</url>
 		</repository>
+		<repository>
+			<id>xtext4roo</id>
+			<url>http://xtext4roo.googlecode.com/svn/repo</url>
+		</repository>
 	</repositories>
 	<distributionManagement>
 		<repository>
@@ -155,15 +160,15 @@
 			<uniqueVersion>false</uniqueVersion>
 		</snapshotRepository>
 	</distributionManagement>
-	<description>This project provides an addon for Spring Roo which aims to generate equals() and hashCode() methods. </description>
+	<description>This project provides an addon for Spring Roo generates equals() and hashCode() methods. It uses Xtend2 for code generation.</description>
 	<url>http://code.google.com/p/spring-roo-equals-roo-addon/</url>
 	<issueManagement>
 		<url>http://code.google.com/p/spring-roo-equals-roo-addon/issues/list</url>
 	</issueManagement>
 	<scm>
-		<url>http://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/de.saxsys.roo.equals.addon</url>
-		<connection>scm:svn:http://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/de.saxsys.roo.equals.addon</connection>
-		<developerConnection>scm:svn:https://spring-roo-equals-roo-addon.googlecode.com/svn/trunk/de.saxsys.roo.equals.addon</developerConnection>
+		<url>http://spring-roo-equals-roo-addon.googlecode.com/svn/branches/xtend2/de.saxsys.roo.equals.addon</url>
+		<connection>scm:svn:http://spring-roo-equals-roo-addon.googlecode.com/svn/branches/xtend2/de.saxsys.roo.equals.addon</connection>
+		<developerConnection>scm:svn:https://spring-roo-equals-roo-addon.googlecode.com/svn/branches/xtend2/de.saxsys.roo.equals.addon</developerConnection>
 	</scm>
 	<developers>
 		<developer>
@@ -277,8 +282,6 @@
 						<Bundle-Copyright>Copyright ${project.organization.name}. All
 							Rights Reserved.</Bundle-Copyright>
 						<Bundle-DocURL>${project.url}</Bundle-DocURL>
-						<Private-Package>org.eclipse.xtext.*, com.google.*</Private-Package>
-						<Import-Package>!org.eclipse.emf.*,*</Import-Package>
 					</instructions>
 					<remoteOBR>true</remoteOBR>
 					<bundleUrl>${bundle.url}</bundleUrl>
