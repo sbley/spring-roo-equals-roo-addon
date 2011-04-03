@@ -1,0 +1,1 @@
+mvn deploy:deploy-file -Dfile=org.eclipse.xtext.xbase.lib_2.0.0.v201103151224.jar -DgroupId=org.eclipse.xtext -DartifactId=org.eclipse.xtext.xbase.lib -Dversion=2.0.0.v201103151224 -Dpackaging=jar -DgeneratePom=true -DrepositoryId=xtext4roo -Durl=dav:https://xtext4roo.googlecode.com/svn/repo 
