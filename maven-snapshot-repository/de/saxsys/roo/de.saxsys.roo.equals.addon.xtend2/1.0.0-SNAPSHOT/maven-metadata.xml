@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>de.saxsys.roo</groupId>
+  <artifactId>de.saxsys.roo.equals.addon.xtend2</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <buildNumber>1</buildNumber>
+    </snapshot>
+    <lastUpdated>20110403172301</lastUpdated>
+  </versioning>
+</metadata>
