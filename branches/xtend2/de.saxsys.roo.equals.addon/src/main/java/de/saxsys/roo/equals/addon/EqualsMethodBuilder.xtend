@@ -11,6 +11,7 @@ import static extension java.lang.reflect.Modifier.*
 import static extension de.saxsys.roo.equals.addon.Parameter.*
 import static extension de.saxsys.roo.equals.addon.MethodSignature.*
 import static extension de.saxsys.roo.equals.addon.Method.*
+import static extension de.saxsys.roo.equals.addon.Annotation.*
 import java.lang.reflect.Modifier
 import org.springframework.roo.model.JavaSymbolName
 import org.springframework.roo.classpath.details.MethodMetadataBuilder
@@ -29,7 +30,9 @@ class EqualsMethodBuilder extends de.saxsys.roo.equals.addon.MethodBuilder{
 	}
 	getEqualsMethod(EqualsMetadata eqMetadata, ClassOrInterfaceTypeDetails typeDetails, ImportRegistrationResolver ir){
 		method( 
-			signature(Modifier::PUBLIC, JavaType::BOOLEAN_PRIMITIVE, "equals", param("java.lang.Object", "other")),
+			signature(annotation("java.lang.Override"),
+				Modifier::PUBLIC, JavaType::BOOLEAN_PRIMITIVE, "equals", param("java.lang.Object", "other")
+			),
 		 	[|{
 			val simpleName = typeDetails.name.simpleTypeName
 			''' 
@@ -58,7 +61,9 @@ class EqualsMethodBuilder extends de.saxsys.roo.equals.addon.MethodBuilder{
 	
 	getHashCodeMethod(EqualsMetadata eqMetadata, ClassOrInterfaceTypeDetails typeDetails, ImportRegistrationResolver ir){
 		method( 
-			signature(Modifier::PUBLIC, JavaType::INT_PRIMITIVE, "hashCode"),
+			signature(annotation("java.lang.Override"), 
+				Modifier::PUBLIC, JavaType::INT_PRIMITIVE, "hashCode"
+			),
 		 	[|{
 			val simpleName = typeDetails.name.simpleTypeName
 			''' 
