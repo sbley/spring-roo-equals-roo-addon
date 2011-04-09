@@ -2,4 +2,8 @@
 
 Implementing code generation in plain Java can be quite cumbersome, as you might notice when looking at [http://code.google.com/p/spring-roo-equals-roo-addon/source/browse/trunk/de.saxsys.roo.equals.addon/src/main/java/de/saxsys/roo/equals/addon/EqualsMetadata.java EqualsMetadata.java].
 
-To show a nicer approach, we provide an Xtend2 based version of our addon [http://spring-roo-equals-roo-addon.googlecode.com/svn/branches/xtend2/ here].
+To show a nicer approach, we provide an [http://blog.efftinge.de/2010/12/xtend-2-successor-to-xpand.html Xtend2] based version of our addon [http://spring-roo-equals-roo-addon.googlecode.com/svn/branches/xtend2/ here].
+
+The Metadata and the MetadataProvider classes are still written in plain Java, but the code generation of the equals and hashCode method has been moved to [EqualsMethodBuilder.xtend http://code.google.com/p/spring-roo-equals-roo-addon/source/browse/branches/xtend2/de.saxsys.roo.equals.addon/src/main/java/de/saxsys/roo/equals/addon/EqualsMethodBuilder.xtend].
+
+_We have also added some helper classes (FakedBodyBuilder.java, Method.java, MethodSignature.java, Parameter.java ), but they are not specific to the addon and could be moved to some common library later._
