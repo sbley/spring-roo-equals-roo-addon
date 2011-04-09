@@ -1,3 +1,5 @@
 #summary Describes the Xtend2 based version of the Roo-Equals-Addon
 
 Implementing code generation in plain Java can be quite cumbersome, as you might notice when looking at [http://code.google.com/p/spring-roo-equals-roo-addon/source/browse/trunk/de.saxsys.roo.equals.addon/src/main/java/de/saxsys/roo/equals/addon/EqualsMetadata.java EqualsMetadata.java].
+
+To show a nicer approach, we provide an Xtend2 based version of our addon [http://spring-roo-equals-roo-addon.googlecode.com/svn/branches/xtend2/ here].
