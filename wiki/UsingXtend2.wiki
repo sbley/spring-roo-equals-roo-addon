@@ -1,0 +1,1 @@
+#summary Describes the Xtend2 based version of the Roo-Equals-Addon
