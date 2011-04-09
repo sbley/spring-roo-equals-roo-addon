@@ -20,5 +20,5 @@ The addon has some additional dependencies, which will be installed, too: the Xb
 
 If you want to play around with [http://code.google.com/p/spring-roo-equals-roo-addon/source/browse/branches/xtend2/de.saxsys.roo.equals.addon/src/main/java/de/saxsys/roo/equals/addon/EqualsMethodBuilder.xtend EqualsMethodBuilder.xtend ] or if you want to write your own Xtend2 based Roo addon, you need:
 
-* Eclipse Indigo (We used M7. You might also use an STS based on Eclipse Indigo. Even Helios might work, but we did not try)
-* Xtext 2.0, at least 2.0.0.v201103281003  (This is a nightly build. You can get it [http://www.eclipse.org/modeling/tmf/downloads/ here] )
+  * Eclipse Indigo (We used M7. You might also use an STS based on Eclipse Indigo. Even Helios might work, but we did not try)
+  * Xtext 2.0, at least 2.0.0.v201103281003  (This is a nightly build. You can get it [http://www.eclipse.org/modeling/tmf/downloads/ here] )
