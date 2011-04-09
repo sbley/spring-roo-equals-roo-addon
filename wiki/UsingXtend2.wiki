@@ -69,4 +69,4 @@ If you want the dependencies to be automatically installed if one installs you a
 <referral depth="1" url="http://xtext4roo.googlecode.com/svn/repo/repository.xml"/>
 }}}
 
-See also our [http://code.google.com/p/spring-roo-equals-roo-addon/source/browse/maven-repository/repository.xml repository].
+See also our Equals-Addon [http://code.google.com/p/spring-roo-equals-roo-addon/source/browse/maven-repository/repository.xml repository].
