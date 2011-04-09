@@ -34,7 +34,7 @@ class MethodBuilder{
 			val mmdbuilder = new MethodMetadataBuilder(
 				declaringId, sig.modifier,
 				sig.name, sig.returnType,
-				sig.parameters.map(p | p.type.annoJavaType(p.annotations)),
+				sig.parameters.map(p | p.type.annoJavaType(p.annotations.map(ab | ab.build))),
 				sig.parameters.map(p | p.name),
 				new FakedBodyBuilder(method.body.apply))	
 			mmdbuilder.setAnnotations(sig.annotations)

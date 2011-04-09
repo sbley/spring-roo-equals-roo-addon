@@ -3,16 +3,16 @@ package de.saxsys.roo.equals.addon;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.roo.classpath.details.annotations.AnnotationMetadata;
+import org.springframework.roo.classpath.details.annotations.AnnotationMetadataBuilder;
 import org.springframework.roo.model.JavaSymbolName;
 import org.springframework.roo.model.JavaType;
 
 public class Parameter {
-	private List<AnnotationMetadata> annotations;
+	private List<AnnotationMetadataBuilder> annotations;
 	private JavaType type;
 	private JavaSymbolName name;
 	
-	public Parameter(List<AnnotationMetadata> annotations, JavaType type,
+	public Parameter(List<AnnotationMetadataBuilder> annotations, JavaType type,
 			JavaSymbolName name) {
 		super();
 		this.annotations = annotations;
@@ -20,16 +20,16 @@ public class Parameter {
 		this.name = name;
 	}
 	
-	public Parameter(List<AnnotationMetadata> annotations, JavaType type,
+	public Parameter(List<AnnotationMetadataBuilder> annotations, JavaType type,
 			String name) {
 		this(annotations, type, new JavaSymbolName(name));
 	}
 
-	public List<AnnotationMetadata> getAnnotations() {
+	public List<AnnotationMetadataBuilder> getAnnotations() {
 		return annotations;
 	}
 
-	public void setAnnotations(List<AnnotationMetadata> annotations) {
+	public void setAnnotations(List<AnnotationMetadataBuilder> annotations) {
 		this.annotations = annotations;
 	}
 
@@ -49,15 +49,15 @@ public class Parameter {
 		this.name = name;
 	}
 	
-	public Parameter with(AnnotationMetadata annotation){
+	public Parameter with(AnnotationMetadataBuilder annotation){
 		if(annotations==null){
-			annotations = new ArrayList<AnnotationMetadata>();
+			annotations = new ArrayList<AnnotationMetadataBuilder>();
 		}
 		annotations.add(annotation);
 		return this;
 	}
 	
-	public static Parameter param(List<AnnotationMetadata> annotations, JavaType type,
+	public static Parameter param(List<AnnotationMetadataBuilder> annotations, JavaType type,
 			String name){
 		return new Parameter(annotations, type, name);
 	}	
