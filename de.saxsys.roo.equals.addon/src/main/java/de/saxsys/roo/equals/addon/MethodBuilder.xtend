@@ -36,9 +36,8 @@ class MethodBuilder{
 				sig.name, sig.returnType,
 				sig.parameters.map(p | p.type.annoJavaType(p.annotations)),
 				sig.parameters.map(p | p.name),
-				new FakedBodyBuilder(method.body.apply))
-			//TODO: Builder oder nicht Builder ??	
-			mmdbuilder.setAnnotations(sig.annotations.map(a | new AnnotationMetadataBuilder(a)))
+				new FakedBodyBuilder(method.body.apply))	
+			mmdbuilder.setAnnotations(sig.annotations)
 			mmdbuilder.setThrowsTypes(sig.exceptions)
 			mmdbuilder.build()
 		}
@@ -63,6 +62,8 @@ class MethodBuilder{
 	annoJavaType(String fqn, List<AnnotationMetadata> annotations){
 		fqn.javaType.annoJavaType(annotations)
 	}
+	
+	
 	
 	resolve(String fqn, ImportRegistrationResolver ir){ 
 		(new JavaType(fqn)).getNameIncludingTypeParameters(false, ir)

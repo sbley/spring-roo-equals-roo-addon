@@ -3,21 +3,22 @@ package de.saxsys.roo.equals.addon;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-import org.springframework.roo.classpath.details.annotations.AnnotationMetadata;
+import org.springframework.roo.classpath.details.annotations.AnnotationMetadataBuilder;
 import org.springframework.roo.model.JavaSymbolName;
 import org.springframework.roo.model.JavaType;
 
 public class MethodSignature {
-	private List<AnnotationMetadata> annotations = new ArrayList<AnnotationMetadata>();
+	private List<AnnotationMetadataBuilder> annotations = new ArrayList<AnnotationMetadataBuilder>();
 	private int modifier = Modifier.PUBLIC;
 	private JavaType returnType = JavaType.VOID_PRIMITIVE;
 	private JavaSymbolName name;
 	private List<Parameter> parameters = new ArrayList<Parameter>();
 	private List<JavaType> exceptions = new ArrayList<JavaType>();
 
-	public MethodSignature(List<AnnotationMetadata> annotations, int modifier,
+	public MethodSignature(List<AnnotationMetadataBuilder> annotations, int modifier,
 			JavaType returnType, JavaSymbolName name,
 			List<Parameter> parameters, List<JavaType> exceptions) {
 		super();
@@ -39,11 +40,11 @@ public class MethodSignature {
 		}
 	}
 
-	public List<AnnotationMetadata> getAnnotations() {
+	public List<AnnotationMetadataBuilder> getAnnotations() {
 		return annotations;
 	}
 
-	public void setAnnotations(List<AnnotationMetadata> annotations) {
+	public void setAnnotations(List<AnnotationMetadataBuilder> annotations) {
 		this.annotations = annotations;
 	}
 
@@ -99,7 +100,7 @@ public class MethodSignature {
 		return this;
 	}
 
-	public MethodSignature withAnnotations(AnnotationMetadata... annotations) {
+	public MethodSignature withAnnotations(AnnotationMetadataBuilder... annotations) {
 		this.annotations.addAll(Arrays.asList(annotations));
 		return this;
 	}
@@ -119,7 +120,7 @@ public class MethodSignature {
 	}
 
 	public static MethodSignature signature(
-			List<AnnotationMetadata> annotations, int modifier,
+			List<AnnotationMetadataBuilder> annotations, int modifier,
 			JavaType returnType, String name, Parameter... parameters) {
 		return new MethodSignature(annotations, modifier, returnType,
 				new JavaSymbolName(name), Arrays.asList(parameters), null);
@@ -127,11 +128,27 @@ public class MethodSignature {
 	}
 	
 	public static MethodSignature signature(
-			List<AnnotationMetadata> annotations, int modifier,
+			List<AnnotationMetadataBuilder> annotations, int modifier,
 			String returnTypeFqn, String name, Parameter... parameters) {
 		return new MethodSignature(annotations, modifier, new JavaType(returnTypeFqn),
 				new JavaSymbolName(name), Arrays.asList(parameters), null);
 
 	}
+	
+	public static MethodSignature signature(
+            AnnotationMetadataBuilder annotation, int modifier,
+            JavaType returnType, String name, Parameter... parameters) {
+        return new MethodSignature(Collections.singletonList(annotation), modifier, returnType,
+                new JavaSymbolName(name), Arrays.asList(parameters), null);
+
+    }
+    
+    public static MethodSignature signature(
+            AnnotationMetadataBuilder annotation, int modifier,
+            String returnTypeFqn, String name, Parameter... parameters) {
+        return new MethodSignature(Collections.singletonList(annotation), modifier, new JavaType(returnTypeFqn),
+                new JavaSymbolName(name), Arrays.asList(parameters), null);
+
+    }
 
 }
