@@ -34,14 +34,34 @@ addon create advanced ...
 Then, have a look at our [http://code.google.com/p/spring-roo-equals-roo-addon/source/browse/branches/xtend2/de.saxsys.roo.equals.addon/pom.xml pom.xml]. You will at least have to add the following lines to your POM:
 
 {{{
-
+<dependencies>
+...
+<!-- Xtend2 Dependencies -->
+	<dependency>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
+		<version>2.0.0.v201103151224</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>org.eclipse.xtext.xtend2.lib</artifactId>
+		<version>2.0.0.v201103151224</version>
+	</dependency>
+<!-- Google Collections -->
+	<dependency>
+		<groupId>com.google.collections</groupId>
+		<artifactId>google-collections</artifactId>
+		<version>1.0</version>
+	</dependency>
+...
+</dependencies>
+...
 <repositories>
 	...
-		<repository>
-			<id>xtext4roo</id>
-			<url>http://xtext4roo.googlecode.com/svn/repo</url>
-		</repository>
-	</repositories>
+	<repository>
+		<id>xtext4roo</id>
+		<url>http://xtext4roo.googlecode.com/svn/repo</url>
+	</repository>
+</repositories>
 
 }}}
-
