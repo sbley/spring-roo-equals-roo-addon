@@ -13,9 +13,7 @@ The addon is provided via RooBot, so you can install it in Roo by:
 addon install bundle --bundleSymbolicName de.saxsys.roo.equals.addon.xtend2
 }}}
 
-The addon has some additional dependencies, which will be installed, too: the Xbase and Xtend2 runtime libraries and Google collections.
-
-We provide them as Roo-compliant wrapped bundles in the [http://code.google.com/p/xtext4roo/source/browse/repo/repository.xml xtext4roo] bundle repository (OBR). To tell Apache Felix to search in this repository, we had to add the follwing line in the Equals-Addon [http://code.google.com/p/spring-roo-equals-roo-addon/source/browse/maven-repository/repository.xml repository]:
+The addon has some additional dependencies, which will be installed, too: the Xbase and Xtend2 runtime libraries and Google collections. We provide them as Roo-compliant wrapped bundles in the [http://code.google.com/p/xtext4roo/source/browse/repo/repository.xml xtext4roo] bundle repository (OBR). To tell Apache Felix to search in this repository, we had to add the follwing line in the Equals-Addon [http://code.google.com/p/spring-roo-equals-roo-addon/source/browse/maven-repository/repository.xml repository]:
 {{{
 <referral depth="1" url="http://xtext4roo.googlecode.com/svn/repo/repository.xml"/>
 }}}
