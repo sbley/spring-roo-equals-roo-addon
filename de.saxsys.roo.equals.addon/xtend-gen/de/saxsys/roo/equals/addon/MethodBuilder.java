@@ -68,24 +68,31 @@ public class MethodBuilder {
           final Function1<Parameter,AnnotatedJavaType> function_1 = new Function1<Parameter,AnnotatedJavaType>() {
               public AnnotatedJavaType apply(Parameter p_1) {
                 JavaType _type_1 = p_1.getType();
-                List<AnnotationMetadata> _annotations = p_1.getAnnotations();
-                AnnotatedJavaType _annoJavaType = _this.annoJavaType(_type_1, _annotations);
+                List<AnnotationMetadataBuilder> _annotations = p_1.getAnnotations();
+                final Function1<AnnotationMetadataBuilder,AnnotationMetadata> function_2 = new Function1<AnnotationMetadataBuilder,AnnotationMetadata>() {
+                    public AnnotationMetadata apply(AnnotationMetadataBuilder ab) {
+                      AnnotationMetadata _build = ab.build();
+                      return _build;
+                    }
+                  };
+                List<AnnotationMetadata> _map_1 = ListExtensions.map(_annotations, function_2);
+                AnnotatedJavaType _annoJavaType = _this.annoJavaType(_type_1, _map_1);
                 return _annoJavaType;
               }
             };
-          List<AnnotatedJavaType> _map_1 = ListExtensions.map(_parameters_1, function_1);
+          List<AnnotatedJavaType> _map_2 = ListExtensions.map(_parameters_1, function_1);
           List<Parameter> _parameters_2 = sig.getParameters();
-          final Function1<Parameter,JavaSymbolName> function_2 = new Function1<Parameter,JavaSymbolName>() {
+          final Function1<Parameter,JavaSymbolName> function_3 = new Function1<Parameter,JavaSymbolName>() {
               public JavaSymbolName apply(Parameter p_2) {
                 JavaSymbolName _name_2 = p_2.getName();
                 return _name_2;
               }
             };
-          List<JavaSymbolName> _map_2 = ListExtensions.map(_parameters_2, function_2);
+          List<JavaSymbolName> _map_3 = ListExtensions.map(_parameters_2, function_3);
           Function0<StringConcatenation> _body = method.getBody();
           StringConcatenation _apply = _body.apply();
           FakedBodyBuilder _fakedBodyBuilder = new FakedBodyBuilder(_apply);
-          MethodMetadataBuilder _methodMetadataBuilder = new MethodMetadataBuilder(declaringId, _modifier, _name_1, _returnType, _map_1, _map_2, _fakedBodyBuilder);
+          MethodMetadataBuilder _methodMetadataBuilder = new MethodMetadataBuilder(declaringId, _modifier, _name_1, _returnType, _map_2, _map_3, _fakedBodyBuilder);
           final MethodMetadataBuilder mmdbuilder = _methodMetadataBuilder;
           final MethodMetadataBuilder typeConverted_mmdbuilder = (MethodMetadataBuilder)mmdbuilder;
           List<AnnotationMetadataBuilder> _annotations_1 = sig.getAnnotations();
@@ -93,8 +100,8 @@ public class MethodBuilder {
           final MethodMetadataBuilder typeConverted_mmdbuilder_1 = (MethodMetadataBuilder)mmdbuilder;
           List<JavaType> _exceptions = sig.getExceptions();
           typeConverted_mmdbuilder_1.setThrowsTypes(_exceptions);
-          MethodMetadata _build = mmdbuilder.build();
-          _xblockexpression_1 = (_build);
+          MethodMetadata _build_1 = mmdbuilder.build();
+          _xblockexpression_1 = (_build_1);
         }
         _xifexpression = _xblockexpression_1;
       }
