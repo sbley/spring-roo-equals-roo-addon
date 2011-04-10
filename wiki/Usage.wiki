@@ -2,7 +2,7 @@
 
 ==Using the equals command==
 
-The simplest way to use this plugin is to type the equals command in the Roo shell:
+The simplest way to use this addon is to type the equals command in the Roo shell:
 {{{
 equals --class Customer
 }}}
@@ -16,8 +16,8 @@ The equals command has three options that have the same meaning as the according
   * `--callInstanceof`
   * `--exclusiveMode`
 
-==Using the plugin without the equals command==
-You can also use the plugin without the equals command. Then, you have to perform the step described in the following manually:
+==Using the addon without the equals command==
+You can also use the addon without the equals command. Then, you have to perform the step described in the following manually:
 ===Project Configuration===
   # You can create a Roo managed project from the Roo shell:
 {{{
