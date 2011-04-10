@@ -27,12 +27,11 @@ import org.springframework.roo.model.JavaType;
 
 @SuppressWarnings("all")
 public class MethodBuilder {
-  private final MethodBuilder _this = this;
   
   public void buildMethods(final ItdTypeDetailsBuilder itdBuilder, final String declaringId, final ClassOrInterfaceTypeDetails govTypeDetails, final List<Method> methods) {
     for (Method m : methods) {
       final ItdTypeDetailsBuilder typeConverted_itdBuilder = (ItdTypeDetailsBuilder)itdBuilder;
-      MethodMetadata _orBuildMethod = _this.getOrBuildMethod(declaringId, govTypeDetails, m);
+      MethodMetadata _orBuildMethod = this.getOrBuildMethod(declaringId, govTypeDetails, m);
       typeConverted_itdBuilder.addMethod(_orBuildMethod);
     }
   }
@@ -45,18 +44,19 @@ public class MethodBuilder {
       final ClassOrInterfaceTypeDetails typeConverted_govTypeDetails = (ClassOrInterfaceTypeDetails)govTypeDetails;
       JavaSymbolName _name = sig.getName();
       List<Parameter> _parameters = sig.getParameters();
-      final Function1<Parameter,JavaType> function = new Function1<Parameter,JavaType>() {
+      final Function1<Parameter,JavaType> _function = new Function1<Parameter,JavaType>() {
           public JavaType apply(Parameter p) {
             JavaType _type = p.getType();
             return _type;
           }
         };
-      List<JavaType> _map = ListExtensions.map(_parameters, function);
+      List<JavaType> _map = ListExtensions.<Parameter, JavaType>map(_parameters, _function);
       MethodMetadata _declaredMethod = MemberFindingUtils.getDeclaredMethod(typeConverted_govTypeDetails, _name, _map);
       final MethodMetadata existingMethod = _declaredMethod;
       MethodMetadata _xifexpression = null;
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(existingMethod, null);
-      if (((Boolean)_operator_notEquals)) {
+      final MethodMetadata typeConverted_existingMethod = (MethodMetadata)existingMethod;
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(typeConverted_existingMethod, null);
+      if (_operator_notEquals) {
         _xifexpression = existingMethod;
       } else {
         MethodMetadata _xblockexpression_1 = null;
@@ -65,30 +65,30 @@ public class MethodBuilder {
           JavaSymbolName _name_1 = sig.getName();
           JavaType _returnType = sig.getReturnType();
           List<Parameter> _parameters_1 = sig.getParameters();
-          final Function1<Parameter,AnnotatedJavaType> function_1 = new Function1<Parameter,AnnotatedJavaType>() {
+          final Function1<Parameter,AnnotatedJavaType> _function_1 = new Function1<Parameter,AnnotatedJavaType>() {
               public AnnotatedJavaType apply(Parameter p_1) {
                 JavaType _type_1 = p_1.getType();
                 List<AnnotationMetadataBuilder> _annotations = p_1.getAnnotations();
-                final Function1<AnnotationMetadataBuilder,AnnotationMetadata> function_2 = new Function1<AnnotationMetadataBuilder,AnnotationMetadata>() {
+                final Function1<AnnotationMetadataBuilder,AnnotationMetadata> _function_2 = new Function1<AnnotationMetadataBuilder,AnnotationMetadata>() {
                     public AnnotationMetadata apply(AnnotationMetadataBuilder ab) {
                       AnnotationMetadata _build = ab.build();
                       return _build;
                     }
                   };
-                List<AnnotationMetadata> _map_1 = ListExtensions.map(_annotations, function_2);
-                AnnotatedJavaType _annoJavaType = _this.annoJavaType(_type_1, _map_1);
+                List<AnnotationMetadata> _map_1 = ListExtensions.<AnnotationMetadataBuilder, AnnotationMetadata>map(_annotations, _function_2);
+                AnnotatedJavaType _annoJavaType = MethodBuilder.this.annoJavaType(_type_1, _map_1);
                 return _annoJavaType;
               }
             };
-          List<AnnotatedJavaType> _map_2 = ListExtensions.map(_parameters_1, function_1);
+          List<AnnotatedJavaType> _map_2 = ListExtensions.<Parameter, AnnotatedJavaType>map(_parameters_1, _function_1);
           List<Parameter> _parameters_2 = sig.getParameters();
-          final Function1<Parameter,JavaSymbolName> function_3 = new Function1<Parameter,JavaSymbolName>() {
+          final Function1<Parameter,JavaSymbolName> _function_3 = new Function1<Parameter,JavaSymbolName>() {
               public JavaSymbolName apply(Parameter p_2) {
                 JavaSymbolName _name_2 = p_2.getName();
                 return _name_2;
               }
             };
-          List<JavaSymbolName> _map_3 = ListExtensions.map(_parameters_2, function_3);
+          List<JavaSymbolName> _map_3 = ListExtensions.<Parameter, JavaSymbolName>map(_parameters_2, _function_3);
           Function0<StringConcatenation> _body = method.getBody();
           StringConcatenation _apply = _body.apply();
           FakedBodyBuilder _fakedBodyBuilder = new FakedBodyBuilder(_apply);
@@ -116,7 +116,7 @@ public class MethodBuilder {
   }
   
   public AnnotatedJavaType annoJavaType(final JavaType type) {
-    AnnotatedJavaType _annoJavaType = _this.annoJavaType(type, null);
+    AnnotatedJavaType _annoJavaType = this.annoJavaType(type, null);
     return _annoJavaType;
   }
   
@@ -126,8 +126,8 @@ public class MethodBuilder {
   }
   
   public AnnotatedJavaType annoJavaType(final String fqn, final List<AnnotationMetadata> annotations) {
-    JavaType _javaType = _this.javaType(fqn);
-    AnnotatedJavaType _annoJavaType = _this.annoJavaType(_javaType, annotations);
+    JavaType _javaType = this.javaType(fqn);
+    AnnotatedJavaType _annoJavaType = this.annoJavaType(_javaType, annotations);
     return _annoJavaType;
   }
   
@@ -139,7 +139,7 @@ public class MethodBuilder {
   
   public boolean hasAnnotation(final IdentifiableAnnotatedJavaStructure ajs, final String fqn) {
     List<AnnotationMetadata> _annotations = ajs.getAnnotations();
-    final Function1<AnnotationMetadata,Boolean> function = new Function1<AnnotationMetadata,Boolean>() {
+    final Function1<AnnotationMetadata,Boolean> _function = new Function1<AnnotationMetadata,Boolean>() {
         public Boolean apply(AnnotationMetadata a) {
           JavaType _annotationType = a.getAnnotationType();
           String _fullyQualifiedTypeName = _annotationType.getFullyQualifiedTypeName();
@@ -147,7 +147,7 @@ public class MethodBuilder {
           return ((Boolean)_equals);
         }
       };
-    boolean _exists = IterableExtensions.exists(_annotations, function);
+    boolean _exists = IterableExtensions.<AnnotationMetadata>exists(_annotations, _function);
     return _exists;
   }
   
