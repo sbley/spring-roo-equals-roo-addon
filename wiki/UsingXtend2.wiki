@@ -52,11 +52,11 @@ Then, have a look at our [http://code.google.com/p/spring-roo-equals-roo-addon/s
 		</executions>
 	</plugin>
 ...
-<plugins>
+</plugins>
 ...
 <dependencies>
 ...
-<!-- Xtend2 Dependencies -->
+	<!-- Xtend2 Dependencies -->
 	<dependency>
 		<groupId>org.eclipse.xtext</groupId>
 		<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
@@ -67,13 +67,13 @@ Then, have a look at our [http://code.google.com/p/spring-roo-equals-roo-addon/s
 		<artifactId>org.eclipse.xtext.xtend2.lib</artifactId>
 		<version>2.0.0.v201103151224</version>
 	</dependency>
-<!-- Google Collections -->
+	<!-- Google Collections -->
 	<dependency>
 		<groupId>com.google.collections</groupId>
 		<artifactId>google-collections</artifactId>
 		<version>1.0</version>
 	</dependency>
-<!-- Google Guice -->
+	<!-- Google Guice -->
 	<dependency>
 		<groupId>com.google.inject</groupId>
 		<artifactId>guice</artifactId>
