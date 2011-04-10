@@ -31,6 +31,29 @@ addon create advanced ...
 Then, have a look at our [http://code.google.com/p/spring-roo-equals-roo-addon/source/browse/branches/xtend2/de.saxsys.roo.equals.addon/pom.xml pom.xml]. You will at least have to add the following lines to your POM:
 
 {{{
+...
+<plugins>
+...
+	<plugin>
+		<groupId>org.codehaus.mojo</groupId>
+		<artifactId>build-helper-maven-plugin</artifactId>
+		<executions>
+			<execution>
+				<phase>generate-sources</phase>
+				<goals>
+					<goal>add-source</goal>
+				</goals>
+				<configuration>
+					<sources>
+						<source>xtend-gen</source>
+					</sources>
+				</configuration>
+			</execution>
+		</executions>
+	</plugin>
+...
+<plugins>
+...
 <dependencies>
 ...
 <!-- Xtend2 Dependencies -->
