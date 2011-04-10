@@ -50,6 +50,13 @@ Then, have a look at our [http://code.google.com/p/spring-roo-equals-roo-addon/s
 		<artifactId>google-collections</artifactId>
 		<version>1.0</version>
 	</dependency>
+<!-- Google Guice -->
+	<dependency>
+		<groupId>com.google.inject</groupId>
+		<artifactId>guice</artifactId>
+		<version>3.0</version>
+	</dependency>
+
 ...
 </dependencies>
 ...
@@ -63,6 +70,7 @@ Then, have a look at our [http://code.google.com/p/spring-roo-equals-roo-addon/s
 
 }}}
 
+_Note: In our Equals-Addon we do not really use Google Guice. Nevertheless we need the dependency, since otherwise the Xtext Builder in Eclipse will complain when comiling the Xtend files._
 
 If you want the dependencies to be automatically installed if one installs your addon (via RooBot or "osgi obr start"), you have to add the following line to your OBR:
 {{{
