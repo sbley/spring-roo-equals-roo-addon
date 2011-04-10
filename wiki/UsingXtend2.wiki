@@ -64,7 +64,7 @@ Then, have a look at our [http://code.google.com/p/spring-roo-equals-roo-addon/s
 }}}
 
 
-If you want the dependencies to be automatically installed if one installs you addon (via RooBot or "osgi obr start"), you have to add the following line to your OBR:
+If you want the dependencies to be automatically installed if one installs your addon (via RooBot or "osgi obr start"), you have to add the following line to your OBR:
 {{{
 <referral depth="1" url="http://xtext4roo.googlecode.com/svn/repo/repository.xml"/>
 }}}
